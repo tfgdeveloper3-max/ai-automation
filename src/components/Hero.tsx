@@ -1,8 +1,9 @@
 import type { CSSProperties } from 'react';
 import Navbar from './Navbar';
 import Ribbon from './Ribbon';
+import HeroVisual from './HeroVisual';
 
-/* Background: deep navy with blue / violet glows (left + right), like the screenshot */
+
 const HERO_BG: CSSProperties = {
     backgroundImage: [
         'radial-gradient(55% 60% at 0% 45%, rgba(37, 99, 235, 0.35) 0%, transparent 70%)',
@@ -12,8 +13,7 @@ const HERO_BG: CSSProperties = {
     ].join(', '),
 };
 
-/* Page-load reveal (keyframes live in hero.css) */
-const reveal =
+const REVEAL =
     'opacity-0 animate-[heroFadeUp_1.1s_cubic-bezier(0.19,1,0.22,1)_forwards] motion-reduce:animate-none motion-reduce:opacity-100';
 const delay = (s: string): CSSProperties => ({ animationDelay: s });
 
@@ -25,11 +25,15 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
     </svg>
 );
 
-const Hero = () => {
+interface HeroProps {
+    ready?: boolean;
+}
+
+const Hero = ({ ready = true }: HeroProps) => {
+    const reveal = ready ? REVEAL : 'opacity-0';
+
     return (
         <section className="relative isolate overflow-hidden font-['DM_Sans',sans-serif]">
-            {/* Dark background stops at the middle of the ribbon, so the ribbons
-                cross the edge without any negative margin */}
             <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 bottom-12 z-0 sm:bottom-16 lg:bottom-[72px]"
@@ -73,20 +77,19 @@ const Hero = () => {
                             >
                                 <a
                                     href="#get-started"
-                                    className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-8 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(138,196,75,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                                    className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-8 text-sm font-medium text-white transition hover:translate-y-[-2px] hover:shadow-[0_10px_24px_rgba(138,196,75,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                                 >
                                     Get Started
                                 </a>
                                 <a
                                     href="#get-started"
                                     aria-label="Get started"
-                                    className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                                    className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:translate-y-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                                 >
                                     <ChevronsRight className="h-5 w-5" />
                                 </a>
                             </div>
 
-                            {/* Trustpilot + reviews */}
                             <div className={`mt-8 sm:mt-10 ${reveal}`} style={delay('0.75s')}>
                                 <div className="flex items-center justify-center gap-1.5 md:justify-start">
                                     <svg viewBox="0 0 24 24" className="h-5 w-5 text-[#22c55e]" fill="currentColor" aria-hidden="true">
@@ -96,7 +99,6 @@ const Hero = () => {
                                 </div>
 
                                 <div className="mt-3 flex items-center justify-center gap-4 md:justify-start">
-                                    {/* Overlap via narrow grid columns (no negative margins) */}
                                     <div className="grid grid-cols-[repeat(3,26px)_38px] sm:grid-cols-[repeat(3,30px)_42px]">
                                         {AVATARS.map((src, i) => (
                                             <img
@@ -113,17 +115,8 @@ const Hero = () => {
                             </div>
                         </div>
 
-                        {/* ---------- Right: illustration ---------- */}
-                        <div
-                            className={`relative lg:col-start-3 lg:col-end-13 lg:row-start-1 lg:self-end ${reveal}`}
-                            style={delay('0.4s')}
-                        >
-                            <img
-                                src="/images/hero-banner.png"
-                                alt="AI assistant answering order, refund and return questions across Shopify, Amazon and TikTok"
-                                className="mx-auto block h-auto w-full max-w-[720px] select-none lg:max-w-none"
-                                draggable={false}
-                            />
+                        <div className="relative lg:col-start-4 lg:col-end-13 lg:row-start-1 lg:self-end">
+                            <HeroVisual play={ready} className="mx-auto max-w-[760px] lg:max-w-none" />
                         </div>
                     </div>
                 </div>
