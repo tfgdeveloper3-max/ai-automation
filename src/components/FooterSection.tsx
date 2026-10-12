@@ -1,8 +1,15 @@
+import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 
 const GREEN = "#7EC242";
 
-const USEFUL_LINKS = ["Home", "About", "Services", "Projects", "Contact us"];
+const USEFUL_LINKS = [
+    { label: "Home", to: "/" },
+    { label: "About", to: "/about" },
+    { label: "Services", to: "/service" },
+    { label: "Blog", to: "/blog" },
+    { label: "Contact us", to: "/contact" },
+];
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
     size?: number | string;
@@ -38,7 +45,6 @@ const SOCIALS = [
     { icon: LinkedinIcon, href: "https://linkedin.com", label: "LinkedIn" },
 ];
 
-/** Fixed constellation points for the top-right network pattern. */
 const NODES = [
     { x: 760, y: 10 },
     { x: 830, y: 40 },
@@ -52,18 +58,8 @@ const NODES = [
     { x: 840, y: 170 },
 ];
 
-const LINKS = [
-    [0, 1],
-    [1, 2],
-    [1, 3],
-    [3, 4],
-    [3, 5],
-    [0, 6],
-    [5, 6],
-    [3, 7],
-    [5, 8],
-    [5, 9],
-    [7, 9],
+const EDGES = [
+    [0, 1], [1, 2], [1, 3], [3, 4], [3, 5], [0, 6], [5, 6], [3, 7], [5, 8], [5, 9], [7, 9],
 ];
 
 function NetworkPattern() {
@@ -72,8 +68,9 @@ function NetworkPattern() {
             viewBox="0 0 960 220"
             className="pointer-events-none absolute right-0 top-0 h-[220px] w-[960px] max-w-full opacity-60"
             preserveAspectRatio="xMaxYMin meet"
+            aria-hidden="true"
         >
-            {LINKS.map(([a, b], i) => (
+            {EDGES.map(([a, b], i) => (
                 <line
                     key={i}
                     x1={NODES[a].x}
@@ -105,9 +102,19 @@ export default function FooterSection() {
 
             <div className="relative mx-auto max-w-6xl px-6">
                 <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-                    {/* About + socials */}
+                    {/* Logo + about + socials */}
                     <div>
-                        <p className="max-w-xs text-sm leading-relaxed text-neutral-400">
+                        <Link to="/" aria-label="AMZ Automation Solutions — Home" className="inline-block">
+                            <img
+                                src="/images/logo.png"
+                                alt="AMZ Automation Solutions"
+                                className="h-20 w-auto sm:h-24"
+                                loading="lazy"
+                                draggable={false}
+                            />
+                        </Link>
+
+                        <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-400">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit aut elit
                             tellus luctus nec ulla corper mattis aulvinar daibus leo.
                         </p>
@@ -120,7 +127,7 @@ export default function FooterSection() {
                                     target="_blank"
                                     rel="noreferrer"
                                     aria-label={s.label}
-                                    className="flex h-9 w-9 items-center justify-center rounded-md text-neutral-900 transition-transform duration-200 hover:-translate-y-0.5"
+                                    className="flex h-9 w-9 items-center justify-center rounded-md text-neutral-900 transition-transform duration-200 hover:translate-y-[-2px]"
                                     style={{ backgroundColor: GREEN }}
                                 >
                                     <s.icon size={16} />
@@ -134,17 +141,11 @@ export default function FooterSection() {
                         <h4 className="mb-5 text-lg font-semibold text-white">Useful Links</h4>
                         <ul className="flex flex-col gap-3">
                             {USEFUL_LINKS.map((link) => (
-                                <li key={link} className="flex items-center gap-2">
-                                    <span
-                                        className="h-1.5 w-1.5 shrink-0 rounded-full"
-                                        style={{ backgroundColor: GREEN }}
-                                    />
-                                    <a
-                                        href="#"
-                                        className="text-sm text-neutral-300 transition-colors hover:text-white"
-                                    >
-                                        {link}
-                                    </a>
+                                <li key={link.label} className="flex items-center gap-2">
+                                    <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: GREEN }} />
+                                    <Link to={link.to} className="text-sm text-neutral-300 transition-colors hover:text-white">
+                                        {link.label}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -187,6 +188,7 @@ export default function FooterSection() {
                             <input
                                 type="email"
                                 placeholder="Enter Email"
+                                aria-label="Email address"
                                 className="w-full bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-neutral-500"
                             />
                             <button
@@ -200,10 +202,7 @@ export default function FooterSection() {
                         </form>
 
                         <label className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-neutral-500">
-                            <input
-                                type="checkbox"
-                                className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[#7EC242]"
-                            />
+                            <input type="checkbox" className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[#7EC242]" />
                             quis autem vel eum iure reprehenderit rui in ea voluptate esse.
                         </label>
                     </div>

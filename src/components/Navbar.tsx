@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink } from 'react-router-dom';
 
 type NavItem = { label: string; to: string; route?: boolean };
@@ -11,6 +12,10 @@ const LINKS: NavItem[] = [
     { label: 'Affiliate', to: '/affiliate', route: true },
     { label: 'Contact', to: '/contact', route: true },
 ];
+
+/* Height of the navbar at the very top of the page.
+   The spacer uses the same classes so the hero content never jumps. */
+const TOP_HEIGHT = 'h-20 sm:h-24 lg:h-[104px] xl:h-28';
 
 const ChevronsRight = ({ className = '' }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
@@ -43,13 +48,44 @@ const NavItemLink = ({ item, mobile, onClick }: { item: NavItem; mobile?: boolea
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const close = () => setOpen(false);
 
-    return (
-        <header className="relative z-30">
-            <nav className="mx-auto flex w-full max-w-[1280px] items-center px-5 py-5 sm:px-8 lg:px-10 lg:py-6">
-                <Link to="/" className="text-2xl font-medium tracking-tight text-white sm:text-[28px]">
-                    Logo Here
+    /* Solid background once the page is scrolled */
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 10);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    /* Close the mobile menu with Escape */
+    useEffect(() => {
+        if (!open) return;
+        const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [open]);
+
+    const solid = scrolled || open;
+
+    const header = (
+        <header
+            className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${solid ? 'bg-[#160f4a]/90 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-md' : 'bg-transparent'
+                }`}
+        >
+            <nav
+                className={`mx-auto flex w-full max-w-[1280px] items-center px-5 transition-[height] duration-300 sm:px-8 lg:px-10 ${scrolled ? 'h-16 sm:h-[72px] lg:h-20' : TOP_HEIGHT
+                    }`}
+            >
+                <Link to="/" aria-label="AMZ Automation Solutions — Home" className="shrink-0" onClick={close}>
+                    <img
+                        src="/images/logo.png"
+                        alt="AMZ Automation Solutions"
+                        draggable={false}
+                        className={`w-auto transition-[height] duration-300 ${scrolled ? 'h-14 sm:h-16 lg:h-[72px]' : 'h-16 sm:h-20 lg:h-[88px] xl:h-24'
+                            }`}
+                    />
                 </Link>
 
                 <ul className="ml-auto mr-10 hidden items-center gap-7 lg:flex xl:mr-14 xl:gap-10">
@@ -91,7 +127,7 @@ const Navbar = () => {
             </nav>
 
             {open && (
-                <div id="mobile-menu" className="absolute inset-x-0 top-full px-5 sm:px-8 lg:hidden">
+                <div id="mobile-menu" className="absolute inset-x-0 top-full px-5 pt-2 sm:px-8 lg:hidden">
                     <div className="rounded-2xl border border-white/10 bg-[#140f45]/95 p-4 shadow-2xl backdrop-blur-md">
                         <ul className="flex flex-col">
                             {LINKS.map((item) => (
@@ -111,6 +147,15 @@ const Navbar = () => {
                 </div>
             )}
         </header>
+    );
+
+    return (
+        <>
+            {/* Spacer keeps the hero layout exactly as before */}
+            <div aria-hidden="true" className={TOP_HEIGHT} />
+            {/* Rendered into <body> so no section can ever paint over it */}
+            {typeof document !== 'undefined' ? createPortal(header, document.body) : header}
+        </>
     );
 };
 

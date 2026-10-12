@@ -16,8 +16,8 @@
 
 .preloader__stage {
     position: relative;
-    width: min(90vw, 900px);
-    height: clamp(140px, 22vw, 220px);
+    width: min(92vw, 960px);
+    height: clamp(220px, 34vw, 340px);
 }
 
 .preloader__canvas {
@@ -33,7 +33,6 @@
     width: 1px;
     height: 1px;
     padding: 0;
-    margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;

@@ -21,8 +21,8 @@ import ServicePage from './components/pages/Service/page';
 import BlogPage from './components/pages/Blog/page';
 import AfiliatePage from './components/pages/Afiliate/page';
 import ContactPage from './components/pages/Contact/page';
+import RouteMeta from './components/RouteMeta';
 
-/* Scroll to top whenever the route changes */
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -55,10 +55,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      {loading && <Preloader text="AI AUTOMATION" onFinished={() => setLoading(false)} />}
+      {loading && <Preloader text="AMZ|AUTOMATION SOLUTIONS" onFinished={() => setLoading(false)} />}
 
       <ScrollToTop />
-
+      <RouteMeta />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
