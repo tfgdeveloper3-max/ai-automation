@@ -111,19 +111,16 @@ const HowItWorks: React.FC = () => {
             className="relative isolate overflow-hidden px-5 py-16 text-white sm:px-8 sm:py-20 lg:py-24"
             style={SECTION_BG}
         >
-            {/* ---------- Decorations ---------- */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
                 <div className="absolute inset-0" style={STRIPES} />
                 <div className="absolute left-0 top-0 h-[260px] w-[320px] sm:h-[340px] sm:w-[460px]" style={DOTS} />
 
-                {/* Rocket, top-right */}
                 <img
                     src="/images/Right-top.png"
                     alt=""
                     className="absolute right-4 top-4 w-12 sm:right-10 sm:top-8 sm:w-16 lg:right-14 lg:w-24"
                 />
 
-                {/* Robot, bottom-left (only where there is room beside the grid) */}
                 <img
                     src="/images/Left.png"
                     alt=""
@@ -132,7 +129,6 @@ const HowItWorks: React.FC = () => {
             </div>
 
             <div className="relative z-10">
-                {/* ---------- Header ---------- */}
                 <div className={`mx-auto flex max-w-[620px] flex-col items-center text-center ${reveal(0).className}`} style={reveal(0).style}>
                     <span className="inline-flex h-6 w-44 items-center justify-center rounded-full bg-[#8AC44B] font-['Montserrat',sans-serif] text-xs font-medium text-white">
                         Process
@@ -148,7 +144,6 @@ const HowItWorks: React.FC = () => {
                     </p>
                 </div>
 
-                {/* ---------- 2 x 2 grid ---------- */}
                 <div className="mx-auto mt-8 grid max-w-[960px] grid-cols-1 gap-y-4 sm:mt-6 sm:grid-cols-2 sm:gap-0">
                     {STEPS.map(({ title, text, Icon, frame }, i) => {
                         const r = reveal(i + 1);

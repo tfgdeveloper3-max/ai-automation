@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+
 import Hero from './components/Hero';
 import Features from './components/Features';
 import SkillsSection from './components/SkillsSection';
-import './styles/fonts.css';
-import './App.css';
 import SuccessStories from './components/caseStudy';
 import HowItWorks from './components/HowitWorks';
 import Testimonials from './components/Testimonials';
@@ -13,17 +13,28 @@ import FooterIntroReveal from './components/FooterIntroReveal';
 import FooterSection from './components/FooterSection';
 import Preloader from './components/Preloader';
 
-function App() {
-  const [loading, setLoading] = useState(true);
 
+import './styles/fonts.css';
+import './App.css';
+import AboutPage from './components/pages/About/page';
+import ServicePage from './components/pages/Service/page';
+import BlogPage from './components/pages/Blog/page';
+import AfiliatePage from './components/pages/Afiliate/page';
+import ContactPage from './components/pages/Contact/page';
+
+/* Scroll to top whenever the route changes */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+function HomePage() {
   return (
     <>
-      {loading && (
-        <Preloader text="AI AUTOMATION" onFinished={() => setLoading(false)} />
-      )}
-
       <Hero />
-
       <main>
         <Features />
         <SkillsSection />
@@ -36,6 +47,28 @@ function App() {
         <FooterSection />
       </main>
     </>
+  );
+}
+
+function App() {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <BrowserRouter>
+      {loading && <Preloader text="AI AUTOMATION" onFinished={() => setLoading(false)} />}
+
+      <ScrollToTop />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/service" element={<ServicePage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/affiliate" element={<AfiliatePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
