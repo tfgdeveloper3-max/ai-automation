@@ -4,8 +4,8 @@ import { useSectionReveal } from './usesectionreveal';
 const BRANDS = ['Culture Amp', 'Contentful', 'Dropbox', 'Airtable'];
 
 const STATS = [
-    { value: '65%', label: ['Paid Serach', 'Marketing'] },
-    { value: '65%', label: ['Paid Serach', 'Marketing'] },
+    { value: '85%', label: ['Cart Recovery', 'Rate'] },
+    { value: '3x', label: ['Average Sales', 'Growth'] },
 ];
 
 const ChevronsRight = ({ className = '' }: { className?: string }) => (
@@ -60,22 +60,21 @@ const SkillsSection = () => {
                     <div className="text-center lg:text-left">
                         <div className={reveal(1).className} style={reveal(1).style}>
                             <span className="inline-flex rounded-full bg-[#8ac44b] px-8 py-1.5 font-['Montserrat',sans-serif] text-xs font-medium text-white sm:text-[13px]">
-                                About Company
+                                About AMZ Automation
                             </span>
 
                             <h2 className="mt-4 font-['DM_Sans',sans-serif] text-[32px] font-light leading-[1.15] text-white sm:text-[40px] lg:text-[44px] xl:text-[48px]">
-                                Skills To <span className="font-semibold">Improve</span>
+                                Automated Workflows
                                 <br />
-                                Your <span className="font-semibold">Company</span> Brand
+                                To Scale Your <br /><span className="font-semibold">E-Commerce</span> Brand
                             </h2>
 
-                            <p className="mx-auto mt-4 max-w-[540px] font-['Montserrat',sans-serif] text-sm leading-[1.7] text-white/80 lg:mx-0">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                been the industry&rsquo;s standard dummy text ever since 1966, when designers at Letraset and
-                                James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero
-                                translation and scrambled it to make dummy text for Letraset&rsquo;s Body Type sheets. It has
-                                survived not only many decades, but also the leap into electronic typesetting, remaining
-                                essentially unchanged.
+                            <p className="mx-auto mt-4 max-w-[540px] font-['Montserrat',sans-serif] text-[16px] leading-[1.7] text-white/80 lg:mx-0">
+                                At AMZ Automation, we specialize in empowering online businesses across Amazon,
+                                Shopify, and TikTok to scale seamlessly. Our intelligent automation platforms
+                                recover lost sales, eliminate repetitive customer service inquiries, and optimize
+                                store operations&mdash;allowing you to focus on strategy and growth while our
+                                automated systems drive revenue around the clock.
                             </p>
                         </div>
 

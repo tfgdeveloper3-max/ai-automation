@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import Hero from './components/Hero';
@@ -11,7 +11,6 @@ import CtaBanner from './components/Ctasection';
 import Faqs from './components/Faqsection';
 import FooterIntroReveal from './components/FooterIntroReveal';
 import FooterSection from './components/FooterSection';
-import Preloader from './components/Preloader';
 
 
 import './styles/fonts.css';
@@ -51,12 +50,8 @@ function HomePage() {
 }
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
   return (
     <BrowserRouter>
-      {loading && <Preloader text="AMZ|AUTOMATION SOLUTIONS" onFinished={() => setLoading(false)} />}
-
       <ScrollToTop />
       <RouteMeta />
       <Routes>

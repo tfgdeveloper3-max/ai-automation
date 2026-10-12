@@ -12,14 +12,49 @@ interface Testimonial {
     text: string;
 }
 
-const DUMMY_TEXT =
-    "Lorem Ipsum is simply dummy text of the printing and industry's standard dummy Bride Printing Library in London,";
-
 const TESTIMONIALS: Testimonial[] = [
-    { id: 1, name: 'Perin Rames', role: 'Head of Management at ZE', avatar: '/images/avatar.png', text: DUMMY_TEXT },
-    { id: 2, name: 'Aiden Cole', role: 'Product Lead at Nexa', avatar: '/images/avatar.png', text: DUMMY_TEXT },
-    { id: 3, name: 'Sara Malik', role: 'Marketing Director at Orbit', avatar: '/images/avatar.png', text: DUMMY_TEXT },
-    { id: 4, name: 'Omar Hassan', role: 'Operations Head at Vertex', avatar: '/images/avatar.png', text: DUMMY_TEXT },
+    {
+        id: 1,
+        name: 'Marcus Vance',
+        role: 'Founder, Apex Goods (Shopify & Amazon)',
+        avatar: '/images/avatar-1.png',
+        text: 'AMZ Automation completely transformed our customer service operations. The AI chatbot resolves over 80% of order status inquiries instantly, allowing our team to focus on expanding our product catalog. Our ROI was clear within the first 30 days.',
+    },
+    {
+        id: 2,
+        name: 'Sarah Jenkins',
+        role: 'E-Commerce Director, TrendStyle',
+        avatar: '/images/avatar-2.png',
+        text: "Managing multi-channel inventory across Shopify and TikTok used to be a nightmare with frequent stockouts. Their inventory automation keeps everything in sync in real time. We haven't had a single overselling issue since implementation!",
+    },
+    {
+        id: 3,
+        name: 'David Miller',
+        role: 'Owner, Pinnacle Store (Amazon FBA)',
+        avatar: '/images/avatar-3.png',
+        text: 'The automated review requests and customer follow-up pipelines increased our Amazon product review volume by 3x within six weeks. Highly recommended for any e-commerce seller looking to automate growth.',
+    },
+    {
+        id: 4,
+        name: 'Elena Rostova',
+        role: 'Co-Founder, Sol Beauty',
+        avatar: '/images/avatar-4.png',
+        text: 'Their cart recovery and automated cross-selling workflows saved us thousands in lost sales last month alone. AMZ Automation made our backend operations run like clockwork without adding extra headcount.',
+    },
+    {
+        id: 5,
+        name: 'Jason Reynolds',
+        role: 'Operations Manager, Vibe Gear',
+        avatar: '/images/avatar-5.png',
+        text: 'Integrating our TikTok Shop order flow directly with our main warehouse was seamless. The automation setup eliminated manual data entry completely and halved our order processing time.',
+    },
+    {
+        id: 6,
+        name: 'Chloe Bennett',
+        role: 'CEO, Luxe Living Co.',
+        avatar: '/images/avatar-6.png',
+        text: "AMZ Automation is a game-changer for scaling e-commerce brands. From handling returns automatically to syncing sales data into one clean pipeline, they've saved us at least 20 hours every week.",
+    },
 ];
 
 const QuoteIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
@@ -63,8 +98,7 @@ const Author: React.FC<{ item: Testimonial; size: 'lg' | 'md' }> = ({ item, size
         <img
             src={item.avatar}
             alt={item.name}
-            className={`shrink-0 rounded-full bg-neutral-300 object-cover ${size === 'lg' ? 'h-16 w-16' : 'h-[52px] w-[52px]'
-                }`}
+            className={`shrink-0 rounded-full bg-neutral-300 object-cover ${size === 'lg' ? 'h-16 w-16' : 'h-[52px] w-[52px]'}`}
         />
         <div>
             <p className="text-sm font-bold leading-5 text-black">{item.name}</p>
@@ -114,13 +148,14 @@ const Testimonials: React.FC = () => {
                             style={{ fontFamily: HEADING_FONT }}
                         >
                             What Our Awesome <br className="hidden sm:block" />
-                            <span className="font-bold">Customers</span> Says
+                            <span className="font-bold">Customers</span> Say
                         </h2>
                     </div>
 
                     <p className="max-w-[370px] border-l-[3px] border-[#8AC44B] pl-4 text-[15px] leading-6 text-neutral-500">
-                        Lorem Ipsum is simply dummy text of the printing and industry&apos;s standard dummy Bride
-                        Printing Library in London,
+                        Discover how AMZ Automation helps e-commerce store owners automate
+                        operations, recover abandoned sales, and scale seamlessly across
+                        Amazon, Shopify, and TikTok.
                     </p>
                 </div>
 

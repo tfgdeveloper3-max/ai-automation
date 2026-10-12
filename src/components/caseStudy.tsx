@@ -62,7 +62,7 @@ const SuccessStories: React.FC = () => {
             className="w-full bg-white px-4 py-12 sm:px-6 sm:py-16"
         >
             <header className="mb-8 flex flex-col items-center gap-2 sm:mb-10">
-                <span className="rounded-full bg-[#7CC242] px-6 py-0.5 text-[11px] font-medium text-white">
+                <span className="rounded-full0 rounded-full bg-[#7CC242] px-6 py-1.5 text-[11px] font-medium,0 font-medium text-white">
                     Case Study
                 </span>
 
@@ -70,9 +70,18 @@ const SuccessStories: React.FC = () => {
                     className="text-4xl leading-tight tracking-tight text-black sm:text-[40px]"
                     style={{ fontFamily: "var(--font-heading)" }}
                 >
-                    <span className="font-bold">Success</span>{" "}
-                    <span className="font-normal">Stories</span>
+                    <span className="font-bold">Real Results</span>{" "}
+                    <span className="font-normal">&amp; Success Stories</span>
                 </h2>
+
+                <p
+                    className="mx-auto mt-2 max-w-[540px] text-center text-sm leading-relaxed text-[#6b6b7a] sm:text-[15px]"
+                    style={{ fontFamily: "var(--font-body)" }}
+                >
+                    See how AMZ Automation helps e-commerce brands boost sales,
+                    streamline fulfillment, and maximize revenue across global
+                    marketplaces.
+                </p>
             </header>
 
             {/* Grid */}
@@ -91,8 +100,10 @@ const SuccessStories: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 
 export default SuccessStories;
+
+

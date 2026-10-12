@@ -8,8 +8,6 @@ interface FeatureCard {
     highlight?: boolean;
 }
 
-/* ---------------- Icons (outline = currentColor, accent = green) ---------------- */
-
 const GREEN = '#8ac44b';
 
 const RobotIcon = () => (
@@ -52,7 +50,6 @@ const ChipIcon = () => (
 
 const BrainGearIcon = () => (
     <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
-        {/* brain (left half) */}
         <path d="M24 8C21 5 16 6 15 9c-4 0-6 4-5 7-3 2-3 7-1 9-2 3-1 8 3 9 1 4 6 6 9 4 1 2 3 2 3 2V8Z" />
         <path d="M15 9c0 3 2 4 4 4M10 16c2 1 4 1 5 0M9 25c3 0 5-1 6-3M12 34c1-2 3-3 5-3" />
         <g stroke={GREEN}>
@@ -60,7 +57,6 @@ const BrainGearIcon = () => (
             <circle cx="16" cy="21" r="1.3" />
             <circle cx="18" cy="27" r="1.3" />
         </g>
-        {/* gear (right half) */}
         <path d="M24 14a10 10 0 0 1 0 20" />
         <path d="M24 20a4 4 0 0 1 0 8" />
         <path
@@ -71,22 +67,40 @@ const BrainGearIcon = () => (
     </svg>
 );
 
-/* ---------------- Data ---------------- */
 
-const LOREM =
-    'Lorem Ipsum is simply dummy text of the printing and industry\u2019s standard dummy Bride Printing Library in London,';
+const INTRO_PARAGRAPH =
+    'We build custom AI-powered workflows that handle repetitive customer support, order fulfillment, and marketing tasks across your sales channels automatically.';
 
 const CARDS: FeatureCard[] = [
-    { title: 'Place Your Heading', description: LOREM, icon: <RobotIcon /> },
-    { title: 'Place Your Heading', description: LOREM, icon: <ChipIcon />, highlight: true },
-    { title: 'Place Your Heading', description: LOREM, icon: <BrainGearIcon /> },
-    { title: 'Place Your Heading', description: LOREM, icon: <BrainGearIcon /> },
+    {
+        title: '24/7 AI Customer Support',
+        description:
+            'Instant automated responses for order status, returns, and FAQs across Amazon, Shopify, and TikTok.',
+        icon: <RobotIcon />,
+    },
+    {
+        title: 'Multi-Channel Order Sync',
+        description:
+            'Automatically process return requests, issue labels, and update order statuses across all platforms in real time.',
+        icon: <ChipIcon />,
+        highlight: true,
+    },
+    {
+        title: 'Smart Inventory Management',
+        description:
+            'Sync inventory levels automatically across sales channels to prevent stockouts and over-selling.',
+        icon: <BrainGearIcon />,
+    },
+    {
+        title: 'Automated Cross-Selling',
+        description:
+            'Trigger personalized product recommendations and promo codes based on real-time customer behavior.',
+        icon: <BrainGearIcon />,
+    },
 ];
 
-/* Staircase on laptop/desktop: each card sits higher than the one before (positive margins only) */
 const STEP_OFFSETS = ['lg:mt-[150px]', 'lg:mt-[86px]', 'lg:mt-[36px]', 'lg:mt-0'];
 
-/* Halftone dots fading in from the bottom-right corner (dark card) */
 const HALFTONE: CSSProperties = {
     backgroundImage: 'radial-gradient(rgba(255,255,255,0.22) 1px, transparent 1.3px)',
     backgroundSize: '6px 6px',
@@ -100,7 +114,6 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
     </svg>
 );
 
-/* ---------------- Section ---------------- */
 
 const Features = () => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.15 });
@@ -114,7 +127,6 @@ const Features = () => {
     return (
         <section ref={ref} className="bg-white px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
             <div className="mx-auto w-full max-w-[1200px]">
-                {/* ---------- Intro ---------- */}
                 <div
                     className={`flex flex-col gap-6 md:flex-row md:items-start md:justify-between ${reveal(0).className}`}
                     style={reveal(0).style}
@@ -124,18 +136,18 @@ const Features = () => {
                             What We Can Do
                         </span>
                         <h2 className="mt-3 font-['DM_Sans',sans-serif] text-[32px] font-normal leading-[1.2] text-[#111111] sm:text-[40px] lg:text-[48px]">
-                            <span className="font-semibold">Lorem Ipsum</span> Is
+                            <span className="font-semibold">Intelligent Automation</span>{' '}
+                            Built for
                             <br />
-                            Simply Dummy Text
+                            E-Commerce Growth
                         </h2>
                     </div>
 
-                    <p className="max-w-[380px] border-l-[3px] border-[#8ac44b] pl-4 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#6b6b7a] sm:text-[15px] md:mt-9">
-                        {LOREM}
+                    <p className="max-w-[380px] border-l-[3px] border-[#8ac44b] pl-4 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#6b6b7a] sm:text-[18px] md:mt-9">
+                        {INTRO_PARAGRAPH}
                     </p>
                 </div>
 
-                {/* ---------- Cards ---------- */}
                 <div className="mt-10 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4 xl:gap-7">
                     {CARDS.map((card, i) => {
                         const r = reveal(i + 1);
@@ -145,8 +157,8 @@ const Features = () => {
                             <div key={i} className={`${STEP_OFFSETS[i]} ${r.className}`} style={r.style}>
                                 <article
                                     className={`group relative isolate h-full overflow-hidden border px-8 pb-9 pt-9 transition-all duration-500 ${hl
-                                            ? 'rounded-md border-transparent bg-[#1d1650] shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
-                                            : 'rounded-xl border-gray-100 bg-white shadow-[0_6px_10px_-2px_rgba(15,10,50,0.16)] hover:border-transparent hover:bg-[#1d1650] hover:shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
+                                        ? 'rounded-md border-transparent bg-[#1d1650] shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
+                                        : 'rounded-xl border-gray-100 bg-white shadow-[0_6px_10px_-2px_rgba(15,10,50,0.16)] hover:border-transparent hover:bg-[#1d1650] hover:shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
                                         }`}
                                 >
                                     <div
@@ -172,7 +184,7 @@ const Features = () => {
                                         </h3>
 
                                         <p
-                                            className={`mt-3 font-['Montserrat',sans-serif] text-[13px] leading-[1.65] transition-colors duration-500 ${hl ? 'text-white/70' : 'text-[#7b7b8a] group-hover:text-white/70'
+                                            className={`mt-3 font-['Montserrat',sans-serif] text-[16px] leading-[1.65] transition-colors duration-500 ${hl ? 'text-white/70' : 'text-[#7b7b8a] group-hover:text-white/70'
                                                 }`}
                                         >
                                             {card.description}
@@ -194,7 +206,6 @@ const Features = () => {
                     })}
                 </div>
 
-                {/* ---------- View All ---------- */}
                 <div className={`mt-12 flex items-center justify-center gap-2 lg:mt-14 ${reveal(5).className}`} style={reveal(5).style}>
                     <a
                         href="#"

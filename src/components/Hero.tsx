@@ -3,7 +3,6 @@ import Navbar from './Navbar';
 import Ribbon from './Ribbon';
 import HeroVisual from './HeroVisual';
 
-
 const HERO_BG: CSSProperties = {
     backgroundImage: [
         'radial-gradient(55% 60% at 0% 45%, rgba(37, 99, 235, 0.35) 0%, transparent 70%)',
@@ -58,17 +57,19 @@ const Hero = ({ ready = true }: HeroProps) => {
                                 className={`mt-2 text-[34px] font-medium leading-[1.15] tracking-[-0.01em] text-white sm:text-5xl lg:text-[50px] xl:text-[58px] ${reveal}`}
                                 style={delay('0.25s')}
                             >
-                                <span className="text-[0.72em] font-normal">With</span> Amazon,
+                                Smart AI Automation
                                 <br />
-                                Shopify, <span className="text-[0.72em] font-normal">&amp;</span> Tiktok
+                                For Amazon, Shopify,{' '}
+                                <span className="text-[0.72em] font-normal">&amp;</span> TikTok
                             </h1>
 
                             <p
-                                className={`mx-auto mt-3 max-w-[420px] text-sm leading-relaxed text-white/80 sm:text-[15px] md:mx-0 ${reveal}`}
+                                className={`mx-auto mt-3 max-w-[420px] text-sm leading-relaxed text-white/80 sm:text-[18px] md:mx-0 ${reveal}`}
                                 style={delay('0.45s')}
                             >
-                                Lorem Ipsum is simply dummy text of the printing and industry&rsquo;s standard dummy Bride
-                                Printing Library in London,
+                                Supercharge your e-commerce business with intelligent workflows.
+                                Automate order tracking, customer support, refunds, and upsells
+                                across all your sales channels seamlessly with AMZ automations.
                             </p>
 
                             <div
@@ -95,7 +96,7 @@ const Hero = ({ ready = true }: HeroProps) => {
                                     <svg viewBox="0 0 24 24" className="h-5 w-5 text-[#22c55e]" fill="currentColor" aria-hidden="true">
                                         <path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z" />
                                     </svg>
-                                    <span className="text-lg font-semibold text-white">Trustipilot</span>
+                                    <span className="text-lg font-semibold text-white">Trustpilot</span>
                                 </div>
 
                                 <div className="mt-3 flex items-center justify-center gap-4 md:justify-start">
@@ -110,7 +111,9 @@ const Hero = ({ ready = true }: HeroProps) => {
                                             />
                                         ))}
                                     </div>
-                                    <span className="text-sm font-semibold text-white sm:text-[15px]">450+ Reviews</span>
+                                    <span className="text-sm font-semibold text-white sm:text-[15px]">
+                                        4.9/5 Rating 
+                                    </span>
                                 </div>
                             </div>
                         </div>
