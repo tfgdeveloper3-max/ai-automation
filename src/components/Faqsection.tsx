@@ -8,16 +8,31 @@ interface Faq {
     a: string;
 }
 
-const ANSWER =
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";
-
 const FAQS: Faq[] = [
-    { q: 'Antis unde omnis istye natus error?', a: ANSWER },
-    { q: 'Quasi sed architecto beatae vitae?', a: ANSWER },
-    { q: 'Totam rem aperiam, earue iesa uate?', a: ANSWER },
-    { q: 'Duis lacinia pulvinar turpis lacinia?', a: ANSWER },
-    { q: 'Integer lobortis sem conseruat seua?', a: ANSWER },
-    { q: 'Rutem auibusdam reu aut officiis?', a: ANSWER },
+    {
+        q: 'What platforms does AMZ Automation support?',
+        a: 'We specialize in automating operations across Amazon, Shopify, and TikTok Shop, as well as integrating custom CRMs, inventory tools, and messaging platforms.',
+    },
+    {
+        q: 'How long does it take to set up automated workflows?',
+        a: 'Most standard automation workflows can be configured and deployed within 3 to 7 business days following our initial discovery and audit call.',
+    },
+    {
+        q: 'Will this work with my existing tech stack?',
+        a: 'Yes! Our solutions seamlessly integrate into your current store setup, fulfillment channels, and communication tools without interrupting daily operations.',
+    },
+    {
+        q: 'Is technical expertise required to manage the automations?',
+        a: 'Not at all. We build hands-free, user-friendly pipelines and provide full documentation and support so your team can focus entirely on growing your business.',
+    },
+    {
+        q: 'How does automation help improve customer satisfaction?',
+        a: 'By automating order tracking updates, FAQs, and refund workflows, your customers receive instant 24/7 responses, reducing wait times and improving store reviews.',
+    },
+    {
+        q: 'How do I get started with AMZ Automation?',
+        a: "Simply schedule a free audit call through our website. We\u2019ll review your current processes, spot efficiency bottlenecks, and outline a custom automation plan for your brand.",
+    },
 ];
 
 const useInView = <T extends HTMLElement>(threshold = 0.15) => {
@@ -32,7 +47,7 @@ const useInView = <T extends HTMLElement>(threshold = 0.15) => {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setInView(true);
-                    observer.disconnect(); // play once
+                    observer.disconnect();
                 }
             },
             { threshold }
@@ -59,8 +74,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
 
     return (
         <div
-            className={`transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-                }`}
+            className={`transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
             style={{ transitionDelay: visible ? `${index * 90}ms` : '0ms' }}
         >
             <div className="rounded-xl border border-neutral-100 bg-white shadow-[0_5px_8px_-2px_rgba(0,0,0,0.28)]">
@@ -77,13 +91,11 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
                     </span>
 
                     <span
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors duration-300 motion-reduce:transition-none ${open ? 'bg-[#8AC44B]' : 'bg-[#191041]'
-                            }`}
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors duration-300 motion-reduce:transition-none ${open ? 'bg-[#8AC44B]' : 'bg-[#191041]'}`}
                     >
                         <svg
                             viewBox="0 0 24 24"
-                            className={`h-4 w-4 transition-transform duration-300 motion-reduce:transition-none ${open ? 'rotate-90' : ''
-                                }`}
+                            className={`h-4 w-4 transition-transform duration-300 motion-reduce:transition-none ${open ? 'rotate-90' : ''}`}
                             fill="none"
                             stroke="#fff"
                             strokeWidth="3"
@@ -101,8 +113,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
                     role="region"
                     aria-labelledby={buttonId}
                     aria-hidden={!open}
-                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-                        }`}
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                 >
                     <div className="overflow-hidden">
                         <p className="px-6 pb-5 pt-1 text-[15px] leading-6 text-neutral-500">{faq.a}</p>
@@ -126,7 +137,6 @@ const Faqs: React.FC = () => {
             className="bg-white px-5 pb-20 pt-4"
         >
             <div className="mx-auto max-w-[912px]">
-                {/* Header */}
                 <div className="flex flex-col items-center text-center">
                     <span className="inline-flex h-6 w-40 items-center justify-center rounded-full bg-[#8AC44B] text-xs font-medium text-white">
                         FAQS
@@ -139,9 +149,9 @@ const Faqs: React.FC = () => {
                         Frequently Asked <span className="font-bold">Questions</span>
                     </h2>
 
-                    <p className="mt-3 max-w-[520px] text-[13px] leading-5 text-neutral-500">
-                        Lorem Ipsum is simply dummy text of the printing and industry&apos;s standard dummy Bride
-                        Printing Library in London,
+                    <p className="mt-3 max-w-[520px] text-[15px] leading-5 text-neutral-500">
+                        Find answers to common questions about our e-commerce automation
+                        services, integrations, and setup process.
                     </p>
                 </div>
 

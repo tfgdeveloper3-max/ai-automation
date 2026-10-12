@@ -23,12 +23,14 @@ const CtaBanner: React.FC = () => {
                         className="text-[26px] font-normal leading-tight text-white sm:text-[32px]"
                         style={{ fontFamily: HEADING_FONT }}
                     >
-                        Ready To Build Something <span className="font-bold">Extraordinary?</span>
+                        Ready To Scale Your E-Commerce Store On{' '}
+                        <span className="font-bold">Autopilot?</span>
                     </h2>
 
-                    <p className="mx-auto mt-5 max-w-[450px] text-[13px] leading-5 text-white/60">
-                        Let&apos;s turn your vision into a digital experience that drives real results. Reach out
-                        for a custom assessment.
+                    <p className="mx-auto mt-5 max-w-[450px] text-[15px] leading-5 text-white/60">
+                        Let&apos;s turn your store operations into an automated,
+                        revenue-driving machine. Reach out today for a custom automation
+                        assessment tailored to your business.
                     </p>
 
                     <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
@@ -51,8 +53,8 @@ const CtaBanner: React.FC = () => {
 
                     <p className="mt-7 text-[11px] text-white/50">
                         Or email us directly at:{' '}
-                        <a href="mailto:hello@lorem.com" className="font-bold text-white hover:underline">
-                            hello@lorem.com
+                        <a href="mailto:hello@amzautomation.com" className="font-bold text-white hover:underline">
+                            hello@amzautomation.com
                         </a>
                     </p>
                 </div>

@@ -1,11 +1,20 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { useSectionReveal } from '../usesectionreveal';
 
-const P_LONG =
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u2019s standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset\u2019s Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting, remaining essentially unchanged.';
+const P_REFERRAL_1 =
+    'Partnering with AMZ Automation allows agencies, consultants, and e-commerce professionals to generate recurring revenue by recommending our proven AI automation solutions. When you refer online store owners looking to streamline their Amazon, Shopify, or TikTok operations, you earn generous commission payouts for every client that signs up.';
 
-const P_SHORT =
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u2019s standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation.';
+const P_REFERRAL_2 =
+    'We handle all the technical onboarding, setup, and client support while you reap the rewards. It\u2019s a simple, high-value partnership designed to help you monetize your network and deliver real automation impact to growing e-commerce brands.';
+
+const P_PARTNER_1 =
+    'Joining the AMZ Automation affiliate and referral network gives you direct access to competitive commission structures, dedicated partner support, and real-time tracking dashboards. Whether you run an agency, manage e-commerce clients, or create content for online sellers, our program is designed to help you monetize your audience effortlessly.';
+
+const P_PARTNER_2 =
+    'Get started today and start earning recurring rewards by helping Amazon, Shopify, and TikTok brands automate their fulfillment, inventory, and customer support pipelines.';
+
+const P_GLOBAL =
+    'At AMZ Automation, our affiliate partner network knows no borders. No matter where you are in the world, you can connect e-commerce store owners on Amazon, Shopify, and TikTok with our powerful AI automation tools. Earn reliable, recurring commissions, track your referrals seamlessly, and grow your passive income alongside a global leader in e-commerce workflows.';
 
 const ChevronsRight = ({ className = '' }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
@@ -20,8 +29,8 @@ interface SplitProps {
     image: string;
     imageAlt: string;
     imageSide: 'left' | 'right';
-    imageMaxW?: string; 
-    bg?: string; 
+    imageMaxW?: string;
+    bg?: string;
     cta?: { label: string; href: string };
 }
 
@@ -73,7 +82,7 @@ const AffiliateSplit = ({
                     {paragraphs.map((p, i) => (
                         <p
                             key={i}
-                            className="mt-4 max-w-[600px] font-['Montserrat',sans-serif] text-sm leading-[1.7] text-[#3a3a48] lg:text-[15px]"
+                            className="mt-4 max-w-[600px] font-['Montserrat',sans-serif] text-sm leading-[1.7] text-[#3a3a48] lg:text-[18px]"
                         >
                             {p}
                         </p>
@@ -112,7 +121,7 @@ const AffiliateSections = () => (
                     With Rewards
                 </>
             }
-            paragraphs={[P_LONG, P_SHORT]}
+            paragraphs={[P_REFERRAL_1, P_REFERRAL_2]}
             image="/images/Afilitate1.png"
             imageAlt="Two hands fitting coloured puzzle pieces together"
             imageSide="left"
@@ -127,24 +136,24 @@ const AffiliateSections = () => (
                     <span className="font-bold">Partner</span> With Us?
                 </>
             }
-            paragraphs={[P_LONG, P_SHORT]}
+            paragraphs={[P_PARTNER_1, P_PARTNER_2]}
             image="/images/Afilitate2.png"
             imageAlt="Business partners, a globe, a meeting and a rising bar chart arranged in a circle"
             imageSide="right"
             imageMaxW="max-w-[500px]"
             bg="bg-[#f2f2f2]"
-            cta={{ label: 'Learn About Our Amazon Services', href: '#services' }}
+            cta={{ label: 'Become a Partner Today', href: '#services' }}
         />
 
         <AffiliateSplit
             heading={
                 <>
-                    Join Our <span className="font-bold">Affiliate Program</span>
+                    Join Our <br /><span className="font-bold">Affiliate Program</span>
                     <br className="hidden sm:block" /> From Anywhere Around
                     <br className="hidden sm:block" /> The Globe!
                 </>
             }
-            paragraphs={[P_LONG]}
+            paragraphs={[P_GLOBAL]}
             image="/images/Afilitate3.png"
             imageAlt="Hands reaching out of two laptops exchanging money and a light bulb idea"
             imageSide="left"

@@ -5,10 +5,10 @@ const GREEN = "#7EC242";
 
 const USEFUL_LINKS = [
     { label: "Home", to: "/" },
-    { label: "About", to: "/about" },
+    { label: "About Us", to: "/about" },
     { label: "Services", to: "/service" },
-    { label: "Blog", to: "/blog" },
-    { label: "Contact us", to: "/contact" },
+    { label: "Case Studies", to: "/blog" },
+    { label: "Contact Us", to: "/contact" },
 ];
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
@@ -115,8 +115,9 @@ export default function FooterSection() {
                         </Link>
 
                         <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-400">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit aut elit
-                            tellus luctus nec ulla corper mattis aulvinar daibus leo.
+                            Empowering e-commerce brands on Amazon, Shopify, and TikTok with
+                            custom AI workflows, automated customer support, and seamless
+                            operations to scale revenue effortlessly.
                         </p>
 
                         <div className="mt-6 flex items-center gap-3">
@@ -157,22 +158,22 @@ export default function FooterSection() {
                         <ul className="flex flex-col gap-4 text-sm text-neutral-300">
                             <li className="flex items-center gap-3">
                                 <Phone size={15} style={{ color: GREEN }} />
-                                <a href="tel:+10012345789" className="hover:text-white">
-                                    +00 1 2345 789
+                                <a href="tel:+18001234567" className="hover:text-white">
+                                    +1 (800) 123-4567
                                 </a>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail size={15} style={{ color: GREEN }} />
-                                <a href="mailto:info@lonam.com" className="hover:text-white">
-                                    info@lonam.com
+                                <a href="mailto:hello@amzautomation.com" className="hover:text-white">
+                                    hello@amzautomation.com
                                 </a>
                             </li>
                             <li className="flex items-start gap-3">
                                 <MapPin size={15} className="mt-0.5 shrink-0" style={{ color: GREEN }} />
                                 <span>
-                                    adipiscing elit aut elit tellus
+                                    123 Innovation Way, Suite 400,
                                     <br />
-                                    luctus nec ulla
+                                    New York, NY 10001
                                 </span>
                             </li>
                         </ul>
@@ -187,7 +188,7 @@ export default function FooterSection() {
                         >
                             <input
                                 type="email"
-                                placeholder="Enter Email"
+                                placeholder="Enter your email address"
                                 aria-label="Email address"
                                 className="w-full bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-neutral-500"
                             />
@@ -203,14 +204,15 @@ export default function FooterSection() {
 
                         <label className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-neutral-500">
                             <input type="checkbox" className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[#7EC242]" />
-                            quis autem vel eum iure reprehenderit rui in ea voluptate esse.
+                            I agree to receive marketing updates and automation insights.
+                            You can unsubscribe at any time.
                         </label>
                     </div>
                 </div>
 
                 {/* Bottom bar */}
                 <div className="mt-14 border-t border-white/10 pt-6 text-center text-xs text-neutral-500">
-                    Copyright © 2026 | All rights reserved.
+                    Copyright © 2026 AMZ Automation | All rights reserved.
                 </div>
             </div>
         </footer>

@@ -2,10 +2,10 @@ import { useState, type CSSProperties, type FormEvent } from 'react';
 import { useSectionReveal } from '../usesectionreveal';
 
 const SUBJECTS = [
-    { id: 'general-1', label: 'General Inquiry' },
-    { id: 'general-2', label: 'General Inquiry' },
-    { id: 'general-3', label: 'General Inquiry' },
-    { id: 'general-4', label: 'General Inquiry' },
+    { id: 'general-inquiry', label: 'General Inquiry' },
+    { id: 'amazon-automation', label: 'Amazon Automation' },
+    { id: 'shopify-tiktok', label: 'Shopify & TikTok' },
+    { id: 'affiliate-partnership', label: 'Affiliate Partnership' },
 ];
 
 const SOCIALS = [
@@ -13,7 +13,6 @@ const SOCIALS = [
     { name: 'Instagram', href: '#', icon: '/images/social/instagram.svg', tone: 'white' },
     { name: 'Discord', href: '#', icon: '/images/social/discord.svg', tone: 'green' },
 ] as const;
-
 
 const PhoneIcon = () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0" aria-hidden="true">
@@ -76,15 +75,13 @@ const Field = ({
     </label>
 );
 
-
 const ContactSection = () => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.12 });
     const [subject, setSubject] = useState(SUBJECTS[0].id);
     const [sent, setSent] = useState(false);
 
     const reveal = (i: number) => ({
-        className: `transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`,
+        className: `transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`,
         style: { transitionDelay: `${i * 130}ms` } as CSSProperties,
     });
 
@@ -94,7 +91,7 @@ const ContactSection = () => {
         new FormData(e.currentTarget).forEach((value, key) => {
             data[key] = String(value);
         });
-        console.log('Contact form:', { ...data, subject: SUBJECTS.find((x) => x.id === subject)?.label }); // TODO: send to your API / email service
+        console.log('Contact form:', { ...data, subject: SUBJECTS.find((x) => x.id === subject)?.label });
         setSent(true);
         e.currentTarget.reset();
         setSubject(SUBJECTS[0].id);
@@ -110,15 +107,15 @@ const ContactSection = () => {
                             Contact Us
                         </span>
                         <h2 className="mt-2 font-['Anybody',sans-serif] text-[32px] font-light leading-[1.15] text-[#111111] sm:text-[40px] lg:text-[48px]">
-                            <span className="font-bold">Lorem Ipsum</span> Is
+                            <span className="font-bold">Let&rsquo;s Connect</span>
                             <br />
-                            Simply Dummy Text
+                            &amp; Scale Your Business
                         </h2>
                     </div>
 
                     <p className="max-w-[380px] border-l-[3px] border-[#8ac44b] pl-4 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#6b6b7a] sm:text-[15px] md:mt-6">
-                        Lorem Ipsum is simply dummy text of the printing and industry&rsquo;s standard dummy Bride Printing
-                        Library in London.
+                        Ready to automate your Amazon, Shopify, or TikTok operations? Send us
+                        a message and our automation specialists will get back to you shortly.
                     </p>
                 </div>
 
@@ -132,26 +129,28 @@ const ContactSection = () => {
 
                         <div className="relative z-10">
                             <h3 className="font-['Montserrat',sans-serif] text-xl font-semibold sm:text-2xl">Contact Information</h3>
-                            <p className="mt-2 font-['Montserrat',sans-serif] text-sm text-white/75">Say something to start a live chat!</p>
+                            <p className="mt-2 font-['Montserrat',sans-serif] text-sm text-white/75">
+                                Reach out directly or send us a message to get started!
+                            </p>
                         </div>
 
                         <ul className="relative z-10 mt-10 space-y-7 font-['Montserrat',sans-serif] text-sm sm:mt-14">
                             <li>
-                                <a href="tel:+10123456789" className="flex items-center gap-5 hover:text-[#8ac44b]">
-                                    <PhoneIcon /> +1012 3456 789
+                                <a href="tel:+18001234567" className="flex items-center gap-5 hover:text-[#8ac44b]">
+                                    <PhoneIcon /> +1 (800) 123-4567
                                 </a>
                             </li>
                             <li>
-                                <a href="mailto:demo@gmail.com" className="flex items-center gap-5 hover:text-[#8ac44b]">
-                                    <MailIcon /> demo@gmail.com
+                                <a href="mailto:hello@amzautomation.com" className="flex items-center gap-5 hover:text-[#8ac44b]">
+                                    <MailIcon /> hello@amzautomation.com
                                 </a>
                             </li>
                             <li className="flex items-start gap-5">
                                 <PinIcon />
                                 <address className="not-italic leading-relaxed">
-                                    132 Dartmouth Street Boston,
+                                    123 Innovation Way, Suite 400,
                                     <br />
-                                    Massachusetts 02156 United States
+                                    New York, NY 10001
                                 </address>
                             </li>
                         </ul>
@@ -162,8 +161,7 @@ const ContactSection = () => {
                                     <a
                                         href={s.href}
                                         aria-label={s.name}
-                                        className={`inline-flex h-8 w-8 items-center justify-center rounded-full transition hover:scale-110 ${s.tone === 'green' ? 'bg-[#8ac44b] text-white' : 'bg-white text-[#1f1650]'
-                                            }`}
+                                        className={`inline-flex h-8 w-8 items-center justify-center rounded-full transition hover:scale-110 ${s.tone === 'green' ? 'bg-[#8ac44b] text-white' : 'bg-white text-[#1f1650]'}`}
                                     >
                                         <SocialIcon name={s.name} icon={s.icon} />
                                     </a>
@@ -207,7 +205,7 @@ const ContactSection = () => {
                                 name="message"
                                 rows={2}
                                 required
-                                placeholder="Write your message.."
+                                placeholder="Tell us about your store and automation goals..."
                                 className="mt-1.5 block w-full resize-none border-0 border-b border-[#8d8d99] bg-transparent px-0 pb-2 pt-1 font-['Montserrat',sans-serif] text-sm text-[#111111] outline-none transition-colors placeholder:text-[#8d8d99] focus:border-[#111111] focus:ring-0"
                             />
                         </label>

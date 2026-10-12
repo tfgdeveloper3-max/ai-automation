@@ -1,4 +1,4 @@
-import type { CSSProperties, JSX } from 'react';
+import { useState, type CSSProperties, type FocusEvent, type JSX } from 'react';
 import { useSectionReveal } from '../usesectionreveal';
 
 interface FeatureCard {
@@ -77,6 +77,9 @@ const CARDS: FeatureCard[] = [
     { title: 'Place Your Heading', description: LOREM, icon: <BrainGearIcon /> },
 ];
 
+/* The card that is dark by default (the one with highlight: true) */
+const DEFAULT_ACTIVE = Math.max(0, CARDS.findIndex((c) => c.highlight));
+
 const STEP_OFFSETS = ['lg:mt-[150px]', 'lg:mt-[86px]', 'lg:mt-[36px]', 'lg:mt-0'];
 
 const HALFTONE: CSSProperties = {
@@ -92,9 +95,17 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
     </svg>
 );
 
-
 const ServiceFeatures = () => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.15 });
+
+    /* Only ONE card is dark at a time: the hovered/focused one, or the default */
+    const [active, setActive] = useState(DEFAULT_ACTIVE);
+    const reset = () => setActive(DEFAULT_ACTIVE);
+
+    /* Reset when keyboard focus leaves the whole grid */
+    const handleGridBlur = (e: FocusEvent<HTMLDivElement>) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) reset();
+    };
 
     const reveal = (i: number) => ({
         className: `transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -105,7 +116,6 @@ const ServiceFeatures = () => {
     return (
         <section ref={ref} className="bg-white px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
             <div className="mx-auto w-full max-w-[1200px]">
-                {/* ---------- Intro ---------- */}
                 <div
                     className={`flex flex-col gap-6 md:flex-row md:items-start md:justify-between ${reveal(0).className}`}
                     style={reveal(0).style}
@@ -126,44 +136,53 @@ const ServiceFeatures = () => {
                     </p>
                 </div>
 
-                {/* ---------- Cards ---------- */}
-                <div className="mt-10 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4 xl:gap-7">
+                <div
+                    className="mt-10 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4 xl:gap-7"
+                    onMouseLeave={reset}
+                    onBlur={handleGridBlur}
+                >
                     {CARDS.map((card, i) => {
                         const r = reveal(i + 1);
-                        const hl = !!card.highlight;
+                        const on = active === i;
 
                         return (
-                            <div key={i} className={`${STEP_OFFSETS[i]} ${r.className}`} style={r.style}>
+                            <div
+                                key={i}
+                                className={`${STEP_OFFSETS[i]} ${r.className}`}
+                                style={r.style}
+                                onMouseEnter={() => setActive(i)}
+                                onFocus={() => setActive(i)}
+                            >
                                 <article
-                                    className={`group relative isolate h-full overflow-hidden border px-8 pb-9 pt-9 transition-all duration-500 ${hl
-                                        ? 'rounded-md border-transparent bg-[#1d1650] shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
-                                        : 'rounded-xl border-gray-100 bg-white shadow-[0_6px_10px_-2px_rgba(15,10,50,0.16)] hover:border-transparent hover:bg-[#1d1650] hover:shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
+                                    className={`relative isolate h-full overflow-hidden border px-8 pb-9 pt-9 transition-all duration-500 ${on
+                                            ? 'rounded-md border-transparent bg-[#1d1650] shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
+                                            : 'rounded-xl border-gray-100 bg-white shadow-[0_6px_10px_-2px_rgba(15,10,50,0.16)]'
                                         }`}
                                 >
                                     <div
                                         aria-hidden="true"
-                                        className={`pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ${hl ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                                        className={`pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ${on ? 'opacity-100' : 'opacity-0'
                                             }`}
                                         style={HALFTONE}
                                     />
 
                                     <div className="relative z-10">
                                         <div
-                                            className={`h-14 w-14 transition-colors duration-500 ${hl ? 'text-[#4f8cff]' : 'text-[#2b2b3a] group-hover:text-[#4f8cff]'
+                                            className={`h-14 w-14 transition-colors duration-500 ${on ? 'text-[#4f8cff]' : 'text-[#2b2b3a]'
                                                 }`}
                                         >
                                             {card.icon}
                                         </div>
 
                                         <h3
-                                            className={`mt-6 font-['Anybody',sans-serif] text-base font-bold transition-colors duration-500 ${hl ? 'text-white' : 'text-[#1d1650] group-hover:text-white'
+                                            className={`mt-6 font-['Anybody',sans-serif] text-base font-bold transition-colors duration-500 ${on ? 'text-white' : 'text-[#1d1650]'
                                                 }`}
                                         >
                                             {card.title}
                                         </h3>
 
                                         <p
-                                            className={`mt-3 font-['Montserrat',sans-serif] text-[13px] leading-[1.65] transition-colors duration-500 ${hl ? 'text-white/70' : 'text-[#7b7b8a] group-hover:text-white/70'
+                                            className={`mt-3 font-['Montserrat',sans-serif] text-[13px] leading-[1.65] transition-colors duration-500 ${on ? 'text-white/70' : 'text-[#7b7b8a]'
                                                 }`}
                                         >
                                             {card.description}
@@ -185,7 +204,6 @@ const ServiceFeatures = () => {
                     })}
                 </div>
 
-                {/* ---------- View All ---------- */}
                 <div className={`mt-12 flex items-center justify-center gap-2 lg:mt-14 ${reveal(5).className}`} style={reveal(5).style}>
                     <a
                         href="#"

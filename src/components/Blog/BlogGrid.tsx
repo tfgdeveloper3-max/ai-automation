@@ -13,32 +13,68 @@ interface Post {
     tags: string[];
 }
 
-const EXCERPT = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum ever since 1966,';
-
 const POSTS: Post[] = [
-    { image: '/images/Blog1.jpg', imageAlt: 'Pile of US dollar bills' },
-    { image: '/images/Blog2.jpg', imageAlt: 'Two businessmen shaking hands in an office' },
-    { image: '/images/Blog3.jpg', imageAlt: 'Person shopping online on a laptop with gift bags' },
-    { image: '/images/Blog4.jpg', imageAlt: 'Two women looking at a laptop in a café' },
-    { image: '/images/Blog5.jpg', imageAlt: 'Developers coding together on laptops' },
-    { image: '/images/Blog6.jpg', imageAlt: 'Two colleagues talking in a meeting' },
+    {
+        image: '/images/Blog1.jpg',
+        imageAlt: 'Pile of US dollar bills',
+        title: 'How AI Agents Are Revolutionizing Amazon & Shopify Growth',
+        excerpt:
+            'Discover how 24/7 autonomous AI agents audit search performance, recover lost revenue, and optimize multi-channel store listings in real time.',
+        tags: ['Automation', 'E-Commerce'],
+    },
+    {
+        image: '/images/Blog2.jpg',
+        imageAlt: 'Two businessmen shaking hands in an office',
+        title: '5 Automated Workflows Every TikTok Shop Owner Needs',
+        excerpt:
+            'Streamline order processing, automate influencer outreach, and sync viral inventory directly into your fulfillment pipeline without lifting a finger.',
+        tags: ['TikTok Shop', 'Workflows'],
+    },
+    {
+        image: '/images/Blog3.jpg',
+        imageAlt: 'Person shopping online on a laptop with gift bags',
+        title: 'How to Reduce Order Returns by 40% Using Instant AI Chatbots',
+        excerpt:
+            'Learn how intelligent post-purchase automation handles sizing questions, order updates, and product guidance before buyers initiate return requests.',
+        tags: ['AI Support', 'Customer Experience'],
+    },
+    {
+        image: '/images/Blog4.jpg',
+        imageAlt: 'Two women looking at a laptop in a café',
+        title: 'Multi-Channel Inventory Sync: Eliminating Stockouts on Amazon & Shopify',
+        excerpt:
+            'Prevent overselling and protect account health metrics with real-time automated stock synchronization across all your online sales channels.',
+        tags: ['Inventory', 'Operations'],
+    },
+    {
+        image: '/images/Blog5.jpg',
+        imageAlt: 'Developers coding together on laptops',
+        title: 'Automating Abandoned Carts & Cross-Sells for Maximum LTV',
+        excerpt:
+            'Turn lost browser interest into repeat purchases using customized automated messaging pipelines that trigger personalized discounts and upsells.',
+        tags: ['Sales Growth', 'Retention'],
+    },
+    {
+        image: '/images/Blog6.jpg',
+        imageAlt: 'Two colleagues talking in a meeting',
+        title: 'Is E-Commerce Automation Worth It? Breaking Down the Real ROI',
+        excerpt:
+            'Calculate your saved hours, profit margins, and operational costs to see how hands-free store management pays for itself in under 30 days.',
+        tags: ['Case Study', 'ROI'],
+    },
 ].map((p) => ({
     ...p,
     href: '#',
     date: '02 Oct 2026',
     dateTime: '2026-10-02',
-    readTime: '4 min',
-    title: 'Place Your Blog Heading Here!',
-    excerpt: EXCERPT,
-    tags: ['Design', 'Product'],
+    readTime: '4 min read',
 }));
 
 const BlogGrid = () => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.1 });
 
     const reveal = (i: number) => ({
-        className: `transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`,
+        className: `transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`,
         style: { transitionDelay: `${i * 100}ms` } as CSSProperties,
     });
 

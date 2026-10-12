@@ -17,11 +17,11 @@ const FEATURED: Post = {
     image: '/images/Blog.jpg',
     imageAlt: 'Designer working on a laptop and tablet at a desk with sketches and flowers',
     date: '02 Oct 2026',
-    readTime: '4 min',
-    title: 'Lorem Ipsum is simply dummy text of the printing and industry.',
+    readTime: '4 min read',
+    title: 'How AI Automation Can Double Your E-Commerce Customer Retention Rate',
     excerpt:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u2019s standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset\u2019s Body Type sheets',
-    tags: ['Design', 'Product', 'Frameworks'],
+        'Discover how automating post-purchase messaging, review requests, and personalized cross-selling can turn one-time shoppers into loyal brand advocates without increasing your team\u2019s workload.',
+    tags: ['Automation', 'E-Commerce', 'Growth'],
 };
 
 const TOTAL_POSTS = 8;
@@ -49,15 +49,16 @@ const BlogFeatured = () => {
                             Blogs
                         </span>
                         <h2 className="mt-2 font-['Anybody',sans-serif] text-[32px] font-light leading-[1.15] text-[#111111] sm:text-[40px] lg:text-[48px]">
-                            <span className="font-bold">Lorem Ipsum</span> Is
+                            <span className="font-bold">Latest E-Commerce</span>
                             <br />
-                            Simply Dummy Text
+                            Automation Insights
                         </h2>
                     </div>
 
-                    <p className="max-w-[380px] border-l-[3px] border-[#8ac44b] pl-4 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#6b6b7a] sm:text-[15px] md:mt-6">
-                        Lorem Ipsum is simply dummy text of the printing and industry&rsquo;s standard dummy Bride Printing
-                        Library in London,
+                    <p className="max-w-[380px] border-l-[3px] border-[#8ac44b] pl-4 font-['Montserrat',sans-serif] text-[16px] leading-relaxed text-[#6b6b7a] sm:text-[16px] md:mt-6">
+                        Expert advice, guides, and practical growth strategies to help you
+                        automate customer operations, boost store efficiency, and maximize
+                        profit margins.
                     </p>
                 </div>
 
@@ -65,7 +66,7 @@ const BlogFeatured = () => {
                     className={`mt-8 font-['Montserrat',sans-serif] text-lg font-light italic text-[#111111] sm:mt-10 sm:text-xl ${reveal(1).className}`}
                     style={reveal(1).style}
                 >
-                    Recent Post ({String(TOTAL_POSTS).padStart(2, '0')})
+                    Recent Posts ({String(TOTAL_POSTS).padStart(2, '0')})
                 </p>
 
                 <article className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-5 lg:gap-6">
@@ -104,7 +105,7 @@ const BlogFeatured = () => {
                                 </a>
                             </h3>
 
-                            <p className="mt-4 font-['Montserrat',sans-serif] text-[13px] leading-[1.75] text-white/75 sm:text-sm">
+                            <p className="mt-4 font-['Montserrat',sans-serif] text-[15px] leading-[1.75] text-white/75 sm:text-sm">
                                 {post.excerpt}
                             </p>
 

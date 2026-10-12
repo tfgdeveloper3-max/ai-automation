@@ -54,16 +54,17 @@ const ContactHero = () => {
                         className={`font-['Anybody',sans-serif] text-[44px] leading-[1.1] text-white sm:text-[56px] lg:text-[68px] ${reveal}`}
                         style={delay('0.1s')}
                     >
-                        <span className="font-bold">Contact </span>
-                        <span className="font-light">Us </span>
+                        <span className="font-bold">Contact</span>{' '}
+                        <span className="font-light">Us</span>
                     </h1>
 
                     <p
-                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-sm leading-relaxed text-white/85 sm:text-[15px] ${reveal}`}
+                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[16px] leading-relaxed text-white/85 sm:text-[16px] ${reveal}`}
                         style={delay('0.3s')}
                     >
-                        Lorem Ipsum is simply dummy text of the printing and industry&rsquo;s standard dummy Bride Printing
-                        Library in London,
+                        Have questions about scaling your e-commerce business? Get in touch
+                        with the AMZ Automation team today to explore custom AI workflows
+                        for your Amazon, Shopify, or TikTok store.
                     </p>
 
                     <div className={`mt-6 flex items-center gap-2 ${reveal}`} style={delay('0.45s')}>
@@ -83,7 +84,6 @@ const ContactHero = () => {
                     </div>
 
                     <div className={`mt-6 flex items-center gap-4 ${reveal}`} style={delay('0.6s')}>
-                        {/* Overlap via narrow grid columns (no negative margins) */}
                         <div className="grid grid-cols-[repeat(3,30px)_44px] sm:grid-cols-[repeat(3,34px)_48px]">
                             {AVATARS.map((src, i) => (
                                 <img
@@ -96,7 +96,7 @@ const ContactHero = () => {
                             ))}
                         </div>
                         <span className="font-['Montserrat',sans-serif] text-sm font-medium text-white sm:text-[15px]">
-                            450+ Reviews
+                            Trusted by 450+ Brands
                         </span>
                     </div>
                 </div>
