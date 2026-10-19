@@ -5,10 +5,10 @@ const GREEN = "#7EC242";
 
 const USEFUL_LINKS = [
     { label: "Home", to: "/" },
-    { label: "About Us", to: "/about" },
+    { label: "About", to: "/about" },
     { label: "Services", to: "/service" },
-    { label: "Case Studies", to: "/blog" },
-    { label: "Contact Us", to: "/contact" },
+    { label: "Reviews", to: "/reviews" },
+    { label: "Contact us", to: "/contact" },
 ];
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
@@ -45,6 +45,7 @@ const SOCIALS = [
     { icon: LinkedinIcon, href: "https://linkedin.com", label: "LinkedIn" },
 ];
 
+/** Fixed constellation points for the top-right network pattern. */
 const NODES = [
     { x: 760, y: 10 },
     { x: 830, y: 40 },
@@ -115,9 +116,8 @@ export default function FooterSection() {
                         </Link>
 
                         <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-400">
-                            Empowering e-commerce brands on Amazon, Shopify, and TikTok with
-                            custom AI workflows, automated customer support, and seamless
-                            operations to scale revenue effortlessly.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit aut elit
+                            tellus luctus nec ulla corper mattis aulvinar daibus leo.
                         </p>
 
                         <div className="mt-6 flex items-center gap-3">
@@ -156,25 +156,31 @@ export default function FooterSection() {
                     <div>
                         <h4 className="mb-5 text-lg font-semibold text-white">Contact Us</h4>
                         <ul className="flex flex-col gap-4 text-sm text-neutral-300">
+                            <li className="flex items-start gap-3">
+                                <span className="font-semibold text-white">AMZ Automation Solutions</span>
+                            </li>
                             <li className="flex items-center gap-3">
-                                <Phone size={15} style={{ color: GREEN }} />
-                                <a href="tel:+18001234567" className="hover:text-white">
-                                    +1 (800) 123-4567
+                                <Phone size={15} className="shrink-0" style={{ color: GREEN }} />
+                                <a href="tel:+12138639445" className="min-w-0 hover:text-white">
+                                    (213) 863-9445
                                 </a>
                             </li>
                             <li className="flex items-center gap-3">
-                                <Mail size={15} style={{ color: GREEN }} />
-                                <a href="mailto:hello@amzautomation.com" className="hover:text-white">
-                                    hello@amzautomation.com
+                                <Mail size={15} className="shrink-0" style={{ color: GREEN }} />
+                                <a
+                                    href="mailto:support@amzautomationsolutions.com"
+                                    className="min-w-0 break-all hover:text-white"
+                                >
+                                    support@amzautomationsolutions.com
                                 </a>
                             </li>
                             <li className="flex items-start gap-3">
                                 <MapPin size={15} className="mt-0.5 shrink-0" style={{ color: GREEN }} />
-                                <span>
-                                    123 Innovation Way, Suite 400,
+                                <address className="min-w-0 not-italic">
+                                    1001 Wilshire Boulevard,
                                     <br />
-                                    New York, NY 10001
-                                </span>
+                                    Los Angeles, CA 90017
+                                </address>
                             </li>
                         </ul>
                     </div>
@@ -188,7 +194,7 @@ export default function FooterSection() {
                         >
                             <input
                                 type="email"
-                                placeholder="Enter your email address"
+                                placeholder="Enter Email"
                                 aria-label="Email address"
                                 className="w-full bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-neutral-500"
                             />
@@ -204,15 +210,14 @@ export default function FooterSection() {
 
                         <label className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-neutral-500">
                             <input type="checkbox" className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[#7EC242]" />
-                            I agree to receive marketing updates and automation insights.
-                            You can unsubscribe at any time.
+                            quis autem vel eum iure reprehenderit rui in ea voluptate esse.
                         </label>
                     </div>
                 </div>
 
                 {/* Bottom bar */}
                 <div className="mt-14 border-t border-white/10 pt-6 text-center text-xs text-neutral-500">
-                    Copyright © 2026 AMZ Automation | All rights reserved.
+                    Copyright © 2026 | All rights reserved.
                 </div>
             </div>
         </footer>

@@ -2,8 +2,8 @@ import AfilitateHero from '@/components/Afiliate/AfilitateHero';
 import FooterIntroReveal from '../../FooterIntroReveal';
 import FooterSection from '../../FooterSection';
 import AffiliateSections from '@/components/Afiliate/AfiliateSections';
-import AfiliateFaqs from '@/components/Afiliate/AfiliateFaqs';
 import BrandsTrust from '@/components/BrandsTrust';
+import Faqs from '@/components/Faqsection';
 
 const AfiliatePage = () => {
     return (
@@ -12,7 +12,7 @@ const AfiliatePage = () => {
             <main>
                 <AffiliateSections />
                 <BrandsTrust />
-                <AfiliateFaqs />
+                <Faqs />
                 <FooterIntroReveal />
             </main>
             <FooterSection />

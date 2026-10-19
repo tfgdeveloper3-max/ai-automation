@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react';
 import Navbar from './Navbar';
 import Ribbon from './Ribbon';
 import HeroVisual from './HeroVisual';
+import { useLeadModal } from './leadModalContext';
 
 const HERO_BG: CSSProperties = {
     backgroundImage: [
@@ -30,6 +31,7 @@ interface HeroProps {
 
 const Hero = ({ ready = true }: HeroProps) => {
     const reveal = ready ? REVEAL : 'opacity-0';
+    const { openLeadForm } = useLeadModal();
 
     return (
         <section className="relative isolate overflow-hidden font-['DM_Sans',sans-serif]">
@@ -76,19 +78,21 @@ const Hero = ({ ready = true }: HeroProps) => {
                                 className={`mt-6 flex items-center justify-center gap-3 md:justify-start ${reveal}`}
                                 style={delay('0.6s')}
                             >
-                                <a
-                                    href="#get-started"
+                                <button
+                                    type="button"
+                                    onClick={openLeadForm}
                                     className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-8 text-sm font-medium text-white transition hover:translate-y-[-2px] hover:shadow-[0_10px_24px_rgba(138,196,75,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                                 >
                                     Get Started
-                                </a>
-                                <a
-                                    href="#get-started"
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={openLeadForm}
                                     aria-label="Get started"
                                     className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:translate-y-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                                 >
                                     <ChevronsRight className="h-5 w-5" />
-                                </a>
+                                </button>
                             </div>
 
                             <div className={`mt-8 sm:mt-10 ${reveal}`} style={delay('0.75s')}>
@@ -112,7 +116,7 @@ const Hero = ({ ready = true }: HeroProps) => {
                                         ))}
                                     </div>
                                     <span className="text-sm font-semibold text-white sm:text-[15px]">
-                                        4.9/5 Rating 
+                                        4.9/5 Rating
                                     </span>
                                 </div>
                             </div>

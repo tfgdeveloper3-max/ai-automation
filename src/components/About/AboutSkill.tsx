@@ -6,13 +6,6 @@ const STATS = [
     { value: '65%', label: ['Paid Serach', 'Marketing'] },
 ];
 
-
-const ChevronsRight = ({ className = '' }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-        <path d="M6 7l5 5-5 5M13 7l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-);
-
 const AboutSkills = () => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.15 });
 
@@ -43,22 +36,21 @@ const AboutSkills = () => {
                     <div className="text-center lg:text-left">
                         <div className={reveal(2).className} style={reveal(2).style}>
                             <span className="inline-flex rounded-full bg-[#8ac44b] px-8 py-1.5 font-['Montserrat',sans-serif] text-xs font-medium text-white sm:text-[13px]">
-                                About Company
+                                About AMZ Automation
                             </span>
 
                             <h2 className="mt-4 font-['DM_Sans',sans-serif] text-[32px] font-light leading-[1.15] text-[#111111] sm:text-[40px] lg:text-[44px] xl:text-[48px]">
-                                Skills To <span className="font-semibold">Improve</span>
+                                Automated Workflows
                                 <br />
-                                Your <span className="font-semibold">Company</span> Brand
+                                To Scale Your <br /><span className="font-semibold">E-Commerce</span> Brand
                             </h2>
 
                             <p className="mx-auto mt-4 max-w-[540px] font-['Montserrat',sans-serif] text-sm leading-[1.7] text-[#6b6b7a] lg:mx-0">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                been the industry&rsquo;s standard dummy text ever since 1966, when designers at Letraset and
-                                James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero
-                                translation and scrambled it to make dummy text for Letraset&rsquo;s Body Type sheets. It has
-                                survived not only many decades, but also the leap into electronic typesetting, remaining
-                                essentially unchanged.
+                                At AMZ Automation, we specialize in empowering online businesses across Amazon,
+                                Shopify, and TikTok to scale seamlessly. Our intelligent automation platforms
+                                recover lost sales, eliminate repetitive customer service inquiries, and optimize
+                                store operations&mdash;allowing you to focus on strategy and growth while our
+                                automated systems drive revenue around the clock.
                             </p>
                         </div>
 
@@ -78,25 +70,6 @@ const AboutSkills = () => {
                                     </span>
                                 </div>
                             ))}
-                        </div>
-
-                        <div
-                            className={`mt-10 flex items-center justify-center gap-2 lg:justify-start ${reveal(4).className}`}
-                            style={reveal(4).style}
-                        >
-                            <a
-                                href="#"
-                                className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-8 font-['Montserrat',sans-serif] text-sm font-semibold text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d1650]"
-                            >
-                                Explore More
-                            </a>
-                            <a
-                                href="#"
-                                aria-label="Explore more"
-                                className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d1650]"
-                            >
-                                <ChevronsRight className="h-5 w-5" />
-                            </a>
                         </div>
                     </div>
                 </div>

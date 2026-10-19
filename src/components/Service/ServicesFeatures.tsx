@@ -1,10 +1,13 @@
 import { useState, type CSSProperties, type FocusEvent, type JSX } from 'react';
+import { Link } from 'react-router-dom';
 import { useSectionReveal } from '../usesectionreveal';
+
 
 interface FeatureCard {
     title: string;
     description: string;
     icon: JSX.Element;
+    href: string;
     highlight?: boolean;
 }
 
@@ -67,14 +70,39 @@ const BrainGearIcon = () => (
     </svg>
 );
 
-const LOREM =
-    'Lorem Ipsum is simply dummy text of the printing and industry\u2019s standard dummy Bride Printing Library in London,';
+const INTRO_PARAGRAPH =
+    'We build custom AI-powered workflows that handle repetitive customer support, order fulfillment, and marketing tasks across your sales channels automatically.';
 
 const CARDS: FeatureCard[] = [
-    { title: 'Place Your Heading', description: LOREM, icon: <RobotIcon /> },
-    { title: 'Place Your Heading', description: LOREM, icon: <ChipIcon />, highlight: true },
-    { title: 'Place Your Heading', description: LOREM, icon: <BrainGearIcon /> },
-    { title: 'Place Your Heading', description: LOREM, icon: <BrainGearIcon /> },
+    {
+        title: '24/7 AI Customer Support',
+        description:
+            'Instant automated responses for order status, returns, and FAQs across Amazon, Shopify, and TikTok.',
+        icon: <RobotIcon />,
+        href: '/service/ai-customer-support',
+    },
+    {
+        title: 'Multi-Channel Order Sync',
+        description:
+            'Automatically process return requests, issue labels, and update order statuses across all platforms in real time.',
+        icon: <ChipIcon />,
+        href: '/service/multi-channel-order-sync',
+        highlight: true,
+    },
+    {
+        title: 'Smart Inventory Management',
+        description:
+            'Sync inventory levels automatically across sales channels to prevent stockouts and over-selling.',
+        icon: <BrainGearIcon />,
+        href: '/service/smart-inventory-management',
+    },
+    {
+        title: 'Automated Cross-Selling',
+        description:
+            'Trigger personalized product recommendations and promo codes based on real-time customer behavior.',
+        icon: <BrainGearIcon />,
+        href: '/service/automated-cross-selling',
+    },
 ];
 
 /* The card that is dark by default (the one with highlight: true) */
@@ -89,20 +117,12 @@ const HALFTONE: CSSProperties = {
     maskImage: 'radial-gradient(120% 90% at 100% 100%, #000 0%, transparent 65%)',
 };
 
-const ChevronsRight = ({ className = '' }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-        <path d="M6 7l5 5-5 5M13 7l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-);
-
 const ServiceFeatures = () => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.15 });
 
-    /* Only ONE card is dark at a time: the hovered/focused one, or the default */
     const [active, setActive] = useState(DEFAULT_ACTIVE);
     const reset = () => setActive(DEFAULT_ACTIVE);
 
-    /* Reset when keyboard focus leaves the whole grid */
     const handleGridBlur = (e: FocusEvent<HTMLDivElement>) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) reset();
     };
@@ -125,14 +145,14 @@ const ServiceFeatures = () => {
                             What We Can Do
                         </span>
                         <h2 className="mt-3 font-['DM_Sans',sans-serif] text-[32px] font-normal leading-[1.2] text-[#111111] sm:text-[40px] lg:text-[48px]">
-                            <span className="font-semibold">Lorem Ipsum</span> Is
+                            <span className="font-semibold">Intelligent Automation</span> Built for
                             <br />
-                            Simply Dummy Text
+                            E-Commerce Growth
                         </h2>
                     </div>
 
-                    <p className="max-w-[380px] border-l-[3px] border-[#8ac44b] pl-4 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#6b6b7a] sm:text-[15px] md:mt-9">
-                        {LOREM}
+                    <p className="max-w-[380px] border-l-[3px] border-[#8ac44b] pl-4 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#6b6b7a] sm:text-[18px] md:mt-9">
+                        {INTRO_PARAGRAPH}
                     </p>
                 </div>
 
@@ -155,8 +175,8 @@ const ServiceFeatures = () => {
                             >
                                 <article
                                     className={`relative isolate h-full overflow-hidden border px-8 pb-9 pt-9 transition-all duration-500 ${on
-                                            ? 'rounded-md border-transparent bg-[#1d1650] shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
-                                            : 'rounded-xl border-gray-100 bg-white shadow-[0_6px_10px_-2px_rgba(15,10,50,0.16)]'
+                                        ? 'rounded-md border-transparent bg-[#1d1650] shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
+                                        : 'rounded-xl border-gray-100 bg-white shadow-[0_6px_10px_-2px_rgba(15,10,50,0.16)]'
                                         }`}
                                 >
                                     <div
@@ -182,42 +202,27 @@ const ServiceFeatures = () => {
                                         </h3>
 
                                         <p
-                                            className={`mt-3 font-['Montserrat',sans-serif] text-[13px] leading-[1.65] transition-colors duration-500 ${on ? 'text-white/70' : 'text-[#7b7b8a]'
+                                            className={`mt-3 font-['Montserrat',sans-serif] text-[16px] leading-[1.65] transition-colors duration-500 ${on ? 'text-white/70' : 'text-[#7b7b8a]'
                                                 }`}
                                         >
                                             {card.description}
                                         </p>
 
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to={card.href}
+                                            aria-label={`Read more about ${card.title}`}
                                             className="mt-5 inline-flex items-center gap-1.5 font-['Montserrat',sans-serif] text-[13px] font-medium text-[#8ac44b] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ac44b]"
                                         >
                                             Read More
                                             <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                                 <path d="M9 6l6 6-6 6" />
                                             </svg>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </article>
                             </div>
                         );
                     })}
-                </div>
-
-                <div className={`mt-12 flex items-center justify-center gap-2 lg:mt-14 ${reveal(5).className}`} style={reveal(5).style}>
-                    <a
-                        href="#"
-                        className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-9 font-['Montserrat',sans-serif] text-sm font-semibold text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d1650]"
-                    >
-                        View All
-                    </a>
-                    <a
-                        href="#"
-                        aria-label="View all"
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:brightness-110"
-                    >
-                        <ChevronsRight className="h-5 w-5" />
-                    </a>
                 </div>
             </div>
         </section>

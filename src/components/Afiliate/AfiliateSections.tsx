@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { useSectionReveal } from '../usesectionreveal';
+import { useLeadModal } from '../leadModalContext';
 
 const P_REFERRAL_1 =
     'Partnering with AMZ Automation allows agencies, consultants, and e-commerce professionals to generate recurring revenue by recommending our proven AI automation solutions. When you refer online store owners looking to streamline their Amazon, Shopify, or TikTok operations, you earn generous commission payouts for every client that signs up.';
@@ -57,6 +58,8 @@ const AffiliateSplit = ({
     const img = reveal(0, `translate-y-8 lg:translate-y-0 ${imageRight ? 'lg:translate-x-8' : 'lg:translate-x-[-2rem]'}`);
     const txt = reveal(1, 'translate-y-8');
 
+    const { openLeadForm } = useLeadModal();
+
     return (
         <section id={id} ref={ref} className={`${bg} px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24`}>
             <div
@@ -90,19 +93,21 @@ const AffiliateSplit = ({
 
                     {cta && (
                         <div className="mt-7 flex items-center gap-2">
-                            <a
-                                href={cta.href}
+                            <button
+                                type='button'
+                                onClick={openLeadForm}
                                 className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-6 font-['Montserrat',sans-serif] text-[13px] font-medium text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d1650] sm:px-8 sm:text-sm"
                             >
                                 {cta.label}
-                            </a>
-                            <a
-                                href={cta.href}
+                            </button>
+                            <button
+                                type='button'
+                                onClick={openLeadForm}
                                 aria-label={cta.label}
                                 className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d1650]"
                             >
                                 <ChevronsRight className="h-5 w-5" />
-                            </a>
+                            </button>
                         </div>
                     )}
                 </div>

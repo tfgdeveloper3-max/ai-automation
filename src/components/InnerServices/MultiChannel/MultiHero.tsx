@@ -1,6 +1,8 @@
+import { useLeadModal } from '@/components/leadModalContext';
+import Navbar from '@/components/Navbar';
+import Ribbon from '@/components/Ribbon';
 import type { CSSProperties } from 'react';
-import Ribbon from '../Ribbon';
-import Navbar from '../Navbar';
+
 
 const BG: CSSProperties = {
     backgroundImage: [
@@ -29,7 +31,8 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
     </svg>
 );
 
-const BlogHero = () => {
+const MultiHero = () => {
+    const { openLeadForm } = useLeadModal();
     return (
         <section className="relative isolate overflow-hidden">
             <div
@@ -54,33 +57,34 @@ const BlogHero = () => {
                         className={`font-['Anybody',sans-serif] text-[44px] leading-[1.1] text-white sm:text-[56px] lg:text-[68px] ${reveal}`}
                         style={delay('0.1s')}
                     >
-                        <span className="font-light">Our </span>
-                        <span className="font-bold">Blogs</span>
+                        <span className="font-bold">Revenue</span> <span className="font-light">&amp; Upsell Automation</span>
                     </h1>
 
                     <p
                         className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[16px] leading-relaxed text-white/85 sm:text-[16px] ${reveal}`}
                         style={delay('0.3s')}
                     >
-                        Discover the latest strategies, guides, and insider insights on
-                        scaling your Amazon, Shopify, and TikTok stores using cutting-edge
-                        AI and workflow automation.
+                        Maximize Average Order Value (AOV) and customer lifetime value across
+                        Amazon, Shopify, and TikTok stores with automated upsell sequences, cart
+                        recovery, and personalized post-purchase offers.
                     </p>
 
                     <div className={`mt-6 flex items-center gap-2 ${reveal}`} style={delay('0.45s')}>
-                        <a
-                            href="#get-started"
+                        <button
+                            type='button'
+                            onClick={openLeadForm}
                             className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-9 font-['Montserrat',sans-serif] text-sm font-medium text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                         >
                             Get Started
-                        </a>
-                        <a
-                            href="#get-started"
+                        </button>
+                        <button
+                            type='button'
+                            onClick={openLeadForm}
                             aria-label="Get started"
                             className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                         >
                             <ChevronsRight className="h-5 w-5" />
-                        </a>
+                        </button>
                     </div>
 
                     <div className={`mt-6 flex items-center gap-4 ${reveal}`} style={delay('0.6s')}>
@@ -96,7 +100,7 @@ const BlogHero = () => {
                             ))}
                         </div>
                         <span className="font-['Montserrat',sans-serif] text-sm font-medium text-white sm:text-[15px]">
-                            4.9/5 Rating 
+                            450+ Reviews
                         </span>
                     </div>
                 </div>
@@ -107,4 +111,4 @@ const BlogHero = () => {
     );
 };
 
-export default BlogHero;
+export default MultiHero;

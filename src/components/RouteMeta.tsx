@@ -24,6 +24,26 @@ const META: Record<string, PageMeta> = {
         description:
             'Explore our Amazon wholesale, Shopify and TikTok Shop automation services. Done-for-you store management built to increase sales and save time.',
     },
+    '/service/ai-customer-support': {
+        title: `24/7 AI Customer Support | ${SITE_NAME}`,
+        description:
+            'Scale your store support 24/7 without increasing headcount. AI agents for Amazon, Shopify and TikTok Shop answer customers instantly, around the clock.',
+    },
+    '/service/multi-channel-order-sync': {
+        title: `Multi-Channel Order Sync | ${SITE_NAME}`,
+        description:
+            'Automatically process returns, issue labels and update order statuses across Amazon, Shopify and TikTok Shop in real time.',
+    },
+    '/service/smart-inventory-management': {
+        title: `Smart Inventory Management | ${SITE_NAME}`,
+        description:
+            'Sync inventory levels across every sales channel automatically to prevent stockouts and over-selling on Amazon, Shopify and TikTok Shop.',
+    },
+    '/service/automated-cross-selling': {
+        title: `Automated Cross-Selling | ${SITE_NAME}`,
+        description:
+            'Trigger personalised product recommendations and promo codes based on real-time customer behaviour to grow your average order value.',
+    },
     '/blog': {
         title: `Blog – eCommerce Automation Tips | ${SITE_NAME}`,
         description:
@@ -33,6 +53,11 @@ const META: Record<string, PageMeta> = {
         title: `Affiliate Program | ${SITE_NAME}`,
         description:
             'Join the AMZ Automation Solutions affiliate program. Refer clients from anywhere in the world and earn rewards for every successful partnership.',
+    },
+    '/reviews': {
+        title: `Customer Reviews | ${SITE_NAME}`,
+        description:
+            'Read what Amazon, Shopify and TikTok Shop sellers say about AMZ Automation Solutions, and share your own experience.',
     },
     '/contact': {
         title: `Contact Us | ${SITE_NAME}`,

@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useSectionReveal } from './usesectionreveal';
+import { useLeadModal } from './leadModalContext';
 
 const HEADING_FONT = 'var(--font-heading)';
+const SUPPORT_EMAIL = 'support@amzautomationsolutions.com';
 
 const CtaBanner: React.FC = () => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.2 });
+    const { openLeadForm } = useLeadModal();
 
     return (
         <section ref={ref} data-reveal="zoom" data-inview={inView} className="bg-white px-5 py-14">
@@ -34,27 +38,28 @@ const CtaBanner: React.FC = () => {
                     </p>
 
                     <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
-                        <a
-                            href="#contact"
+                        <Link
+                            to="/contact"
                             className="inline-flex h-[34px] items-center rounded-full bg-[#8AC44B] px-8 text-xs font-bold text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8AC44B]"
                             style={{ fontFamily: HEADING_FONT }}
                         >
                             Start Your Project →
-                        </a>
+                        </Link>
 
-                        <a
-                            href="#contact"
+                        <button
+                            type='button'
+                            onClick={openLeadForm}
                             className="text-xs font-bold text-[#8AC44B] underline underline-offset-4 transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8AC44B]"
                             style={{ fontFamily: HEADING_FONT }}
                         >
                             Book a Free Consultation
-                        </a>
+                        </button>
                     </div>
 
                     <p className="mt-7 text-[11px] text-white/50">
                         Or email us directly at:{' '}
-                        <a href="mailto:hello@amzautomation.com" className="font-bold text-white hover:underline">
-                            hello@amzautomation.com
+                        <a href={`mailto:${SUPPORT_EMAIL}`} className="break-all font-bold text-white hover:underline">
+                            {SUPPORT_EMAIL}
                         </a>
                     </p>
                 </div>

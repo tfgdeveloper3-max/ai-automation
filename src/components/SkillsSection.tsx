@@ -101,13 +101,13 @@ const SkillsSection = () => {
                             style={reveal(3).style}
                         >
                             <a
-                                href="#"
+                                href="/about"
                                 className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-8 font-['Montserrat',sans-serif] text-sm font-semibold text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                             >
                                 Explore More
                             </a>
                             <a
-                                href="#"
+                                href="/about"
                                 aria-label="Explore more"
                                 className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                             >

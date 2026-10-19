@@ -8,16 +8,31 @@ interface Faq {
     a: string;
 }
 
-const ANSWER =
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";
-
 const FAQS: Faq[] = [
-    { q: 'Antis unde omnis istye natus error?', a: ANSWER },
-    { q: 'Quasi sed architecto beatae vitae?', a: ANSWER },
-    { q: 'Totam rem aperiam, earue iesa uate?', a: ANSWER },
-    { q: 'Duis lacinia pulvinar turpis lacinia?', a: ANSWER },
-    { q: 'Integer lobortis sem conseruat seua?', a: ANSWER },
-    { q: 'Rutem auibusdam reu aut officiis?', a: ANSWER },
+    {
+        q: 'How do all four AMZ Automation services work together for my store?',
+        a: 'Our services form a unified automation ecosystem. AI Customer Support resolves buyer inquiries, Automated Order & Returns handles post-purchase routing, Inventory & Data Pipelines keep stock synced in real time, and Revenue & Upsell Automation maximizes order values\u2014working together hands-free across Amazon, Shopify, and TikTok Shop.',
+    },
+    {
+        q: 'Can I start with one automation service and add others as my store grows?',
+        a: 'Absolutely! You can start with a single module\u2014such as 24/7 AI Customer Support or Inventory Synchronization\u2014and seamlessly activate additional automated workflows as your multi-channel operations expand.',
+    },
+    {
+        q: 'How long does total platform onboarding and integration take?',
+        a: 'Most full-suite integrations are live within 24 to 48 hours. Our technical team handles all API connections, catalog indexing, and workflow setup without causing any downtime for your store.',
+    },
+    {
+        q: 'Are these automation systems compatible with existing 3PLs, ERPs, and store apps?',
+        a: 'Yes. Our custom data pipelines and API integrations bridge your storefronts with major 3PL fulfillment centers, warehouse management systems, and existing software stacks effortlessly.',
+    },
+    {
+        q: 'Will automating operations compromise account health on Amazon or TikTok Shop?',
+        a: 'No. Every automation protocol built by AMZ Automation complies 100% with seller policies and API guidelines across Amazon, Shopify, and TikTok Shop, actively protecting your account health metrics.',
+    },
+    {
+        q: 'What kind of ongoing support and maintenance does AMZ Automation provide?',
+        a: 'We provide continuous monitoring, performance tuning, and technical maintenance. Our dedicated support team ensures your automated pipelines run smoothly 24/7 as platform algorithms and store demands update.',
+    },
 ];
 
 const useInView = <T extends HTMLElement>(threshold = 0.15) => {
@@ -32,7 +47,7 @@ const useInView = <T extends HTMLElement>(threshold = 0.15) => {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setInView(true);
-                    observer.disconnect(); 
+                    observer.disconnect();
                 }
             },
             { threshold }
@@ -140,8 +155,9 @@ const ServiceFaqs: React.FC = () => {
                     </h2>
 
                     <p className="mt-3 max-w-[520px] text-[13px] leading-5 text-neutral-500">
-                        Lorem Ipsum is simply dummy text of the printing and industry&apos;s standard dummy Bride
-                        Printing Library in London,
+                        Have questions about our end-to-end e-commerce automation services?
+                        Learn how our platform unifies customer support, order processing,
+                        inventory sync, and revenue growth across Amazon, Shopify, and TikTok.
                     </p>
                 </div>
 

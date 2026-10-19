@@ -1,5 +1,6 @@
+import { useSectionReveal } from '@/components/usesectionreveal';
 import React, { useEffect, useRef, useState } from 'react';
-import { useSectionReveal } from '../usesectionreveal';
+
 
 const HEADING_FONT = 'var(--font-heading)';
 
@@ -8,16 +9,31 @@ interface Faq {
     a: string;
 }
 
-const ANSWER =
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";
-
 const FAQS: Faq[] = [
-    { q: 'Antis unde omnis istye natus error?', a: ANSWER },
-    { q: 'Quasi sed architecto beatae vitae?', a: ANSWER },
-    { q: 'Totam rem aperiam, earue iesa uate?', a: ANSWER },
-    { q: 'Duis lacinia pulvinar turpis lacinia?', a: ANSWER },
-    { q: 'Integer lobortis sem conseruat seua?', a: ANSWER },
-    { q: 'Rutem auibusdam reu aut officiis?', a: ANSWER },
+    {
+        q: 'How does automated order routing work across multiple sales channels?',
+        a: 'Once a customer places an order on Amazon, Shopify, or TikTok Shop, our automation engine instantly receives the order payload and routes it to your preferred warehouse, 3PL, or FBA center for immediate processing without manual intervention.',
+    },
+    {
+        q: 'Can customers initiate returns automatically through a self-service portal?',
+        a: 'Yes! We integrate a self-service return portal where customers can submit return requests, receive instant automated approvals based on your rules, and generate prepaid shipping labels in seconds.',
+    },
+    {
+        q: 'How does the system handle inventory updates when an item is returned?',
+        a: 'As soon as a returned item is received and inspected at your warehouse, the system automatically adjusts inventory levels across all your connected channels (Amazon, Shopify, and TikTok) to keep stock counts 100% accurate.',
+    },
+    {
+        q: 'Can we set custom return policies and rules for different products?',
+        a: 'Absolutely. You can customize return windows, non-returnable categories, restocking fees, and auto-approval criteria based on item condition, price, or sales channel requirements.',
+    },
+    {
+        q: 'Does automated order processing prevent overselling during high-volume surges?',
+        a: 'Yes. Real-time inventory synchronization updates stock counts across all active store channels immediately after each purchase, preventing overselling and inventory mismatches during peak sale events.',
+    },
+    {
+        q: 'How does the system handle order tracking updates for buyers?',
+        a: "The moment a shipping label is generated, tracking numbers and status links are automatically pushed back to the customer's account and sent via SMS or email, reducing WISMO (\"Where Is My Order?\") inquiries.",
+    },
 ];
 
 const useInView = <T extends HTMLElement>(threshold = 0.15) => {
@@ -59,8 +75,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
 
     return (
         <div
-            className={`transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-                }`}
+            className={`transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
             style={{ transitionDelay: visible ? `${index * 90}ms` : '0ms' }}
         >
             <div className="rounded-xl border border-neutral-100 bg-white shadow-[0_5px_8px_-2px_rgba(0,0,0,0.28)]">
@@ -77,13 +92,11 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
                     </span>
 
                     <span
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors duration-300 motion-reduce:transition-none ${open ? 'bg-[#8AC44B]' : 'bg-[#191041]'
-                            }`}
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors duration-300 motion-reduce:transition-none ${open ? 'bg-[#8AC44B]' : 'bg-[#191041]'}`}
                     >
                         <svg
                             viewBox="0 0 24 24"
-                            className={`h-4 w-4 transition-transform duration-300 motion-reduce:transition-none ${open ? 'rotate-90' : ''
-                                }`}
+                            className={`h-4 w-4 transition-transform duration-300 motion-reduce:transition-none ${open ? 'rotate-90' : ''}`}
                             fill="none"
                             stroke="#fff"
                             strokeWidth="3"
@@ -101,8 +114,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
                     role="region"
                     aria-labelledby={buttonId}
                     aria-hidden={!open}
-                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-                        }`}
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                 >
                     <div className="overflow-hidden">
                         <p className="px-6 pb-5 pt-1 text-[15px] leading-6 text-neutral-500">{faq.a}</p>
@@ -113,7 +125,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
     );
 };
 
-const AfiliateFaqs: React.FC = () => {
+const AutomatedFaqs: React.FC = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     const { ref, inView } = useInView<HTMLDivElement>();
     const { ref: sectionRef, inView: sectionInView } = useSectionReveal<HTMLElement>({ threshold: 0.1 });
@@ -123,10 +135,9 @@ const AfiliateFaqs: React.FC = () => {
             ref={sectionRef}
             data-reveal="fade"
             data-inview={sectionInView}
-            className="bg-white px-5 pb-20 pt-4"
+            className="bg-white px-5 pb-20 pt-20"
         >
             <div className="mx-auto max-w-[912px]">
-                {/* Header */}
                 <div className="flex flex-col items-center text-center">
                     <span className="inline-flex h-6 w-40 items-center justify-center rounded-full bg-[#8AC44B] text-xs font-medium text-white">
                         FAQS
@@ -139,9 +150,9 @@ const AfiliateFaqs: React.FC = () => {
                         Frequently Asked <span className="font-bold">Questions</span>
                     </h2>
 
-                    <p className="mt-3 max-w-[520px] text-[13px] leading-5 text-neutral-500">
-                        Lorem Ipsum is simply dummy text of the printing and industry&apos;s standard dummy Bride
-                        Printing Library in London,
+                    <p className="mt-3 max-w-[520px] text-[15px] leading-5 text-neutral-500">
+                        Find answers to common questions about how our Automated Order &amp;
+                        Returns workflow operates across Amazon, Shopify, and TikTok Shop.
                     </p>
                 </div>
 
@@ -163,4 +174,4 @@ const AfiliateFaqs: React.FC = () => {
     );
 };
 
-export default AfiliateFaqs;
+export default AutomatedFaqs;

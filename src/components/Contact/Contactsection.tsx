@@ -1,5 +1,15 @@
-import { useState, type CSSProperties, type FormEvent } from 'react';
+import { useCallback, useState, type CSSProperties, type FormEvent } from 'react';
 import { useSectionReveal } from '../usesectionreveal';
+import { submitLead } from '../SubmitLead';
+import ThankYouPopup from '../ThankYou';
+
+const CONTACT = {
+    phoneLabel: '(213) 863-9445',
+    phoneHref: 'tel:+12138639445',
+    email: 'support@amzautomationsolutions.com',
+    addressLine1: '1001 Wilshire Boulevard,',
+    addressLine2: 'Los Angeles, CA 90017',
+};
 
 const SUBJECTS = [
     { id: 'general-inquiry', label: 'General Inquiry' },
@@ -52,6 +62,7 @@ const Field = ({
     placeholder,
     autoComplete,
     required,
+    pattern,
 }: {
     label: string;
     name: string;
@@ -59,6 +70,7 @@ const Field = ({
     placeholder?: string;
     autoComplete?: string;
     required?: boolean;
+    pattern?: string;
 }) => (
     <label className="group block">
         <span className="block font-['Montserrat',sans-serif] text-xs font-medium text-[#8d8d99] transition-colors group-focus-within:text-[#111111]">
@@ -70,6 +82,8 @@ const Field = ({
             placeholder={placeholder}
             autoComplete={autoComplete}
             required={required}
+            pattern={pattern}
+            title={pattern ? 'Please enter a valid phone number' : undefined}
             className="mt-1.5 block w-full border-0 border-b border-[#8d8d99] bg-transparent px-0 pb-2 pt-1 font-['Montserrat',sans-serif] text-sm text-[#111111] outline-none transition-colors placeholder:text-[#b0b0ba] focus:border-[#111111] focus:ring-0"
         />
     </label>
@@ -78,23 +92,39 @@ const Field = ({
 const ContactSection = () => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.12 });
     const [subject, setSubject] = useState(SUBJECTS[0].id);
-    const [sent, setSent] = useState(false);
+    const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+    const sending = status === 'sending';
+    const [thanksName, setThanksName] = useState('');
+    const closeThanks = useCallback(() => setStatus('idle'), []);
 
     const reveal = (i: number) => ({
         className: `transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`,
         style: { transitionDelay: `${i * 130}ms` } as CSSProperties,
     });
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const data: Record<string, string> = {};
-        new FormData(e.currentTarget).forEach((value, key) => {
-            data[key] = String(value);
-        });
-        console.log('Contact form:', { ...data, subject: SUBJECTS.find((x) => x.id === subject)?.label });
-        setSent(true);
-        e.currentTarget.reset();
-        setSubject(SUBJECTS[0].id);
+        const form = e.currentTarget;
+        const fd = new FormData(form);
+        const get = (k: string) => String(fd.get(k) ?? '').trim();
+        const subjectLabel = SUBJECTS.find((x) => x.id === subject)?.label ?? '';
+
+        setStatus('sending');
+        try {
+            await submitLead({
+                name: `${get('firstName')} ${get('lastName')}`.trim(),
+                email: get('email'),
+                phone_number: get('phone'),
+                message: `Subject: ${subjectLabel}\n\n${get('message')}`,
+            });
+            setThanksName(get('firstName'));
+            form.reset();
+            setSubject(SUBJECTS[0].id);
+            setStatus('sent'); 
+        } catch (err) {
+            console.error('Contact form failed:', err);
+            setStatus('error');
+        }
     };
 
     return (
@@ -136,21 +166,23 @@ const ContactSection = () => {
 
                         <ul className="relative z-10 mt-10 space-y-7 font-['Montserrat',sans-serif] text-sm sm:mt-14">
                             <li>
-                                <a href="tel:+18001234567" className="flex items-center gap-5 hover:text-[#8ac44b]">
-                                    <PhoneIcon /> +1 (800) 123-4567
+                                <a href={CONTACT.phoneHref} className="flex items-center gap-5 hover:text-[#8ac44b]">
+                                    <PhoneIcon /> {CONTACT.phoneLabel}
                                 </a>
                             </li>
                             <li>
-                                <a href="mailto:hello@amzautomation.com" className="flex items-center gap-5 hover:text-[#8ac44b]">
-                                    <MailIcon /> hello@amzautomation.com
+                                <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-5 hover:text-[#8ac44b]">
+                                    <MailIcon />
+                                    {/* long email: allowed to wrap so it never squeezes the icon */}
+                                    <span className="min-w-0 break-all">{CONTACT.email}</span>
                                 </a>
                             </li>
                             <li className="flex items-start gap-5">
                                 <PinIcon />
-                                <address className="not-italic leading-relaxed">
-                                    123 Innovation Way, Suite 400,
+                                <address className="min-w-0 not-italic leading-relaxed">
+                                    {CONTACT.addressLine1}
                                     <br />
-                                    New York, NY 10001
+                                    {CONTACT.addressLine2}
                                 </address>
                             </li>
                         </ul>
@@ -171,68 +203,87 @@ const ContactSection = () => {
                     </aside>
 
                     <form onSubmit={handleSubmit} className="px-3 pb-6 pt-2 sm:px-6 lg:py-10 lg:pl-0 lg:pr-10">
-                        <div className="grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
-                            <Field label="First Name" name="firstName" autoComplete="given-name" placeholder="John" required />
-                            <Field label="Last Name" name="lastName" autoComplete="family-name" placeholder="Doe" required />
-                            <Field label="Email" name="email" type="email" autoComplete="email" placeholder="you@example.com" required />
-                            <Field label="Phone Number" name="phone" type="tel" autoComplete="tel" placeholder="+1 012 3456 789" />
-                        </div>
-
-                        <fieldset className="mt-9">
-                            <legend className="font-['Montserrat',sans-serif] text-sm font-semibold text-[#111111]">Select Subject?</legend>
-                            <div className="mt-4 flex flex-wrap gap-x-7 gap-y-3">
-                                {SUBJECTS.map((s) => (
-                                    <label key={s.id} className="inline-flex cursor-pointer items-center gap-2 font-['Montserrat',sans-serif] text-xs text-[#3a3a48]">
-                                        <input
-                                            type="radio"
-                                            name="subject"
-                                            value={s.id}
-                                            checked={subject === s.id}
-                                            onChange={() => setSubject(s.id)}
-                                            className="h-3.5 w-3.5 cursor-pointer appearance-none rounded-full border border-[#d4d4dc] bg-[#e5e5ea] transition checked:border-[#111111] checked:bg-[#111111] checked:shadow-[inset_0_0_0_2px_#fff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ac44b]"
-                                        />
-                                        {s.label}
-                                    </label>
-                                ))}
+                        <fieldset disabled={sending} className="contents">
+                            <div className="grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
+                                <Field label="First Name" name="firstName" autoComplete="given-name" placeholder="John" required />
+                                <Field label="Last Name" name="lastName" autoComplete="family-name" placeholder="Doe" required />
+                                <Field label="Email" name="email" type="email" autoComplete="email" placeholder="you@example.com" required />
+                                <Field
+                                    label="Phone Number"
+                                    name="phone"
+                                    type="tel"
+                                    autoComplete="tel"
+                                    placeholder="(213) 555-0123"
+                                    pattern="[\d\s\+\-\(\)]{7,20}"
+                                    required
+                                />
                             </div>
-                        </fieldset>
 
-                        <label className="group mt-9 block">
-                            <span className="block font-['Montserrat',sans-serif] text-xs font-medium text-[#8d8d99] transition-colors group-focus-within:text-[#111111]">
-                                Message
-                            </span>
-                            <textarea
-                                name="message"
-                                rows={2}
-                                required
-                                placeholder="Tell us about your store and automation goals..."
-                                className="mt-1.5 block w-full resize-none border-0 border-b border-[#8d8d99] bg-transparent px-0 pb-2 pt-1 font-['Montserrat',sans-serif] text-sm text-[#111111] outline-none transition-colors placeholder:text-[#8d8d99] focus:border-[#111111] focus:ring-0"
-                            />
-                        </label>
+                            <fieldset className="mt-9">
+                                <legend className="font-['Montserrat',sans-serif] text-sm font-semibold text-[#111111]">Select Subject?</legend>
+                                <div className="mt-4 flex flex-wrap gap-x-7 gap-y-3">
+                                    {SUBJECTS.map((s) => (
+                                        <label key={s.id} className="inline-flex cursor-pointer items-center gap-2 font-['Montserrat',sans-serif] text-xs text-[#3a3a48]">
+                                            <input
+                                                type="radio"
+                                                name="subject"
+                                                value={s.id}
+                                                checked={subject === s.id}
+                                                onChange={() => setSubject(s.id)}
+                                                className="h-3.5 w-3.5 cursor-pointer appearance-none rounded-full border border-[#d4d4dc] bg-[#e5e5ea] transition checked:border-[#111111] checked:bg-[#111111] checked:shadow-[inset_0_0_0_2px_#fff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ac44b]"
+                                            />
+                                            {s.label}
+                                        </label>
+                                    ))}
+                                </div>
+                            </fieldset>
+
+                            <label className="group mt-9 block">
+                                <span className="block font-['Montserrat',sans-serif] text-xs font-medium text-[#8d8d99] transition-colors group-focus-within:text-[#111111]">
+                                    Message
+                                </span>
+                                <textarea
+                                    name="message"
+                                    rows={2}
+                                    required
+                                    placeholder="Tell us about your store and automation goals..."
+                                    className="mt-1.5 block w-full resize-none border-0 border-b border-[#8d8d99] bg-transparent px-0 pb-2 pt-1 font-['Montserrat',sans-serif] text-sm text-[#111111] outline-none transition-colors placeholder:text-[#8d8d99] focus:border-[#111111] focus:ring-0"
+                                />
+                            </label>
+
+                        </fieldset>
 
                         <div className="mt-8 flex flex-col items-end gap-3">
                             <div className="flex items-center gap-2">
                                 <button
                                     type="submit"
-                                    className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-10 font-['Montserrat',sans-serif] text-sm font-medium text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f1650]"
+                                    disabled={sending}
+                                    className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-10 font-['Montserrat',sans-serif] text-sm font-medium text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f1650]"
                                 >
-                                    Submit Now
+                                    {sending ? 'Sending…' : 'Submit Now'}
                                 </button>
                                 <button
                                     type="submit"
+                                    disabled={sending}
                                     aria-label="Submit"
                                     className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f1650]"
                                 >
                                     <ChevronsRight className="h-5 w-5" />
                                 </button>
                             </div>
-                            <p aria-live="polite" className="font-['Montserrat',sans-serif] text-sm text-[#5f9a24]">
-                                {sent ? 'Thanks! Your message has been sent.' : ''}
+                            <p
+                                aria-live="polite"
+                                className={`text-right font-['Montserrat',sans-serif] text-sm ${status === 'error' ? 'text-[#b42318]' : 'text-[#5f9a24]'}`}
+                            >
+                                {status === 'error' &&
+                                    'Sorry, your message could not be sent. Please try again or email support@amzautomationsolutions.com.'}
                             </p>
                         </div>
                     </form>
                 </div>
             </div>
+
+            <ThankYouPopup open={status === 'sent'} name={thanksName} onClose={closeThanks} />
         </section>
     );
 };

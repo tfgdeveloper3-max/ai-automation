@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 import Ribbon from '../Ribbon';
 import Navbar from '../Navbar';
+import { useLeadModal } from '../leadModalContext';
 
 const BG: CSSProperties = {
     backgroundImage: [
@@ -30,6 +31,7 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
 );
 
 const AfiliateHero = () => {
+    const { openLeadForm } = useLeadModal();
     return (
         <section className="relative isolate overflow-hidden">
             <div
@@ -68,19 +70,21 @@ const AfiliateHero = () => {
                     </p>
 
                     <div className={`mt-6 flex items-center gap-2 ${reveal}`} style={delay('0.45s')}>
-                        <a
-                            href="#get-started"
+                        <button
+                            type='button'
+                            onClick={openLeadForm}
                             className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-9 font-['Montserrat',sans-serif] text-sm font-medium text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                         >
                             Get Started
-                        </a>
-                        <a
-                            href="#get-started"
+                        </button>
+                        <button
+                            type='button'
+                            onClick={openLeadForm}
                             aria-label="Get started"
                             className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                         >
                             <ChevronsRight className="h-5 w-5" />
-                        </a>
+                        </button>
                     </div>
 
                     <div className={`mt-6 flex items-center gap-4 ${reveal}`} style={delay('0.6s')}>

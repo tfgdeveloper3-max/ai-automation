@@ -11,16 +11,23 @@ import CtaBanner from './components/Ctasection';
 import Faqs from './components/Faqsection';
 import FooterIntroReveal from './components/FooterIntroReveal';
 import FooterSection from './components/FooterSection';
+import RouteMeta from './components/RouteMeta';
+import LeadModalProvider from './components/LeadModalProvider';
 
+import AboutPage from './components/pages/About/page';
+import ServicePage from './components/pages/Service/page';
+import AfiliatePage from './components/pages/Afiliate/page';
+import ContactPage from './components/pages/Contact/page';
+import ReviewsPage from './components/pages/Reviews/page';
+
+// Inner service pages
+import AiCustomerSupportPage from './components/pages/InnerServices/AI-CustomerSupport/page';
+import MultiChannelPage from './components/pages/InnerServices/MultiChannel/page';
+import SmartInventoryPage from './components/pages/InnerServices/SmartInventory/page';
+import AutomatedPage from './components/pages/InnerServices/Automated/page';
 
 import './styles/fonts.css';
 import './App.css';
-import AboutPage from './components/pages/About/page';
-import ServicePage from './components/pages/Service/page';
-import BlogPage from './components/pages/Blog/page';
-import AfiliatePage from './components/pages/Afiliate/page';
-import ContactPage from './components/pages/Contact/page';
-import RouteMeta from './components/RouteMeta';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -52,17 +59,25 @@ function HomePage() {
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <RouteMeta />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/service" element={<ServicePage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/affiliate" element={<AfiliatePage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<HomePage />} />
-      </Routes>
+      <LeadModalProvider>
+        <ScrollToTop />
+        <RouteMeta />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/service" element={<ServicePage />} />
+
+          <Route path="/service/ai-customer-support" element={<AiCustomerSupportPage />} />
+          <Route path="/service/multi-channel-order-sync" element={<MultiChannelPage />} />
+          <Route path="/service/smart-inventory-management" element={<SmartInventoryPage />} />
+          <Route path="/service/automated-cross-selling" element={<AutomatedPage />} />
+
+          <Route path="/affiliate" element={<AfiliatePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/reviews" element={<ReviewsPage />} />
+          <Route path="*" element={<HomePage />} />
+        </Routes>
+      </LeadModalProvider>
     </BrowserRouter>
   );
 }

@@ -1,10 +1,13 @@
 import { useState, type CSSProperties, type FocusEvent, type JSX } from 'react';
+import { Link } from 'react-router-dom';
 import { useSectionReveal } from './usesectionreveal';
 
 interface FeatureCard {
     title: string;
     description: string;
     icon: JSX.Element;
+    /** Page the "Read More" link opens */
+    href: string;
     highlight?: boolean;
 }
 
@@ -76,12 +79,14 @@ const CARDS: FeatureCard[] = [
         description:
             'Instant automated responses for order status, returns, and FAQs across Amazon, Shopify, and TikTok.',
         icon: <RobotIcon />,
+        href: '/service/ai-customer-support',
     },
     {
         title: 'Multi-Channel Order Sync',
         description:
             'Automatically process return requests, issue labels, and update order statuses across all platforms in real time.',
         icon: <ChipIcon />,
+        href: '/service/multi-channel-order-sync',
         highlight: true,
     },
     {
@@ -89,12 +94,14 @@ const CARDS: FeatureCard[] = [
         description:
             'Sync inventory levels automatically across sales channels to prevent stockouts and over-selling.',
         icon: <BrainGearIcon />,
+        href: '/service/smart-inventory-management',
     },
     {
         title: 'Automated Cross-Selling',
         description:
             'Trigger personalized product recommendations and promo codes based on real-time customer behavior.',
         icon: <BrainGearIcon />,
+        href: '/service/automated-cross-selling',
     },
 ];
 
@@ -209,15 +216,16 @@ const Features = () => {
                                             {card.description}
                                         </p>
 
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to={card.href}
+                                            aria-label={`Read more about ${card.title}`}
                                             className="mt-5 inline-flex items-center gap-1.5 font-['Montserrat',sans-serif] text-[13px] font-medium text-[#8ac44b] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ac44b]"
                                         >
                                             Read More
                                             <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                                 <path d="M9 6l6 6-6 6" />
                                             </svg>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </article>
                             </div>
@@ -226,19 +234,19 @@ const Features = () => {
                 </div>
 
                 <div className={`mt-12 flex items-center justify-center gap-2 lg:mt-14 ${reveal(5).className}`} style={reveal(5).style}>
-                    <a
-                        href="#"
+                    <Link
+                        to="/service"
                         className="inline-flex h-11 items-center rounded-full bg-[#8ac44b] px-9 font-['Montserrat',sans-serif] text-sm font-semibold text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d1650]"
                     >
                         View All
-                    </a>
-                    <a
-                        href="#"
-                        aria-label="View all"
+                    </Link>
+                    <Link
+                        to="/service"
+                        aria-label="View all services"
                         className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#8ac44b] text-white transition hover:brightness-110"
                     >
                         <ChevronsRight className="h-5 w-5" />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>
