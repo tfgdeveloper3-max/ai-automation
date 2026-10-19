@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
+
 import Hero from './components/Hero';
 import Features from './components/Features';
 import SkillsSection from './components/SkillsSection';
@@ -28,6 +29,7 @@ import AutomatedPage from './components/pages/InnerServices/Automated/page';
 
 import './styles/fonts.css';
 import './App.css';
+import LiveChat from './components/LiveChat';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -40,6 +42,7 @@ function ScrollToTop() {
 function HomePage() {
   return (
     <>
+      <LiveChat />
       <Hero />
       <main>
         <Features />

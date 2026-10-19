@@ -116,8 +116,7 @@ export default function FooterSection() {
                         </Link>
 
                         <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-400">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit aut elit
-                            tellus luctus nec ulla corper mattis aulvinar daibus leo.
+                            Empowering e-commerce brands on Amazon, Shopify, and TikTok with custom AI workflows, automated customer support, and seamless operations to scale revenue effortlessly.
                         </p>
 
                         <div className="mt-6 flex items-center gap-3">
@@ -207,11 +206,6 @@ export default function FooterSection() {
                                 <Send size={16} />
                             </button>
                         </form>
-
-                        <label className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-neutral-500">
-                            <input type="checkbox" className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[#7EC242]" />
-                            quis autem vel eum iure reprehenderit rui in ea voluptate esse.
-                        </label>
                     </div>
                 </div>
 
