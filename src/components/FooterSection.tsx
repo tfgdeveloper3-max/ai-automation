@@ -155,9 +155,6 @@ export default function FooterSection() {
                     <div>
                         <h4 className="mb-5 text-lg font-semibold text-white">Contact Us</h4>
                         <ul className="flex flex-col gap-4 text-sm text-neutral-300">
-                            <li className="flex items-start gap-3">
-                                <span className="font-semibold text-white">AMZ Automation Solutions</span>
-                            </li>
                             <li className="flex items-center gap-3">
                                 <Phone size={15} className="shrink-0" style={{ color: GREEN }} />
                                 <a href="tel:+12138639445" className="min-w-0 hover:text-white">

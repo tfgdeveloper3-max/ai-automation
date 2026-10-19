@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-
-
 import Hero from './components/Hero';
 import Features from './components/Features';
 import SkillsSection from './components/SkillsSection';
@@ -21,7 +19,6 @@ import AfiliatePage from './components/pages/Afiliate/page';
 import ContactPage from './components/pages/Contact/page';
 import ReviewsPage from './components/pages/Reviews/page';
 
-// Inner service pages
 import AiCustomerSupportPage from './components/pages/InnerServices/AI-CustomerSupport/page';
 import MultiChannelPage from './components/pages/InnerServices/MultiChannel/page';
 import SmartInventoryPage from './components/pages/InnerServices/SmartInventory/page';
