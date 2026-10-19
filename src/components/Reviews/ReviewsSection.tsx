@@ -1,13 +1,11 @@
 import { useMemo, useRef, useState } from 'react';
-import { COMPANY_NAME, REVIEWS, type Review } from './ReviewsData';
 import Stars from './Stars';
+import { COMPANY_NAME, REVIEWS, type Review } from './ReviewsData';
 import { SERVICES } from '../ServicesNav';
 
 
-/* ---------------- Helpers ---------------- */
-
 const PAGE_SIZE = 5;
-const CLAMP_AT = 240; // characters before "See more"
+const CLAMP_AT = 240;
 
 type Sort = 'recent' | 'highest' | 'lowest';
 
@@ -56,6 +54,31 @@ const SearchIcon = () => (
     </svg>
 );
 
+const Avatar = ({ review }: { review: Review }) => {
+    const [failed, setFailed] = useState(false);
+
+    if (review.image && !failed) {
+        return (
+            <img
+                src={review.image}
+                alt=""
+                loading="lazy"
+                onError={() => setFailed(true)}
+                className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-[#8ac44b]/40"
+            />
+        );
+    }
+    return (
+        <span
+            aria-hidden="true"
+            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white ${font}`}
+            style={{ backgroundColor: avatarColor(review.id) }}
+        >
+            {initials(review.name)}
+        </span>
+    );
+};
+
 /* ---------------- Review card ---------------- */
 
 const ReviewCard = ({ review }: { review: Review }) => {
@@ -80,17 +103,12 @@ const ReviewCard = ({ review }: { review: Review }) => {
         <article id={`review-${review.id}`} className="scroll-mt-28 rounded-2xl border border-[#ececf2] bg-white p-5 shadow-[0_4px_14px_rgba(20,12,60,0.04)] sm:p-6">
             {/* Reviewer */}
             <header className="flex items-center gap-3 border-b border-[#f0f0f5] pb-4">
-                <span
-                    aria-hidden="true"
-                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white ${font}`}
-                    style={{ backgroundColor: avatarColor(review.id) }}
-                >
-                    {initials(review.name)}
-                </span>
+                <Avatar review={review} />
                 <div className="min-w-0">
                     <p className={`truncate text-[15px] font-semibold text-[#111111] ${font}`}>{review.name}</p>
-                    <p className={`text-xs text-[#6b6b7a] ${font}`}>
-                        {review.country} · {review.reviewsCount} review{review.reviewsCount > 1 ? 's' : ''}
+                    <p className={`text-xs leading-snug text-[#6b6b7a] ${font}`}>
+                        {review.role}
+                        {review.country && ` · ${review.country}`}
                     </p>
                 </div>
             </header>
@@ -105,9 +123,11 @@ const ReviewCard = ({ review }: { review: Review }) => {
                         </span>
                     )}
                 </div>
-                <time dateTime={review.date} className={`text-xs text-[#6b6b7a] ${font}`}>
-                    {fmtDate(review.date)}
-                </time>
+                {review.date && (
+                    <time dateTime={review.date} className={`text-xs text-[#6b6b7a] ${font}`}>
+                        {fmtDate(review.date)}
+                    </time>
+                )}
             </div>
 
             <h3 className="mt-3 font-['Anybody',sans-serif] text-lg font-bold leading-snug text-[#1d1650]">{review.title}</h3>
@@ -124,11 +144,11 @@ const ReviewCard = ({ review }: { review: Review }) => {
                 )}
             </p>
 
-            <p className={`mt-3 text-xs text-[#6b6b7a] ${font}`}>
-                <strong className="font-semibold text-[#3a3a48]">Date of experience:</strong> {fmtDate(review.experienceDate)}
-                <span className="mx-2 text-[#c4c4d0]">|</span>
-                <span className="rounded-full bg-[#f2f1fa] px-2.5 py-0.5 font-medium text-[#1d1650]">{review.service}</span>
-            </p>
+            {review.service && (
+                <p className={`mt-3 text-xs ${font}`}>
+                    <span className="rounded-full bg-[#f2f1fa] px-2.5 py-0.5 font-medium text-[#1d1650]">{review.service}</span>
+                </p>
+            )}
 
             {/* Actions */}
             <div className="mt-4 flex items-center gap-1 border-t border-[#f0f0f5] pt-3">
@@ -182,8 +202,9 @@ const ReviewsSection = ({ onWriteReview }: { onWriteReview?: () => void }) => {
     const avg = Math.round(average * 10) / 10;
     const counts = [5, 4, 3, 2, 1].map((n) => ({ n, count: REVIEWS.filter((r) => r.rating === n).length }));
     const negative = REVIEWS.filter((r) => r.rating <= 2);
-    const replyRate = negative.length ? Math.round((negative.filter((r) => r.reply).length / negative.length) * 100) : 100;
-    const verifiedRate = total ? Math.round((REVIEWS.filter((r) => r.verified).length / total) * 100) : 0;
+    const replyRate = negative.length ? Math.round((negative.filter((r) => r.reply).length / negative.length) * 100) : null;
+    const fiveStarRate = total ? Math.round((REVIEWS.filter((r) => r.rating === 5).length / total) * 100) : 0;
+    const hasVerified = REVIEWS.some((r) => r.verified);
 
     /* Filtered + sorted list */
     const filtered = useMemo(() => {
@@ -192,12 +213,13 @@ const ReviewsSection = ({ onWriteReview }: { onWriteReview?: () => void }) => {
             (r) =>
                 (!starFilter.length || starFilter.includes(r.rating)) &&
                 (!verifiedOnly || r.verified) &&
-                (!q || `${r.title} ${r.body} ${r.name} ${r.service}`.toLowerCase().includes(q))
+                (!q || `${r.title} ${r.body} ${r.name} ${r.role} ${r.service ?? ''}`.toLowerCase().includes(q))
         );
         return [...list].sort((a, b) => {
-            if (sort === 'highest') return b.rating - a.rating || b.date.localeCompare(a.date);
-            if (sort === 'lowest') return a.rating - b.rating || b.date.localeCompare(a.date);
-            return b.date.localeCompare(a.date);
+            const byDate = (b.date ?? '').localeCompare(a.date ?? ''); // 0 when no dates → keeps your order
+            if (sort === 'highest') return b.rating - a.rating || byDate;
+            if (sort === 'lowest') return a.rating - b.rating || byDate;
+            return byDate;
         });
     }, [starFilter, query, sort, verifiedOnly]);
 
@@ -307,18 +329,20 @@ const ReviewsSection = ({ onWriteReview }: { onWriteReview?: () => void }) => {
                         </label>
 
                         <div className="flex items-center gap-3">
-                            <label className={`inline-flex h-11 cursor-pointer items-center gap-2 rounded-full border border-[#dcdce6] bg-white px-4 text-sm text-[#3a3a48] ${font}`}>
-                                <input
-                                    type="checkbox"
-                                    checked={verifiedOnly}
-                                    onChange={(e) => {
-                                        setVerifiedOnly(e.target.checked);
-                                        setPage(1);
-                                    }}
-                                    className="h-4 w-4 accent-[#8ac44b]"
-                                />
-                                Verified
-                            </label>
+                            {hasVerified && (
+                                <label className={`inline-flex h-11 cursor-pointer items-center gap-2 rounded-full border border-[#dcdce6] bg-white px-4 text-sm text-[#3a3a48] ${font}`}>
+                                    <input
+                                        type="checkbox"
+                                        checked={verifiedOnly}
+                                        onChange={(e) => {
+                                            setVerifiedOnly(e.target.checked);
+                                            setPage(1);
+                                        }}
+                                        className="h-4 w-4 accent-[#8ac44b]"
+                                    />
+                                    Verified
+                                </label>
+                            )}
 
                             <label className="relative">
                                 <span className="sr-only">Sort reviews</span>
@@ -420,20 +444,24 @@ const ReviewsSection = ({ onWriteReview }: { onWriteReview?: () => void }) => {
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="rounded-2xl border border-[#ececf2] bg-white p-5">
-                            <p className="font-['Anybody',sans-serif] text-3xl font-bold text-[#1d1650]">{replyRate}%</p>
-                            <p className={`mt-1 text-xs leading-snug text-[#6b6b7a] ${font}`}>of negative reviews replied to</p>
+                            <p className="font-['Anybody',sans-serif] text-3xl font-bold text-[#1d1650]">{avg.toFixed(1)}</p>
+                            <p className={`mt-1 text-xs leading-snug text-[#6b6b7a] ${font}`}>average rating out of 5</p>
                         </div>
                         <div className="rounded-2xl border border-[#ececf2] bg-white p-5">
-                            <p className="font-['Anybody',sans-serif] text-3xl font-bold text-[#1d1650]">{verifiedRate}%</p>
-                            <p className={`mt-1 text-xs leading-snug text-[#6b6b7a] ${font}`}>verified customer reviews</p>
+                            <p className="font-['Anybody',sans-serif] text-3xl font-bold text-[#1d1650]">
+                                {replyRate !== null ? `${replyRate}%` : `${fiveStarRate}%`}
+                            </p>
+                            <p className={`mt-1 text-xs leading-snug text-[#6b6b7a] ${font}`}>
+                                {replyRate !== null ? 'of negative reviews replied to' : 'five-star reviews'}
+                            </p>
                         </div>
                     </div>
 
                     <div className="rounded-2xl border border-[#ececf2] bg-white p-6">
                         <p className="font-['Anybody',sans-serif] text-base font-bold text-[#1d1650]">How reviews work</p>
                         <p className={`mt-2 text-sm leading-relaxed text-[#6b6b7a] ${font}`}>
-                            Reviews marked <span className="font-semibold text-[#5f9a24]">Verified</span> come from customers we have
-                            confirmed worked with us. We publish positive and negative reviews alike, and we never pay for or edit reviews.
+                            Every review here comes from a real client of {COMPANY_NAME}. We publish feedback as our clients share it, and we
+                            never pay for reviews.
                         </p>
                         <button
                             type="button"
