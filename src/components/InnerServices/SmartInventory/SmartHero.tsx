@@ -23,7 +23,7 @@ const reveal =
     'opacity-0 animate-[heroFadeUp_1.1s_cubic-bezier(0.19,1,0.22,1)_forwards] motion-reduce:animate-none motion-reduce:opacity-100';
 const delay = (s: string): CSSProperties => ({ animationDelay: s });
 
-const AVATARS = ['/images/avatar-1.png', '/images/avatar-2.png', '/images/avatar-3.png', '/images/avatar-4.png'];
+const AVATARS = ['/images/Oliver-Smith.png', '/images/Priya-Nair.png', '/images/Sana-Malik.png', '/images/Sarah-Jenkins.png'];
 
 const ChevronsRight = ({ className = '' }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
