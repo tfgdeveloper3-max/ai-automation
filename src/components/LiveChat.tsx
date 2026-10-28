@@ -1,59 +1,80 @@
 import { useEffect } from "react";
 
-type LCEvent = { type?: string; author?: { type?: string } };
-type LCVisibility = { visibility?: string };
-
-type LiveChatWidgetApi = {
-    on: (event: string, cb: (data: never) => void) => void;
-    off: (event: string, cb: (data: never) => void) => void;
-    call: (method: string, ...args: unknown[]) => void;
-    get: (what: string) => { visibility?: string };
+type TawkApi = {
+    onLoad?: () => void;
+    onChatMessageAgent?: (message: string) => void;
+    onChatMaximized?: () => void;
+    maximize?: () => void;
+    isChatMaximized?: () => boolean;
+    [key: string]: unknown;
 };
 
 declare global {
     interface Window {
-        __lc?: Record<string, unknown>;
-        LiveChatWidget?: LiveChatWidgetApi;
+        Tawk_API?: TawkApi;
+        Tawk_LoadStart?: Date;
     }
 }
 
-const LICENSE = 19067595;
-const AGENT_EVENT_TYPES = ["message", "rich_message", "file"];
+const PROPERTY_ID = "6ae280097eefa63472c51ca6";
+const WIDGET_ID = "1k62c89qc";
 const MAX_RETRIES = 10;
-const FLASH_TEXT = "💬 New message!";
+const FLASH_TEXT = "New message!";
+const FIRST_OPEN_DELAY = 5000; 
+const FIRST_VISIT_KEY = "tawk_first_open_done";
+const ROUTE_CHANGE_EVENT = "tawk:routechange";
 
 const injectSnippet = () => {
-    if (document.getElementById("livechat-script")) return;
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = window.Tawk_LoadStart || new Date();
 
-    window.__lc = window.__lc || {};
-    window.__lc.license = LICENSE;
-    window.__lc.integration_name = "manual_channels";
-    window.__lc.product_name = "livechat";
+    if (document.getElementById("tawk-script")) return;
 
     const script = document.createElement("script");
-    script.id = "livechat-script";
-    script.type = "text/javascript";
-    script.text = `;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))`;
+    script.id = "tawk-script";
+    script.async = true;
+    script.src = `https://embed.tawk.to/${PROPERTY_ID}/${WIDGET_ID}`;
+    script.charset = "UTF-8";
+    script.setAttribute("crossorigin", "*");
     document.body.appendChild(script);
 };
 
-const LiveChat = () => {
+const isFirstVisit = () => {
+    try {
+        return !sessionStorage.getItem(FIRST_VISIT_KEY);
+    } catch {
+        return true;
+    }
+};
+
+const markVisited = () => {
+    try {
+        sessionStorage.setItem(FIRST_VISIT_KEY, "1");
+    } catch {
+        
+    }
+};
+
+const TawkChat = () => {
     useEffect(() => {
         injectSnippet();
 
-        const LC = () => window.LiveChatWidget;
-        if (!LC()) return;
+        const T = () => window.Tawk_API;
+        if (!T()) return;
 
         let pendingOpen = false;
+        let openRequested = false;
         let titleTimer: ReturnType<typeof setInterval> | null = null;
         let savedTitle = "";
         const retryTimers = new Set<ReturnType<typeof setTimeout>>();
 
-        const getVisibility = () => {
+        const isWidgetReady = () => typeof T()?.maximize === "function";
+
+        const isMaximized = () => {
             try {
-                return LC()?.get("state").visibility ?? null;
+                return T()?.isChatMaximized?.() ?? false;
             } catch {
-                return null;
+                return false;
             }
         };
 
@@ -76,13 +97,13 @@ const LiveChat = () => {
 
         const forceOpen = (attempt = 0) => {
             try {
-                LC()?.call("maximize");
+                T()?.maximize?.();
             } catch {
-                return;
+                
             }
             const t = setTimeout(() => {
                 retryTimers.delete(t);
-                if (getVisibility() === "maximized") {
+                if (isMaximized()) {
                     pendingOpen = false;
                     stopTitleFlash();
                     return;
@@ -92,19 +113,68 @@ const LiveChat = () => {
             retryTimers.add(t);
         };
 
-        const onNewEvent = (event: LCEvent) => {
-            if (!event || !event.author || event.author.type !== "agent") return;
-            if (!event.type || !AGENT_EVENT_TYPES.includes(event.type)) return;
+        const tryAutoOpen = () => {
+            if (!openRequested || !isWidgetReady()) return;
+            openRequested = false;
+            if (!isMaximized()) forceOpen(0);
+        };
+
+        const requestOpen = () => {
+            openRequested = true;
+            tryAutoOpen();
+        };
+
+        if (isFirstVisit()) {
+            const t = setTimeout(() => {
+                retryTimers.delete(t);
+                markVisited();
+                requestOpen();
+            }, FIRST_OPEN_DELAY);
+            retryTimers.add(t);
+        } else {
+            requestOpen();
+        }
+
+        const origPush = history.pushState;
+        const origReplace = history.replaceState;
+        let lastPath = location.pathname;
+
+        const notifyRouteChange = () => {
+            window.dispatchEvent(new Event(ROUTE_CHANGE_EVENT));
+        };
+
+        const patchedPush: typeof history.pushState = function (this: History, ...args) {
+            const result = origPush.apply(this, args);
+            notifyRouteChange();
+            return result;
+        };
+        const patchedReplace: typeof history.replaceState = function (this: History, ...args) {
+            const result = origReplace.apply(this, args);
+            notifyRouteChange();
+            return result;
+        };
+        history.pushState = patchedPush;
+        history.replaceState = patchedReplace;
+
+        const onRouteChange = () => {
+            if (location.pathname === lastPath) return;
+            lastPath = location.pathname;
+            if (isFirstVisit()) return;
+            requestOpen();
+        };
+
+        window.addEventListener(ROUTE_CHANGE_EVENT, onRouteChange);
+        window.addEventListener("popstate", onRouteChange);
+
+        const onAgentMessage = () => {
             pendingOpen = true;
             forceOpen(0);
             if (document.hidden) startTitleFlash();
         };
 
-        const onVisibilityChanged = (data: LCVisibility) => {
-            if (data && data.visibility === "maximized") {
-                pendingOpen = false;
-                stopTitleFlash();
-            }
+        const onMaximized = () => {
+            pendingOpen = false;
+            stopTitleFlash();
         };
 
         const onTabVisibility = () => {
@@ -112,13 +182,26 @@ const LiveChat = () => {
             else if (!document.hidden) stopTitleFlash();
         };
 
-        LC()?.on("new_event", onNewEvent as (data: never) => void);
-        LC()?.on("visibility_changed", onVisibilityChanged as (data: never) => void);
+        const api = T()!;
+        const prevOnLoad = api.onLoad;
+        const onWidgetLoad = () => {
+            prevOnLoad?.();
+            tryAutoOpen();
+        };
+
+        api.onLoad = onWidgetLoad;
+        api.onChatMessageAgent = onAgentMessage;
+        api.onChatMaximized = onMaximized;
         document.addEventListener("visibilitychange", onTabVisibility);
 
         return () => {
-            LC()?.off("new_event", onNewEvent as (data: never) => void);
-            LC()?.off("visibility_changed", onVisibilityChanged as (data: never) => void);
+            if (api.onLoad === onWidgetLoad) api.onLoad = prevOnLoad;
+            if (api.onChatMessageAgent === onAgentMessage) api.onChatMessageAgent = undefined;
+            if (api.onChatMaximized === onMaximized) api.onChatMaximized = undefined;
+            if (history.pushState === patchedPush) history.pushState = origPush;
+            if (history.replaceState === patchedReplace) history.replaceState = origReplace;
+            window.removeEventListener(ROUTE_CHANGE_EVENT, onRouteChange);
+            window.removeEventListener("popstate", onRouteChange);
             document.removeEventListener("visibilitychange", onTabVisibility);
             retryTimers.forEach(clearTimeout);
             retryTimers.clear();
@@ -129,4 +212,4 @@ const LiveChat = () => {
     return null;
 };
 
-export default LiveChat;
+export default TawkChat;
