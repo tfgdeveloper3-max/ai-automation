@@ -7,8 +7,6 @@ const CONTACT = {
     phoneLabel: '(213) 863-9445',
     phoneHref: 'tel:+12138639445',
     email: 'support@amzautomationsolutions.com',
-    addressLine1: '1001 Wilshire Boulevard,',
-    addressLine2: 'Los Angeles, CA 90017',
 };
 
 const SUBJECTS = [
@@ -34,12 +32,6 @@ const PhoneIcon = () => (
 const MailIcon = () => (
     <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 shrink-0" aria-hidden="true">
         <path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 2.4V17h16V7.4l-8 5.3-8-5.3ZM5.3 7 12 11.4 18.7 7H5.3Z" />
-    </svg>
-);
-
-const PinIcon = () => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 shrink-0" aria-hidden="true">
-        <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" />
     </svg>
 );
 
@@ -177,14 +169,7 @@ const ContactSection = () => {
                                     <span className="min-w-0 break-all">{CONTACT.email}</span>
                                 </a>
                             </li>
-                            <li className="flex items-start gap-5">
-                                <PinIcon />
-                                <address className="min-w-0 not-italic leading-relaxed">
-                                    {CONTACT.addressLine1}
-                                    <br />
-                                    {CONTACT.addressLine2}
-                                </address>
-                            </li>
+
                         </ul>
 
                         <ul className="relative z-10 mt-12 flex gap-3 lg:mt-auto lg:pt-12">

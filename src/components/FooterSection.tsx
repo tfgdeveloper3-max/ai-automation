@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { Phone, Mail, Send } from "lucide-react";
 
 const GREEN = "#7EC242";
 
@@ -169,14 +169,6 @@ export default function FooterSection() {
                                 >
                                     support@amzautomationsolutions.com
                                 </a>
-                            </li>
-                            <li className="flex items-start gap-3">
-                                <MapPin size={15} className="mt-0.5 shrink-0" style={{ color: GREEN }} />
-                                <address className="min-w-0 not-italic">
-                                    1001 Wilshire Boulevard,
-                                    <br />
-                                    Los Angeles, CA 90017
-                                </address>
                             </li>
                         </ul>
                     </div>
