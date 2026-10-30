@@ -27,6 +27,11 @@ import AutomatedPage from './components/pages/InnerServices/Automated/page';
 import './styles/fonts.css';
 import './App.css';
 import LiveChat from './components/LiveChat';
+import QuickLeadSection from './components/QuickLeadSection';
+import TermsAndConditions from './components/Legal/Terms-Condition';
+import PrivacyPolicy from './components/Legal/PrivacyPolicy';
+import RefundPolicy from './components/Legal/RefundPolicy';
+import LandingPage from './components/pages/LP/page';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -42,6 +47,7 @@ function HomePage() {
       <LiveChat />
       <Hero />
       <main>
+        <QuickLeadSection />
         <Features />
         <SkillsSection />
         <SuccessStories />
@@ -75,6 +81,11 @@ function App() {
           <Route path="/affiliate" element={<AfiliatePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/reviews" element={<ReviewsPage />} />
+
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path='/automation-services' element={<LandingPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </LeadModalProvider>

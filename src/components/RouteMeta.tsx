@@ -64,6 +64,11 @@ const META: Record<string, PageMeta> = {
         description:
             'Get in touch with AMZ Automation Solutions. Call, email or send us a message and our team will help you start automating your store.',
     },
+    '/automation-services': {
+        title: `${SITE_NAME} | Automation Services`,
+        description:
+            'Get in touch with AMZ Automation Solutions. Call, email or send us a message and our team will help you start automating your store.',
+    },
 };
 
 const NOT_FOUND: PageMeta = {

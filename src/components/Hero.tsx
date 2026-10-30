@@ -44,7 +44,7 @@ const Hero = ({ ready = true }: HeroProps) => {
             <div className="relative z-10">
                 <Navbar />
 
-                <div className="mx-auto w-full max-w-[1280px] px-5 pb-4 pt-8 sm:px-8 sm:pt-12 lg:px-10 lg:pt-10 xl:pt-14">
+                <div className="mx-auto w-full max-w-[1280px] px-5 pb-4 pt-4 sm:px-8 sm:pt-6 lg:px-10 lg:pt-4 xl:pt-6">
                     <div className="grid grid-cols-1 items-center gap-8 md:gap-10 lg:grid-cols-12 lg:gap-0">
                         {/* ---------- Left: copy ---------- */}
                         <div className="relative z-10 text-center md:text-left lg:col-start-1 lg:col-end-7 lg:row-start-1">
@@ -122,7 +122,7 @@ const Hero = ({ ready = true }: HeroProps) => {
                             </div>
                         </div>
 
-                        <div className="relative lg:col-start-4 lg:col-end-13 lg:row-start-1 lg:self-end">
+                        <div className="relative lg:col-start-4 lg:col-end-13 lg:row-start-1 lg:self-end lg:-translate-y-16 lg:translate-x-16 xl:-translate-y-24 xl:translate-x-24">
                             <HeroVisual play={ready} className="mx-auto max-w-[760px] lg:max-w-none" />
                         </div>
                     </div>

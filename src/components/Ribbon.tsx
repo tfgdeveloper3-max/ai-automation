@@ -14,7 +14,7 @@ const Group = ({ hidden = false }: { hidden?: boolean }) => (
                 className="inline-flex items-center gap-2.5 whitespace-nowrap px-4 text-sm font-bold text-white sm:px-6 sm:text-lg lg:text-xl"
             >
                 <Burst />
-                The Best Solution
+                Smarter Growth, Higher ROI
             </span>
         ))}
     </div>
@@ -22,8 +22,6 @@ const Group = ({ hidden = false }: { hidden?: boolean }) => (
 
 type BandProps = { className: string; reverse?: boolean; duration?: string };
 
-/* Band is 120% wide and centred with flex, so its rotated ends never show
-   inside the viewport (no negative margins / offsets needed). */
 const Band = ({ className, reverse = false, duration = '40s' }: BandProps) => (
     <div className="absolute inset-0 flex items-center justify-center">
         <div className={`w-[120%] shrink-0 overflow-hidden py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.25)] sm:py-3 ${className}`}>
@@ -40,9 +38,7 @@ const Band = ({ className, reverse = false, duration = '40s' }: BandProps) => (
 
 const Ribbon = () => (
     <div className="pointer-events-none relative z-20 h-24 overflow-hidden sm:h-32 lg:h-36" role="presentation">
-        {/* Back: green, rising to the right */}
         <Band className="rotate-[-2.5deg] bg-[#8ac44b]" reverse duration="45s" />
-        {/* Front: navy, falling to the right */}
         <Band className="rotate-[2.5deg] bg-[#1a1356]" />
     </div>
 );

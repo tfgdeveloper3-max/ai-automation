@@ -199,8 +199,38 @@ export default function FooterSection() {
                 </div>
 
                 {/* Bottom bar */}
-                <div className="mt-14 border-t border-white/10 pt-6 text-center text-xs text-neutral-500">
-                    Copyright © 2026 | All rights reserved.
+                <div className="mt-14 border-t border-white/10 pt-6">
+                    <div className="flex flex-col items-center justify-between gap-4 text-xs text-neutral-500 sm:flex-row">
+                        <p>Copyright © 2026 AMZ Automation Solutions. All rights reserved.</p>
+                        <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+                            <li>
+                                <Link
+                                    to="/privacy-policy"
+                                    className="transition-colors hover:text-white"
+                                >
+                                    Privacy Policy
+                                </Link>
+                            </li>
+                            <li className="text-neutral-700">|</li>
+                            <li>
+                                <Link
+                                    to="/terms-and-conditions"
+                                    className="transition-colors hover:text-white"
+                                >
+                                    Terms &amp; Conditions
+                                </Link>
+                            </li>
+                            <li className="text-neutral-700">|</li>
+                            <li>
+                                <Link
+                                    to="/refund-policy"
+                                    className="transition-colors hover:text-white"
+                                >
+                                    Refund Policy
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </footer>
