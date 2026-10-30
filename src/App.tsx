@@ -32,6 +32,7 @@ import TermsAndConditions from './components/Legal/Terms-Condition';
 import PrivacyPolicy from './components/Legal/PrivacyPolicy';
 import RefundPolicy from './components/Legal/RefundPolicy';
 import LandingPage from './components/pages/LP/page';
+import Etsy from './components/pages/InnerServices/EtsyAutomation/page';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -73,10 +74,11 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/service" element={<ServicePage />} />
 
-          <Route path="/service/ai-customer-support" element={<AiCustomerSupportPage />} />
-          <Route path="/service/multi-channel-order-sync" element={<MultiChannelPage />} />
-          <Route path="/service/smart-inventory-management" element={<SmartInventoryPage />} />
-          <Route path="/service/automated-cross-selling" element={<AutomatedPage />} />
+          <Route path="/service/shopify-automation" element={<AiCustomerSupportPage />} />
+          <Route path="/service/tiktok-automation" element={<MultiChannelPage />} />
+          <Route path="/service/walmart-automation" element={<SmartInventoryPage />} />
+          <Route path="/service/ebay-automation" element={<AutomatedPage />} />
+          <Route path="/service/etsy-automation" element={<Etsy />} />
 
           <Route path="/affiliate" element={<AfiliatePage />} />
           <Route path="/contact" element={<ContactPage />} />

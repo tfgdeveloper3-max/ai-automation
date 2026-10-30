@@ -10,28 +10,28 @@ interface Faq {
 
 const FAQS: Faq[] = [
     {
-        q: 'What platforms does AMZ Automation support?',
-        a: 'We specialize in automating operations across Amazon, Shopify, and TikTok Shop, as well as integrating custom CRMs, inventory tools, and messaging platforms.',
+        q: 'What is e-commerce automation and how does AMZ Automation work?',
+        a: 'E-commerce automation is a hands-off investment model where our expert team handles everything for your online store—from product sourcing and listing optimization to order fulfillment and customer service—allowing you to generate passive revenue without daily operational effort.',
     },
     {
-        q: 'How long does it take to set up automated workflows?',
-        a: 'Most standard automation workflows can be configured and deployed within 3 to 7 business days following our initial discovery and audit call.',
+        q: 'Which marketplaces do you support for store automation?',
+        a: 'We specialize in scaling stores across the world\u2019s top digital platforms, including Shopify, TikTok Shop, Walmart, eBay, and Etsy.',
     },
     {
-        q: 'Will this work with my existing tech stack?',
-        a: 'Yes! Our solutions seamlessly integrate into your current store setup, fulfillment channels, and communication tools without interrupting daily operations.',
+        q: 'How much capital do I need to get started?',
+        a: 'Starting your automated e-commerce venture requires a fraction of the budget traditional brick-and-mortar businesses demand. We offer flexible options tailored to fit your specific investment goals.',
     },
     {
-        q: 'Is technical expertise required to manage the automations?',
-        a: 'Not at all. We build hands-free, user-friendly pipelines and provide full documentation and support so your team can focus entirely on growing your business.',
+        q: 'How long does it take for my store to launch and make sales?',
+        a: 'Most of our new partners go live, launch inventory, and generate their first sales in under 4 weeks, with our team managing all underlying operations.',
     },
     {
-        q: 'How does automation help improve customer satisfaction?',
-        a: 'By automating order tracking updates, FAQs, and refund workflows, your customers receive instant 24/7 responses, reducing wait times and improving store reviews.',
+        q: 'Am I required to handle inventory or customer support?',
+        a: 'Not at all! Our systems and dedicated specialists manage inventory tracking, packaging logistics, and 24/7 buyer communications completely on your behalf.',
     },
     {
-        q: 'How do I get started with AMZ Automation?',
-        a: "Simply schedule a free audit call through our website. We\u2019ll review your current processes, spot efficiency bottlenecks, and outline a custom automation plan for your brand.",
+        q: 'How do I track my store\u2019s daily performance and profits?',
+        a: 'You receive full transparency with real-time dashboards and regular reporting so you can monitor your revenue, profit margins, and growth milestones effortlessly.',
     },
 ];
 
@@ -150,12 +150,11 @@ const Faqs: React.FC = () => {
                     </h2>
 
                     <p className="mt-3 max-w-[520px] text-[15px] leading-5 text-neutral-500">
-                        Find answers to common questions about our e-commerce automation
-                        services, integrations, and setup process.
+                        Everything you need to know about partnering with AMZ Automation to
+                        build, manage, and scale your automated e-commerce stores.
                     </p>
                 </div>
 
-                {/* List */}
                 <div ref={ref} className="mt-8 grid grid-cols-1 items-start gap-y-5 md:grid-cols-2 md:gap-x-11 md:gap-y-10">
                     {FAQS.map((faq, i) => (
                         <FaqItem

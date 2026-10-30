@@ -11,28 +11,28 @@ interface Faq {
 
 const FAQS: Faq[] = [
     {
-        q: 'How quickly can AI Customer Support be integrated into my store?',
-        a: 'Setup typically takes 24 to 48 hours. Our team configures and connects the AI agents directly with your Amazon, Shopify, or TikTok account, training it on your specific store FAQs and catalog data.',
+        q: 'How does eBay Automation work with AMZ Automation?',
+        a: 'We take full ownership of your eBay store operations, including account setup, product sourcing, listing optimization, dynamic repricing, fulfillment handling, and customer support.',
     },
     {
-        q: 'Does AMZ Automation work across Amazon, Shopify, and TikTok simultaneously?',
-        a: 'Yes! Our systems are built for multi-channel management, allowing you to synchronize inventory, order workflows, and customer support across Amazon, Shopify, and TikTok Shop from one central pipeline.',
+        q: 'How do you handle initial eBay selling limits for new stores?',
+        a: 'We work directly within eBay\u2019s guidelines to gradually build account metrics, handle seller limit requests, and systematically scale your listing capacity for long-term growth.',
     },
     {
-        q: 'Can the AI chatbot handle complex customer inquiries or refunds?',
-        a: 'The AI instantly handles 80%+ of routine inquiries like order status, shipping updates, and general FAQs. For complex cases or specific refund approvals, the bot smoothly hands off the ticket to your human team with full context.',
+        q: 'What is Cassini SEO and how do you optimize my listings for it?',
+        a: "Cassini is eBay's search algorithm. We optimize your store's listings with high-volume keywords, complete item specifics, competitive pricing, and fast dispatch times to rank on page one.",
     },
     {
-        q: 'Will using automated tools affect my Amazon Seller Central compliance?',
-        a: 'Not at all. All our automation workflows strictly adhere to Amazon, Shopify, and TikTok terms of service, keeping your account safe while improving operational efficiency.',
+        q: 'Do I need to fulfill orders or respond to buyer messages myself?',
+        a: 'No. Our automated systems and dedicated support staff process orders, upload tracking details, and answer customer inquiries around the clock.',
     },
     {
-        q: 'What level of technical setup or maintenance is required from my side?',
-        a: 'Zero technical expertise is required. We handle 100% of the initial setup, API integrations, and continuous performance tuning so your store can run seamlessly on autopilot.',
+        q: 'How do you protect my store\u2019s seller rating and performance metrics?',
+        a: 'We partner with vetted suppliers, monitor stock levels in real time, and implement automated feedback management to maintain Top Rated Seller status.',
     },
     {
-        q: 'How do I get started with AMZ Automation services?',
-        a: 'Simply click the "Get Started" button or reach out via our contact form. Our team will schedule a strategy call to evaluate your store and build a custom automation plan.',
+        q: 'How do I monitor my store\u2019s profitability and inventory?',
+        a: 'You retain 100% account ownership and receive access to clear performance dashboards tracking sales, margins, and active orders.',
     },
 ];
 
@@ -125,7 +125,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
     );
 };
 
-const AiFaqs: React.FC = () => {
+const AutomatedFaqs: React.FC = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     const { ref, inView } = useInView<HTMLDivElement>();
     const { ref: sectionRef, inView: sectionInView } = useSectionReveal<HTMLElement>({ threshold: 0.1 });
@@ -151,9 +151,8 @@ const AiFaqs: React.FC = () => {
                     </h2>
 
                     <p className="mt-3 max-w-[520px] text-[15px] leading-5 text-neutral-500">
-                        Have questions about how our e-commerce automation services work?
-                        Find clear answers below regarding setup, multi-channel integration,
-                        and AI support systems.
+                        Everything you need to know about setting up, managing, and scaling
+                        your eBay Marketplace store.
                     </p>
                 </div>
 
@@ -175,4 +174,4 @@ const AiFaqs: React.FC = () => {
     );
 };
 
-export default AiFaqs;
+export default AutomatedFaqs;

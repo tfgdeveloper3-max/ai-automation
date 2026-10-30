@@ -23,7 +23,7 @@ const reveal =
     'opacity-0 animate-[heroFadeUp_1.1s_cubic-bezier(0.19,1,0.22,1)_forwards] motion-reduce:animate-none motion-reduce:opacity-100';
 const delay = (s: string): CSSProperties => ({ animationDelay: s });
 
-const AVATARS = ['/images/Aisha-Khan.png', '/images/Bilal-Ahmed.png', '/images/Fatima-Noor.png', '/images/Daniel-Brooks.png'];
+const AVATARS = ['/images/Chris-Morgan.png', '/images/Elena-Garcia.png', '/images/Elena-Rostova.png', '/images/Chloe-Bennett.png'];
 
 const ChevronsRight = ({ className = '' }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
@@ -31,7 +31,7 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
     </svg>
 );
 
-const AiHero = () => {
+const MultiHero = () => {
     const { openLeadForm } = useLeadModal();
     return (
         <section className="relative isolate overflow-hidden">
@@ -57,16 +57,14 @@ const AiHero = () => {
                         className={`font-['Anybody',sans-serif] text-[44px] leading-[1.1] text-white sm:text-[56px] lg:text-[68px] ${reveal}`}
                         style={delay('0.1s')}
                     >
-                        <span className="font-bold">24/7 AI</span> <span className="font-light">Customer Support</span>
+                        <span className="font-bold">TikTok </span> <span className="font-light">Shop Automation Solutions</span>
                     </h1>
 
                     <p
-                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[16px] leading-relaxed text-white/85 sm:text-[16px] ${reveal}`}
+                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-white/85 sm:text-[17px] ${reveal}`}
                         style={delay('0.3s')}
                     >
-                        Deliver instant, 24/7 customer assistance across Amazon, Shopify, and
-                        TikTok stores with intelligent AI agents that resolve inquiries, handle
-                        order tracking, and boost customer satisfaction.
+                        Tap into viral video commerce and live-selling ecosystems to capture massive audience engagement, leverage creator partnerships, and drive instant sales completely hands-free with AMZ Automation.
                     </p>
 
                     <div className={`mt-6 flex items-center gap-2 ${reveal}`} style={delay('0.45s')}>
@@ -111,4 +109,4 @@ const AiHero = () => {
     );
 };
 
-export default AiHero;
+export default MultiHero;

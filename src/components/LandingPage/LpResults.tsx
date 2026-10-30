@@ -14,32 +14,32 @@ type ResultVideo = {
 /* Apne videos yahan add karo */
 const VIDEOS: ResultVideo[] = [
     {
-        title: 'From zero to first sales in 3 weeks',
-        client: 'Amazon Automation client',
+        title: 'From setup to first revenue stream in 21 days',
+        client: 'Amazon Automation Partner',
         result: '$12.4k in month one',
         poster: '/images/results/result-1.jpg',
         src: '/videos/result-1.mp4',
     },
     {
-        title: 'AI product research that found a winner',
-        client: 'Walmart Automation client',
-        result: '38% profit margin',
+        title: 'From setup to first revenue stream in 21 days',
+        client: 'Amazon Automation Partner',
+        result: '$12.4k in month one',
         poster: '/images/results/result-2.jpg',
         src: '/videos/result-2.mp4',
     },
     {
-        title: 'A TikTok Shop on full autopilot',
-        client: 'TikTok Shop client',
-        result: '1,200+ orders handled',
+        title: 'From setup to first revenue stream in 21 days',
+        client: 'Amazon Automation Partner',
+        result: '$12.4k in month one',
         poster: '/images/results/result-3.jpg',
         src: '/videos/result-3.mp4',
     },
 ];
 
 const HIGHLIGHTS = [
-    { value: '< 4 weeks', label: 'From onboarding to first sale' },
-    { value: 'AI-driven', label: 'Product research & pricing' },
-    { value: '24/7', label: 'Automated order handling' },
+    { value: 'Under 30 Days', label: 'From initial onboarding to first completed order' },
+    { value: 'Algorithmic-Driven', label: 'Advanced item scouting and dynamic pricing models' },
+    { value: '24/7 Operations', label: 'Fully managed customer service and order processing' },
 ];
 
 const Chevron = ({ dir }: { dir: 'left' | 'right' }) => (
@@ -175,14 +175,15 @@ const LpResults = () => {
                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#8ac44b] opacity-75 motion-reduce:hidden" />
                             <span className="relative inline-flex h-2 w-2 rounded-full bg-[#8ac44b]" />
                         </span>
-                        Powered by AI automation
+                        Powered by Smart Automation
                     </span>
                     <h2 className="mt-5 font-['Anybody',sans-serif] text-[32px] font-bold leading-[1.1] text-white sm:text-[44px] lg:text-[54px]">
-                        Real Client Results, Built on AI Automation
+                        Verified Partner Success Stories
                     </h2>
-                    <p className="mx-auto mt-4 max-w-[640px] font-['Montserrat',sans-serif] text-sm leading-relaxed text-white/70 sm:text-base">
-                        Most new clients are launched, active and making sales in under 4 weeks, while AI
-                        handles the research, pricing and daily operations.
+                    <p className="mx-auto mt-4 max-w-[640px] font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-white/70 sm:text-base">
+                        Most new partners go live, launch inventory, and generate revenue in under
+                        30 days, while AMZ Automation handles product sourcing, pricing strategy,
+                        and daily fulfillment.
                     </p>
                 </header>
 
@@ -237,7 +238,7 @@ const LpResults = () => {
                                             <span aria-hidden="true" className="absolute inset-x-0 top-0 h-full bg-[repeating-linear-gradient(0deg,rgba(255,255,255,0.03)_0px,rgba(255,255,255,0.03)_1px,transparent_1px,transparent_4px)]" />
 
                                             <span className="absolute left-3 top-3 rounded-full bg-[#0e0531]/70 px-3 py-1 font-['Montserrat',sans-serif] text-[10px] font-semibold text-white/80 backdrop-blur-sm sm:left-5 sm:top-5 sm:text-xs">
-                                                Case study {index + 1} / {total}
+                                                Case Study {index + 1} / {total}
                                             </span>
 
                                             <button

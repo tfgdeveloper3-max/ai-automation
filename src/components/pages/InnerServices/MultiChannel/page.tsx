@@ -1,9 +1,9 @@
 import BrandsTrust from "@/components/BrandsTrust";
 import FooterIntroReveal from "@/components/FooterIntroReveal";
 import FooterSection from "@/components/FooterSection";
-import MultiDetail from "@/components/InnerServices/MultiChannel/MultiDetail";
-import MultiFaqs from "@/components/InnerServices/MultiChannel/MultiFaqs";
-import MultiHero from "@/components/InnerServices/MultiChannel/MultiHero";
+import MultiDetail from "@/components/InnerServices/TikTokAutomation/TikTokDetail";
+import MultiFaqs from "@/components/InnerServices/TikTokAutomation/TikTokFaqs";
+import MultiHero from "@/components/InnerServices/TikTokAutomation/TikTokHero";
 
 
 

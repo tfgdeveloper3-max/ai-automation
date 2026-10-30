@@ -23,7 +23,7 @@ const reveal =
     'opacity-0 animate-[heroFadeUp_1.1s_cubic-bezier(0.19,1,0.22,1)_forwards] motion-reduce:animate-none motion-reduce:opacity-100';
 const delay = (s: string): CSSProperties => ({ animationDelay: s });
 
-const AVATARS = ['/images/Oliver-Smith.png', '/images/Priya-Nair.png', '/images/Sana-Malik.png', '/images/Sarah-Jenkins.png'];
+const AVATARS = ['/images/Hannah-Schmidt.png', '/images/Jason-Reynolds.png', '/images/Marcus-Lee.png', '/images/Marcus-Vance.png'];
 
 const ChevronsRight = ({ className = '' }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
@@ -31,7 +31,7 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
     </svg>
 );
 
-const SmartHero = () => {
+const AutomatedHero = () => {
     const { openLeadForm } = useLeadModal();
     return (
         <section className="relative isolate overflow-hidden">
@@ -57,16 +57,14 @@ const SmartHero = () => {
                         className={`font-['Anybody',sans-serif] text-[44px] leading-[1.1] text-white sm:text-[56px] lg:text-[68px] ${reveal}`}
                         style={delay('0.1s')}
                     >
-                        <span className="font-bold">Inventory</span> <span className="font-light">&amp; Data Pipelines</span>
+                        <span className="font-bold">eBay </span> <span className="font-light">Automation Solutions</span>
                     </h1>
 
                     <p
-                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[16px] leading-relaxed text-white/85 sm:text-[16px] ${reveal}`}
+                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-white/85 sm:text-[17px] ${reveal}`}
                         style={delay('0.3s')}
                     >
-                        Keep your store stock in perfect sync and streamline business data
-                        flows across Amazon, Shopify, and TikTok Shop with real-time automated
-                        inventory pipelines.
+                        Leverage decades of marketplace buyer trust with automated inventory sourcing, Cassini SEO listing optimization, and hands-free order fulfillment managed by AMZ Automation.
                     </p>
 
                     <div className={`mt-6 flex items-center gap-2 ${reveal}`} style={delay('0.45s')}>
@@ -111,4 +109,4 @@ const SmartHero = () => {
     );
 };
 
-export default SmartHero;
+export default AutomatedHero;

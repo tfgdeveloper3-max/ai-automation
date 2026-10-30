@@ -56,17 +56,17 @@ const ServiceHero = () => {
                         className={`font-['Anybody',sans-serif] text-[44px] leading-[1.1] text-white sm:text-[56px] lg:text-[68px] ${reveal}`}
                         style={delay('0.1s')}
                     >
-                        <span className="font-bold">Services</span>{' '}
-                        <span className="font-light">We Offer</span>
+                        <span className="font-bold">Our</span>{' '}
+                        <span className="font-light">Services</span>
                     </h1>
 
                     <p
-                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[16px] leading-relaxed text-white/85 sm:text-[16px] ${reveal}`}
+                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[18px] leading-relaxed text-white/85 sm:text-[18px] ${reveal}`}
                         style={delay('0.3s')}
                     >
-                        Explore our suite of AI-driven automation services designed to
-                        streamline order fulfillment, customer support, and multi-channel
-                        inventory management across Amazon, Shopify, and TikTok.
+                        Explore our comprehensive, AI-driven automation solutions designed to
+                        build, manage, and scale your e-commerce brand seamlessly across the
+                        world's top marketplaces with AMZ Automation.
                     </p>
 
                     <div className={`mt-6 flex items-center gap-2 ${reveal}`} style={delay('0.45s')}>
@@ -100,7 +100,7 @@ const ServiceHero = () => {
                             ))}
                         </div>
                         <span className="font-['Montserrat',sans-serif] text-sm font-medium text-white sm:text-[15px]">
-                            4.9/5 Rating
+                            450+ Reviews
                         </span>
                     </div>
                 </div>

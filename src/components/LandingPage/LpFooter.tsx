@@ -5,12 +5,12 @@ const BRAND = {
     name: 'AMZ Automation Solutions',
     logo: '/images/logo.png',
     about:
-        'AMZ Automation Solutions is a digital agency focused on AI-powered e-commerce automation. We build and run stores that grow sales across the world’s major marketplaces.',
+        'AMZ Automation is a premier digital agency specializing in intelligent, AI-driven e-commerce automation. We design, build, and manage scalable retail stores that maximize profitability across the globe\u2019s leading online marketplaces.',
 };
 
 const CONTACT = {
-    phoneLabel: '(213) 863-9445',
-    phoneHref: 'tel:+12138639445',
+    phoneLabel: '(213) 883-9445',
+    phoneHref: 'tel:+12138839445',
     email: 'support@amzautomationsolutions.com',
 };
 
@@ -46,17 +46,20 @@ const SOCIALS = [
 const BADGES = [
     { name: 'Clutch', image: '/images/badges/clutch.png', href: '#' },
     { name: 'Trustpilot', image: '/images/badges/trustpilot.png', href: '#' },
+    { name: 'Google Reviews', image: '/images/badges/google-reviews.png', href: '#' },
+    { name: 'BBB', image: '/images/badges/bbb.png', href: '#' },
+    { name: 'UpCity', image: '/images/badges/upcity.png', href: '#' },
+    { name: 'G2', image: '/images/badges/g2.png', href: '#' },
 ];
 
 const PAYMENTS = [
     { name: 'PayPal', image: '/images/payments/paypal.png' },
     { name: 'Payoneer', image: '/images/payments/payoneer.png' },
-    { name: 'Square', image: '/images/payments/square.png' },
-    { name: 'Stripe', image: '/images/payments/stripe.png' },
-    { name: 'Visa', image: '/images/payments/visa.png' },
-    { name: 'Mastercard', image: '/images/payments/mastercard.png' },
-    { name: 'Discover', image: '/images/payments/discover.png' },
-    { name: 'Amex', image: '/images/payments/amex.png' },
+    { name: 'Skrill', image: '/images/payments/skrill.png' },
+    { name: 'Visa', image: '/images/payments/Visa.png' },
+    { name: 'Mastercard', image: '/images/payments/Mastercard.png' },
+    { name: 'Amazon Pay', image: '/images/payments/Amazonpay.png' },
+    { name: 'G Pay', image: '/images/payments/GPay.png' },
 ];
 
 const ImageOr = ({ src, alt, className, fallbackClass }: { src: string; alt: string; className: string; fallbackClass: string }) => {
@@ -105,7 +108,6 @@ const Column = ({ title, children, className = '', style }: { title: string; chi
 
 const LpFooter = () => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.1 });
-    const year = new Date().getFullYear();
 
     const reveal = (i: number) => ({
         className: `transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
@@ -151,20 +153,21 @@ const LpFooter = () => {
                         <p className="max-w-[460px] font-['Montserrat',sans-serif] text-sm leading-relaxed text-white/65">{BRAND.about}</p>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 lg:justify-end">
+                    <div className="flex flex-wrap items-center gap-3 lg:justify-end">
                         {BADGES.map((b) => (
                             <a
                                 key={b.name}
                                 href={b.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex h-12 items-center rounded-xl border border-white/10 bg-white/[0.04] px-4 transition hover:-translate-y-0.5 hover:border-[#8ac44b]/60"
+                                aria-label={b.name}
+                                className="flex h-11 items-center rounded-lg border border-white/10 bg-white/[0.04] px-3 transition hover:-translate-y-0.5 hover:border-[#8ac44b]/60"
                             >
                                 <ImageOr
                                     src={b.image}
                                     alt={b.name}
-                                    className="max-h-7 w-auto"
-                                    fallbackClass="font-['Anybody',sans-serif] text-sm font-bold text-white"
+                                    className="max-h-6 w-auto"
+                                    fallbackClass="font-['Montserrat',sans-serif] text-[11px] font-bold text-white"
                                 />
                             </a>
                         ))}
@@ -238,9 +241,9 @@ const LpFooter = () => {
                     </span>
                     <p className="font-['Montserrat',sans-serif] text-sm leading-relaxed text-white/70">
                         <span className="font-semibold text-white">Client privacy notice. </span>
-                        Your privacy and confidentiality are our priority. Information you share with us is handled
-                        securely and used only to provide and improve our services. By using this website, you agree
-                        to our{' '}
+                        Your confidentiality and data security are our top priorities. All information shared with
+                        AMZ Automation is encrypted, handled securely, and utilized strictly to deliver and enhance
+                        our management services. By browsing this website, you consent to our{' '}
                         <a href="/privacy-policy" className="font-semibold text-[#8ac44b] underline-offset-4 hover:underline">
                             Privacy Policy
                         </a>
@@ -251,17 +254,18 @@ const LpFooter = () => {
                 <div className="mt-10 grid grid-cols-1 gap-8 border-t border-white/10 py-8 lg:grid-cols-[1fr_auto] lg:items-end">
                     <div>
                         <p className="font-['Montserrat',sans-serif] text-sm text-white/80">
-                            &copy; {year} {BRAND.name}. All rights reserved.
+                            &copy; 2026 {BRAND.name}. All rights reserved.
                         </p>
                         <p className="mt-2 max-w-[560px] font-['Montserrat',sans-serif] text-xs leading-relaxed text-white/45">
-                            All content, trademarks, logos and materials on this website are protected and may not be
-                            used without permission. Marketplace names and logos belong to their respective owners.
+                            All content, trademarks, brand logos, and digital materials are legally protected and
+                            cannot be reproduced without explicit written consent. External marketplace names and
+                            logos remain the property of their respective owners.
                         </p>
                     </div>
 
                     <div>
                         <p className="mb-3 font-['Montserrat',sans-serif] text-xs font-semibold uppercase tracking-wider text-[#8ac44b]">
-                            Accepted payments
+                            Accepted
                         </p>
                         <ul className="flex flex-wrap gap-2">
                             {PAYMENTS.map((p) => (

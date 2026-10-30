@@ -12,24 +12,24 @@ interface ServiceDetailProps {
 
 const DEFAULT_HEADING = (
     <>
-        <span className="font-bold">Automated</span> Order &amp; Returns
+        Walmart <span className="font-bold">Automation</span>
     </>
 );
 
 const DEFAULT_INTRO =
-    'Simplify your post-purchase operations with completely hands-free order processing and return workflows. Our automated platform connects directly with Amazon, Shopify, and TikTok Shop to route orders, generate shipping labels, and manage customer returns instantly\u2014eliminating costly delays and operational overhead.';
+    'Securing a foothold on Walmart Marketplace gives your retail brand direct access to millions of high-intent online shoppers. However, strict seller metrics, application requirements, and logistics compliance can present steep entry barriers. At AMZ Automation, we manage your entire Walmart presence\u2014handling account approvals, product catalog integration, and daily operation metrics\u2014so you can build a profitable marketplace asset without operational friction.';
 
 const DEFAULT_PARAGRAPHS = [
-    'Handling return requests, RMA generation, and status updates manually creates friction for customers and drains internal resources. AMZ Automation automates the entire return portal lifecycle, giving buyers immediate return labels and instant exchange options while systematically updating inventory counts in real time.',
-    'With real-time order tracking notifications and automated exception handling, your store delivers a seamless end-to-end shopping experience. By reducing return processing times and minimizing order error rates, you increase customer lifetime value, protect seller account metrics, and maintain effortless multi-channel growth.',
+    'Our specialized Walmart automation service streamlines every phase of marketplace growth. We assist in navigating Walmart\u2019s rigorous vetting process, optimizing product listings for Walmart\u2019s Search SEO algorithm, and configuring price dynamics to keep your listings competitive. By combining empirical data analysis with proven listing strategies, we ensure your catalog achieves high visibility and consistent Buy Box placement.',
+    'Beyond catalog setup, our management team takes complete responsibility for backend operations. From automated inventory sync and multi-channel fulfillment to 24/7 buyer communications and performance metric tracking, we keep your account in top standing with Walmart\u2019s strict seller policies while delivering consistent, hands-off monthly revenues.',
 ];
 
-const AutomatedServiceDetail = ({
-    id = 'automated-order-returns',
+const SmartServiceDetail = ({
+    id = 'walmart-automation',
     heading = DEFAULT_HEADING,
     intro = DEFAULT_INTRO,
-    image = '/images/Automated.png',
-    imageAlt = 'Illustration of automated order processing and return workflows across Amazon, Shopify, and TikTok stores',
+    image = '/images/Walmart-Automation.png',
+    imageAlt = 'Walmart Marketplace automation dashboard with seller account approvals, product catalog integration, Buy Box placement, and fulfillment workflow',
     paragraphs = DEFAULT_PARAGRAPHS,
 }: ServiceDetailProps) => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.12 });
@@ -74,4 +74,4 @@ const AutomatedServiceDetail = ({
     );
 };
 
-export default AutomatedServiceDetail;
+export default SmartServiceDetail;

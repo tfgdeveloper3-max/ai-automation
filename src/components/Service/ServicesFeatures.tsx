@@ -2,7 +2,6 @@ import { useState, type CSSProperties, type FocusEvent, type JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { useSectionReveal } from '../usesectionreveal';
 
-
 interface FeatureCard {
     title: string;
     description: string;
@@ -13,102 +12,134 @@ interface FeatureCard {
 
 const GREEN = '#8ac44b';
 
-const RobotIcon = () => (
-    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
-        <circle cx="24" cy="3.8" r="1.6" />
-        <path d="M24 5.5V8" />
-        <rect x="12" y="8" width="24" height="16" rx="4" />
-        <circle cx="19" cy="15" r="2.8" />
-        <circle cx="29" cy="15" r="2.8" />
-        <circle cx="19" cy="15" r="0.9" fill={GREEN} stroke={GREEN} />
-        <circle cx="29" cy="15" r="0.9" fill={GREEN} stroke={GREEN} />
-        <path d="M20 20.5h8" />
-        <path d="M9 13v6M39 13v6M9 16h3M36 16h3" />
-        <rect x="15" y="27" width="18" height="13" rx="3" />
-        <path d="M20 31.5h8M20 35.5h8" />
-        <path d="M15 31h-4v6M33 31h4v6" />
-        <path d="M19.5 40v4M28.5 40v4" />
-    </svg>
-);
 
-const ChipIcon = () => (
+
+
+
+/* ---------- Service icons (related to each platform, not their logos) ---------- */
+
+/* Shopify: shopping bag with an automation spark */
+const ShopBagIcon = () => (
     <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
-        <rect x="3" y="6" width="42" height="36" rx="3" />
-        <path d="M3 13h42" />
-        <circle cx="8" cy="9.5" r="0.8" fill="currentColor" />
-        <circle cx="11.5" cy="9.5" r="0.8" fill="currentColor" />
-        <circle cx="15" cy="9.5" r="0.8" fill="currentColor" />
+        <path d="M9 15h30l-2.5 27H11.5L9 15Z" />
+        <path d="M17 19v-6a7 7 0 0 1 14 0v6" />
         <g stroke={GREEN}>
-            <rect x="19" y="20" width="10" height="10" rx="1.5" />
-            <rect x="22" y="23" width="4" height="4" rx="0.5" />
-            <path d="M22 20v-3M26 20v-3M22 30v3M26 30v3" />
-            <path d="M19 23h-5l-2-2M19 27h-5l-2 2M29 23h5l2-2M29 27h5l2 2" />
-            <circle cx="10.8" cy="19.8" r="1.2" />
-            <circle cx="10.8" cy="30.2" r="1.2" />
-            <circle cx="37.2" cy="19.8" r="1.2" />
-            <circle cx="37.2" cy="30.2" r="1.2" />
+            <path d="M25.5 23l-5 8h5l-2 7 6-9h-5l2-6" />
         </g>
     </svg>
 );
 
-const BrainGearIcon = () => (
+/* TikTok Shop: phone with live video + cart */
+const LivePhoneIcon = () => (
     <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
-        <path d="M24 8C21 5 16 6 15 9c-4 0-6 4-5 7-3 2-3 7-1 9-2 3-1 8 3 9 1 4 6 6 9 4 1 2 3 2 3 2V8Z" />
-        <path d="M15 9c0 3 2 4 4 4M10 16c2 1 4 1 5 0M9 25c3 0 5-1 6-3M12 34c1-2 3-3 5-3" />
+        <rect x="12" y="3" width="24" height="42" rx="4" />
+        <path d="M21 7h6" />
+        <path d="M22 40h4" />
         <g stroke={GREEN}>
-            <path d="M17.5 21H24M19.5 27H24" />
-            <circle cx="16" cy="21" r="1.3" />
-            <circle cx="18" cy="27" r="1.3" />
+            <rect x="15.5" y="11" width="10" height="5" rx="2.5" />
+            <circle cx="18.5" cy="13.5" r="0.8" fill={GREEN} />
+            <path d="M21 24.5v9l7.5-4.5L21 24.5Z" />
         </g>
-        <path d="M24 14a10 10 0 0 1 0 20" />
-        <path d="M24 20a4 4 0 0 1 0 8" />
-        <path
-            d="M27.1 14.5l.9-2.9M32.1 18.1l2.4-1.8M34 24h3M32.1 29.9l2.4 1.8M27.1 33.5l.9 2.9"
-            strokeWidth="3.4"
-            strokeLinecap="butt"
-        />
+        <path d="M38 14c2 1.5 3 3.5 3 6s-1 4.5-3 6M41.5 10c3 2.5 4.5 6 4.5 10s-1.5 7.5-4.5 10" />
+    </svg>
+);
+
+/* Walmart: store with an approval check */
+const StoreCheckIcon = () => (
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
+        <path d="M5 18l4-10h30l4 10" />
+        <path d="M5 18c0 2.8 2.2 4.5 4.8 4.5S14.6 20.8 14.6 18c0 2.8 2.2 4.5 4.8 4.5s4.6-1.7 4.6-4.5c0 2.8 2.2 4.5 4.8 4.5s4.6-1.7 4.6-4.5c0 2.8 2.2 4.5 4.8 4.5S43 20.8 43 18" />
+        <path d="M8 22.5V42h20M40 22.5V28" />
+        <path d="M14 42V31h8v11" />
+        <g stroke={GREEN}>
+            <circle cx="37" cy="37" r="7.5" />
+            <path d="m33.5 37 2.5 2.5 4.5-5" />
+        </g>
+    </svg>
+);
+
+/* eBay: price tag with repricing arrows */
+const RepriceTagIcon = () => (
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
+        <path d="M4 22V6h16l20 20-16 16L4 22Z" />
+        <circle cx="12" cy="14" r="2.5" />
+        <g stroke={GREEN}>
+            <path d="M19 26.5c0-2 1.6-3.5 3.6-3.5h2.4M27 26.5c0 2-1.6 3.5-3.6 3.5H21" />
+            <path d="M23.5 21l2 2-2 2M22.5 32l-2-2 2-2" />
+        </g>
+        <path d="M38 8h6M41 5v6" />
+    </svg>
+);
+
+/* Etsy: handmade item (yarn + needle) with an SEO search lens */
+const HandmadeSeoIcon = () => (
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
+        <circle cx="18" cy="20" r="13" />
+        <path d="M8 13c6 1 13 5 17 13M6.5 21c6 0 12 3 15 10M13 8.5c6 3 10 9 11 17" />
+        <path d="M27 6l-9 9" />
+        <circle cx="28.5" cy="4.5" r="1.4" />
+        <g stroke={GREEN}>
+            <circle cx="35" cy="35" r="6.5" />
+            <path d="m39.8 39.8 5 5" />
+        </g>
     </svg>
 );
 
 const INTRO_PARAGRAPH =
-    'We build custom AI-powered workflows that handle repetitive customer support, order fulfillment, and marketing tasks across your sales channels automatically.';
+    'Empower your digital portfolio with turnkey management frameworks designed to scale your revenue across top online marketplaces effortlessly with AMZ Automation.';
 
 const CARDS: FeatureCard[] = [
     {
-        title: '24/7 AI Customer Support',
+        title: 'Shopify Automation',
         description:
-            'Instant automated responses for order status, returns, and FAQs across Amazon, Shopify, and TikTok.',
-        icon: <RobotIcon />,
-        href: '/service/ai-customer-support',
+            'Launch a bespoke, professionally branded Shopify storefront powered by automated fulfillment and high-converting sales funnels.',
+        icon: <ShopBagIcon />,
+        href: '/service/shopify-automation',
     },
     {
-        title: 'Multi-Channel Order Sync',
+        title: 'TikTok Shop Automation',
         description:
-            'Automatically process return requests, issue labels, and update order statuses across all platforms in real time.',
-        icon: <ChipIcon />,
-        href: '/service/multi-channel-order-sync',
+            'Capture massive live-selling traffic and viral video momentum with our end-to-end TikTok social commerce management.',
+        icon: <LivePhoneIcon />,
+        href: '/service/tiktok-shop-automation',
         highlight: true,
     },
     {
-        title: 'Smart Inventory Management',
+        title: 'Walmart Automation',
         description:
-            'Sync inventory levels automatically across sales channels to prevent stockouts and over-selling.',
-        icon: <BrainGearIcon />,
-        href: '/service/smart-inventory-management',
+            "Secure hassle-free marketplace approval and scale your catalog across Walmart's high-intent buyer network.",
+        icon: <StoreCheckIcon />,
+        href: '/service/walmart-automation',
     },
     {
-        title: 'Automated Cross-Selling',
+        title: 'eBay Automation',
         description:
-            'Trigger personalized product recommendations and promo codes based on real-time customer behavior.',
-        icon: <BrainGearIcon />,
-        href: '/service/automated-cross-selling',
+            'Tap into decades of customer trust on eBay with algorithmic repricing and fully managed inventory workflows.',
+        icon: <RepriceTagIcon />,
+        href: '/service/ebay-automation',
     },
+    {
+        title: 'Etsy Automation',
+        description:
+            'Maximize visibility for unique creative or vintage goods using specialized SEO tagging and hands-free upkeep.',
+        icon: <HandmadeSeoIcon />,
+        href: '/service/etsy-automation',
+    },
+];
+
+/* Grid placement: 6-column grid on desktop, each card spans 2.
+   Top row = cards 1-3, bottom row = cards 4-5 centered.
+   On tablet (2 columns) the last card sits centered on its own row. */
+const PLACEMENT = [
+    'lg:col-span-2',
+    'lg:col-span-2',
+    'lg:col-span-2',
+    'lg:col-span-2 lg:col-start-2',
+    'sm:col-span-2 sm:mx-auto sm:w-[calc(50%-12px)] lg:col-span-2 lg:col-start-4 lg:mx-0 lg:w-auto',
 ];
 
 /* The card that is dark by default (the one with highlight: true) */
 const DEFAULT_ACTIVE = Math.max(0, CARDS.findIndex((c) => c.highlight));
-
-const STEP_OFFSETS = ['lg:mt-[150px]', 'lg:mt-[86px]', 'lg:mt-[36px]', 'lg:mt-0'];
 
 const HALFTONE: CSSProperties = {
     backgroundImage: 'radial-gradient(rgba(255,255,255,0.22) 1px, transparent 1.3px)',
@@ -145,19 +176,19 @@ const ServiceFeatures = () => {
                             What We Can Do
                         </span>
                         <h2 className="mt-3 font-['DM_Sans',sans-serif] text-[32px] font-normal leading-[1.2] text-[#111111] sm:text-[40px] lg:text-[48px]">
-                            <span className="font-semibold">Intelligent Automation</span> Built for
+                            <span className="font-semibold">Comprehensive E-Commerce</span>
                             <br />
-                            E-Commerce Growth
+                            Automation Solutions
                         </h2>
                     </div>
 
-                    <p className="max-w-[380px] border-l-[3px] border-[#8ac44b] pl-4 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#6b6b7a] sm:text-[18px] md:mt-9">
+                    <p className="max-w-[400px] border-l-[3px] border-[#8ac44b] pl-4 font-['Montserrat',sans-serif] text-[16px] leading-relaxed text-[#6b6b7a] md:mt-9">
                         {INTRO_PARAGRAPH}
                     </p>
                 </div>
 
                 <div
-                    className="mt-10 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4 xl:gap-7"
+                    className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-14 lg:grid-cols-6 xl:gap-7"
                     onMouseLeave={reset}
                     onBlur={handleGridBlur}
                 >
@@ -167,30 +198,26 @@ const ServiceFeatures = () => {
 
                         return (
                             <div
-                                key={i}
-                                className={`${STEP_OFFSETS[i]} ${r.className}`}
+                                key={card.title}
+                                className={`${PLACEMENT[i]} ${r.className}`}
                                 style={r.style}
                                 onMouseEnter={() => setActive(i)}
                                 onFocus={() => setActive(i)}
                             >
                                 <article
                                     className={`relative isolate h-full overflow-hidden border px-8 pb-9 pt-9 transition-all duration-500 ${on
-                                        ? 'rounded-md border-transparent bg-[#1d1650] shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
-                                        : 'rounded-xl border-gray-100 bg-white shadow-[0_6px_10px_-2px_rgba(15,10,50,0.16)]'
+                                            ? 'rounded-md border-transparent bg-[#1d1650] shadow-[0_20px_40px_rgba(29,22,80,0.25)]'
+                                            : 'rounded-xl border-gray-100 bg-white shadow-[0_6px_10px_-2px_rgba(15,10,50,0.16)]'
                                         }`}
                                 >
                                     <div
                                         aria-hidden="true"
-                                        className={`pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ${on ? 'opacity-100' : 'opacity-0'
-                                            }`}
+                                        className={`pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ${on ? 'opacity-100' : 'opacity-0'}`}
                                         style={HALFTONE}
                                     />
 
                                     <div className="relative z-10">
-                                        <div
-                                            className={`h-14 w-14 transition-colors duration-500 ${on ? 'text-[#4f8cff]' : 'text-[#2b2b3a]'
-                                                }`}
-                                        >
+                                        <div className={`h-14 w-14 transition-colors duration-500 ${on ? 'text-[#4f8cff]' : 'text-[#2b2b3a]'}`}>
                                             {card.icon}
                                         </div>
 

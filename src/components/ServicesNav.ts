@@ -1,28 +1,27 @@
 export interface ServiceLink {
     label: string;
     to: string;
-    description: string;
 }
 
 export const SERVICES: ServiceLink[] = [
     {
-        label: '24/7 AI Customer Support',
-        to: '/service/ai-customer-support',
-        description: 'Instant answers for orders, returns & FAQs',
+        label: 'Shopify Automation',
+        to: '/service/shopify-automation',
     },
     {
-        label: 'Multi-Channel Order Sync',
-        to: '/service/multi-channel-order-sync',
-        description: 'Returns, labels & order status in real time',
+        label: 'TikTok Automation',
+        to: '/service/tiktok-automation',
     },
     {
-        label: 'Smart Inventory Management',
-        to: '/service/smart-inventory-management',
-        description: 'Prevent stockouts and over-selling',
+        label: 'Walmart Automation',
+        to: '/service/walmart-automation',
     },
     {
-        label: 'Automated Cross-Selling',
-        to: '/service/automated-cross-selling',
-        description: 'Personalised offers that grow order value',
+        label: 'Ebay Automation',
+        to: '/service/ebay-automation',
+    },
+    {
+        label: 'Etsy Automation',
+        to: '/service/etsy-automation',
     },
 ];

@@ -27,14 +27,12 @@ const CtaBanner: React.FC = () => {
                         className="text-[26px] font-normal leading-tight text-white sm:text-[32px]"
                         style={{ fontFamily: HEADING_FONT }}
                     >
-                        Ready To Scale Your E-Commerce Store On{' '}
-                        <span className="font-bold">Autopilot?</span>
+                        Ready To Scale Your{' '}
+                        <span className="font-bold">E-Commerce Brand?</span>
                     </h2>
 
-                    <p className="mx-auto mt-5 max-w-[450px] text-[15px] leading-5 text-white/60">
-                        Let&apos;s turn your store operations into an automated,
-                        revenue-driving machine. Reach out today for a custom automation
-                        assessment tailored to your business.
+                    <p className="mx-auto mt-5 max-w-[450px] text-[16px] leading-5 text-white/60">
+                        Let's turn your retail vision into a fully automated, revenue-generating engine. Reach out to AMZ Automation for a custom portfolio assessment. 
                     </p>
 
                     <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">

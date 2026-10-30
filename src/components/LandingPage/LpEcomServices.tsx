@@ -1,62 +1,44 @@
-import { useState, type CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 import { useSectionReveal } from '../usesectionreveal';
 
 type Service = {
     title: string;
     desc: string;
-    image: string;
+    iconLetter: string;
     href: string;
 };
 
-/* Edit titles, lines, images and links here */
+/* Edit titles, lines and links here */
 const SERVICES: Service[] = [
     {
-        title: 'Amazon Automation',
-        desc: 'A fully managed Amazon store, from sourcing to fulfilment.',
-        image: '/images/services/amazon.png',
-        href: '/service/amazon-automation',
-    },
-    {
-        title: 'Walmart Automation',
-        desc: 'Get approved and selling on Walmart Marketplace, hands-off.',
-        image: '/images/services/walmart.png',
-        href: '/service/walmart-automation',
-    },
-    {
-        title: 'eBay Dropshipping',
-        desc: 'Winning products listed and shipped without holding stock.',
-        image: '/images/services/ebay.png',
-        href: '/service/ebay-dropshipping',
-    },
-    {
-        title: 'Account Reinstatement',
-        desc: 'Appeals and plans of action to get suspended accounts back.',
-        image: '/images/services/reinstatement.png',
-        href: '/service/account-reinstatement',
-    },
-    {
-        title: 'Amazon Private Label',
-        desc: 'Build your own brand, from product idea to launch.',
-        image: '/images/services/amazon-private-label.png',
-        href: '/service/amazon-private-label',
-    },
-    {
-        title: 'TikTok Shop Automation',
-        desc: 'Launch and scale a TikTok Shop with trending products.',
-        image: '/images/services/tiktok.png',
-        href: '/service/tiktok-shop-automation',
-    },
-    {
         title: 'Shopify Automation',
-        desc: 'A conversion-ready Shopify store, run for you.',
-        image: '/images/services/shopify.png',
+        desc: 'Custom-branded storefront creation and hands-free fulfillment managed entirely by AMZ Automation experts.',
+        iconLetter: 'S',
         href: '/service/shopify-automation',
     },
     {
-        title: 'Amazon Wholesale FBA',
-        desc: 'Brand-approved wholesale products shipped through FBA.',
-        image: '/images/services/amazon-fba.png',
-        href: '/service/amazon-wholesale-fba',
+        title: 'TikTok Shop Automation',
+        desc: 'Capitalize on live-stream shopping and viral trends with our comprehensive social commerce management.',
+        iconLetter: 'T',
+        href: '/service/tiktok-shop-automation',
+    },
+    {
+        title: 'Walmart Automation',
+        desc: 'Secure marketplace approval and scale your sales catalog across Walmart effortlessly.',
+        iconLetter: 'W',
+        href: '/service/walmart-automation',
+    },
+    {
+        title: 'ebay Automation',
+        desc: 'High-performing product curation and automated inventory control tailored for the eBay platform.',
+        iconLetter: 'e',
+        href: '/service/ebay-automation',
+    },
+    {
+        title: 'Etsy Automation',
+        desc: 'Optimize niche, creative, or vintage product listings with professional SEO and hands-off store upkeep.',
+        iconLetter: 'E',
+        href: '/service/etsy-automation',
     },
 ];
 
@@ -72,23 +54,13 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
     </svg>
 );
 
-/* Shows the first letter if the image is missing */
-const ServiceIcon = ({ src, title }: { src: string; title: string }) => {
-    const [failed, setFailed] = useState(false);
+/* Shows the letter icon for each service */
+const ServiceIcon = ({ letter }: { letter: string }) => {
     return (
         <span className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#f1eefc] ring-1 ring-[#2f2169]/10 transition-all duration-500 group-hover:-rotate-6 group-hover:scale-110 group-hover:bg-white group-hover:ring-[#8ac44b] sm:h-[72px] sm:w-[72px]">
-            {failed ? (
-                <span className="font-['Anybody',sans-serif] text-2xl font-bold text-[#2f2169]">{title[0]}</span>
-            ) : (
-                <img
-                    src={src}
-                    alt=""
-                    loading="lazy"
-                    draggable={false}
-                    onError={() => setFailed(true)}
-                    className="h-11 w-11 object-contain sm:h-12 sm:w-12"
-                />
-            )}
+            <span className="font-['Anybody',sans-serif] text-2xl font-bold text-[#2f2169] sm:text-3xl">
+                {letter}
+            </span>
         </span>
     );
 };
@@ -122,16 +94,18 @@ const LpEcomServices = () => {
                                 What We Do
                             </span>
                             <h2 className="mt-5 font-['Anybody',sans-serif] text-[34px] font-bold leading-[1.1] sm:text-[44px]">
-                                E-Commerce Services
+                                Digital Storefront Solutions
                             </h2>
-                            <p className="mt-5 font-['Montserrat',sans-serif] text-sm leading-[1.8] text-white/75 sm:text-[15px]">
-                                Building e-commerce passive income is stress-free with our done-for-you
-                                automation system. We use a process refined over the last decade to craft
-                                strategies tailored to your business and ideal audience.
+                            <p className="mt-5 font-['Montserrat',sans-serif] text-[17px] leading-[1.8] text-white/75 sm:text-[17px]">
+                                Generating reliable online revenue is entirely effortless with our fully
+                                managed e-commerce model. We utilize frameworks perfected over years of
+                                industry experience to build customized roadmaps tailored specifically
+                                for AMZ Automation partners.
                             </p>
-                            <p className="mt-4 font-['Montserrat',sans-serif] text-sm leading-[1.8] text-white/75 sm:text-[15px]">
-                                Our team works closely with you to build a plan that matches your online
-                                goals and growth vision.
+                            <p className="mt-4 font-['Montserrat',sans-serif] text-[17px] leading-[1.8] text-white/75 sm:text-[17px]">
+                                Our dedicated professionals collaborate closely with you to design a
+                                tailored blueprint aligned with your digital aspirations and financial
+                                growth targets.
                             </p>
 
                             <div className="mt-8 flex items-center gap-6 border-t border-white/10 pt-7">
@@ -140,8 +114,8 @@ const LpEcomServices = () => {
                                     <p className="font-['Montserrat',sans-serif] text-xs text-white/60">Services</p>
                                 </div>
                                 <div>
-                                    <p className="font-['Anybody',sans-serif] text-3xl font-bold text-[#8ac44b]">10+</p>
-                                    <p className="font-['Montserrat',sans-serif] text-xs text-white/60">Years refining</p>
+                                    <p className="font-['Anybody',sans-serif] text-3xl font-bold text-[#8ac44b]">3+ Years</p>
+                                    <p className="font-['Montserrat',sans-serif] text-xs text-white/60">Refining</p>
                                 </div>
                             </div>
 
@@ -168,26 +142,24 @@ const LpEcomServices = () => {
                                     href={s.href}
                                     className="group relative flex items-center gap-4 overflow-hidden rounded-[20px] border border-[#2f2169]/10 bg-white p-3 pr-4 shadow-[0_6px_20px_rgba(15,5,49,0.05)] transition-[box-shadow,border-color,transform] duration-500 hover:-translate-y-0.5 hover:border-transparent hover:shadow-[0_20px_45px_rgba(24,12,74,0.28)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ac44b] sm:gap-5 sm:p-4 sm:pr-5"
                                 >
-                                    {/* Purple sweep from the left on hover */}
                                     <span
                                         aria-hidden="true"
                                         className="absolute inset-0 origin-left scale-x-0 bg-[linear-gradient(110deg,#0e0531_0%,#2f2169_100%)] transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none"
                                     />
-                                    {/* Green accent bar */}
                                     <span
                                         aria-hidden="true"
                                         className="absolute inset-y-4 left-0 w-1 rounded-r-full bg-[#8ac44b] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                                     />
 
                                     <span className="relative">
-                                        <ServiceIcon src={s.image} title={s.title} />
+                                        <ServiceIcon letter={s.iconLetter} />
                                     </span>
 
                                     <span className="relative min-w-0 flex-1">
                                         <span className="block font-['Anybody',sans-serif] text-lg font-bold text-[#0e0531] transition-colors duration-500 group-hover:text-white sm:text-xl">
                                             {s.title}
                                         </span>
-                                        <span className="mt-1 block font-['Montserrat',sans-serif] text-[13px] leading-snug text-[#6b6b7a] transition-colors duration-500 group-hover:text-white/70">
+                                        <span className="mt-1 block font-['Montserrat',sans-serif] text-[15px] leading-snug text-[#6b6b7a] transition-colors duration-500 group-hover:text-white/70">
                                             {s.desc}
                                         </span>
                                     </span>

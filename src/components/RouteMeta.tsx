@@ -24,25 +24,30 @@ const META: Record<string, PageMeta> = {
         description:
             'Explore our Amazon wholesale, Shopify and TikTok Shop automation services. Done-for-you store management built to increase sales and save time.',
     },
-    '/service/ai-customer-support': {
-        title: `24/7 AI Customer Support | ${SITE_NAME}`,
+    '/service/shopify-automation': {
+        title: `Shopify Automation | ${SITE_NAME}`,
         description:
-            'Scale your store support 24/7 without increasing headcount. AI agents for Amazon, Shopify and TikTok Shop answer customers instantly, around the clock.',
+            'Launch a professionally branded Shopify store with automated fulfillment and high-converting sales funnels, fully managed by our e-commerce experts.',
     },
-    '/service/multi-channel-order-sync': {
-        title: `Multi-Channel Order Sync | ${SITE_NAME}`,
+    '/service/tiktok-automation': {
+        title: `TikTok Shop Automation | ${SITE_NAME}`,
         description:
-            'Automatically process returns, issue labels and update order statuses across Amazon, Shopify and TikTok Shop in real time.',
+            'Turn live-selling traffic and viral videos into sales with end-to-end TikTok Shop management, from product launch to daily order handling.',
     },
-    '/service/smart-inventory-management': {
-        title: `Smart Inventory Management | ${SITE_NAME}`,
+    '/service/walmart-automation': {
+        title: `Walmart Automation | ${SITE_NAME}`,
         description:
-            'Sync inventory levels across every sales channel automatically to prevent stockouts and over-selling on Amazon, Shopify and TikTok Shop.',
+            "Get hassle-free Walmart Marketplace approval and scale your catalog across Walmart's high-intent buyer network with a fully managed store.",
     },
-    '/service/automated-cross-selling': {
-        title: `Automated Cross-Selling | ${SITE_NAME}`,
+    '/service/ebay-automation': {
+        title: `eBay Automation | ${SITE_NAME}`,
         description:
-            'Trigger personalised product recommendations and promo codes based on real-time customer behaviour to grow your average order value.',
+            'Grow on eBay with algorithmic repricing, managed inventory workflows and hands-off order handling built on decades of buyer trust.',
+    },
+    '/service/etsy-automation': {
+        title: `Etsy Automation | ${SITE_NAME}`,
+        description:
+            'Boost visibility for handmade and vintage products on Etsy with specialized SEO tagging, optimized listings and hands-free shop upkeep.',
     },
     '/blog': {
         title: `Blog – eCommerce Automation Tips | ${SITE_NAME}`,

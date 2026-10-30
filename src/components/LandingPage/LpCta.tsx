@@ -4,15 +4,15 @@ import { submitLead } from '../SubmitLead';
 import ThankYouPopup from '../ThankYou';
 
 const CONTACT = {
-    phoneLabel: '(213) 863-9445',
-    phoneHref: 'tel:+12138639445',
+    phoneLabel: '(213) 883-9445',
+    phoneHref: 'tel:+12138839445',
     email: 'support@amzautomationsolutions.com',
 };
 
 const NEXT_STEPS = [
-    { title: 'Send your idea', desc: 'Share a few details about your goals.' },
-    { title: 'Free strategy call', desc: 'An expert reviews your options with you.' },
-    { title: 'Launch on autopilot', desc: 'We build and run your AI-powered store.' },
+    { title: 'Share Your Vision', desc: 'Tell us a bit about your investment goals and target timeline.' },
+    { title: 'Strategy Review', desc: 'An e-commerce specialist walks you through your custom growth options.' },
+    { title: 'Automated Launch', desc: 'We build, configure, and manage your store from the ground up.' },
 ];
 
 type LeadForm = { name: string; email: string; phone: string; message: string };
@@ -132,11 +132,12 @@ const LpCta = () => {
                             Let&rsquo;s Dive In
                         </span>
                         <h2 className="mt-5 font-['Anybody',sans-serif] text-[34px] font-bold leading-[1.08] text-white sm:text-[46px] lg:text-[56px]">
-                            Reach Out Now To Share Your Idea
+                            Connect With Our Experts Today
                         </h2>
-                        <p className="mt-5 max-w-[500px] font-['Montserrat',sans-serif] text-sm leading-[1.8] text-white/70 sm:text-[15px]">
-                            You&rsquo;re one message away from a profitable, AI-powered e-commerce business with
-                            strong returns and smooth integration into today&rsquo;s top marketplaces.
+                        <p className="mt-5 max-w-[500px] font-['Montserrat',sans-serif] text-[17px] leading-[1.8] text-white/70 sm:text-[17px]">
+                            You are just one message away from launching a streamlined, professionally
+                            managed e-commerce brand built for steady growth across leading online
+                            marketplaces.
                         </p>
                     </div>
 
@@ -181,7 +182,7 @@ const LpCta = () => {
                                     <h3 className="font-['Anybody',sans-serif] text-2xl font-bold text-[#0e0531] sm:text-[28px]">
                                         Tell us about your idea
                                     </h3>
-                                    <p className="mt-1 font-['Montserrat',sans-serif] text-sm text-[#6b6b7a]">
+                                    <p className="mt-1 font-['Montserrat',sans-serif] text-[17px] text-[#6b6b7a]">
                                         We usually reply within one business day.
                                     </p>
                                 </div>

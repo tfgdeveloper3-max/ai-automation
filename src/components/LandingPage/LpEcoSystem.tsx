@@ -4,10 +4,10 @@ import { useSectionReveal } from '../usesectionreveal';
 const SITE_LOGO = '/images/logo.png';
 
 const STATS = [
-    { value: 3, label: 'Years of experience' },
-    { value: 93, label: 'Satisfied clients' },
-    { value: 59, label: 'E-commerce experts' },
-    { value: 107, label: 'Successful campaigns' },
+    { value: 3, label: 'Years of Industry Leadership' },
+    { value: 93, label: 'Valued Partners' },
+    { value: 59, label: 'Dedicated E-Commerce Specialists' },
+    { value: 107, label: 'Launched Campaigns' },
 ];
 
 type Brand = { name: string; logo: string };
@@ -260,7 +260,7 @@ const LpEcosystem = () => {
                     className={`mx-auto max-w-[900px] text-center font-['Anybody',sans-serif] text-[30px] font-bold leading-[1.12] text-white transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 sm:text-[42px] lg:text-[52px] ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                         }`}
                 >
-                    Building the E-Commerce of Tomorrow, Today.
+                    Engineering Tomorrow's Digital Retail, Today.
                 </h2>
 
                 <div className="mt-12 grid grid-cols-2 gap-y-10 lg:grid-cols-4">

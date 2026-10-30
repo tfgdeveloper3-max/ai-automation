@@ -89,15 +89,15 @@ const LpHero = () => {
                     <p
                         className={`${fadeUp} mb-3.5 font-[Montserrat,sans-serif] text-[clamp(14px,1.8vw,22px)] font-medium text-white/90 [animation-delay:50ms]`}
                     >
-                        Enhance Your E-Commerce Store With
+                        Scale Your Online Retail Business With
                     </p>
 
                     <h1 className={`${fadeUp} m-0 font-[Anybody,sans-serif] uppercase leading-none [animation-delay:150ms]`}>
                         <span className="block bg-gradient-to-b from-[#c3f07f] to-[#8ac44b] bg-clip-text text-[clamp(36px,6.2vw,84px)] font-extrabold tracking-[-0.01em] text-transparent">
-                            Ecom Service Solution&rsquo;s
+                            Top Tier Systems
                         </span>
                         <span className="mt-5 block text-[clamp(26px,3.6vw,52px)] font-bold text-white">
-                            Automation Expertise
+                            Proven Amazon Expertise
                         </span>
                     </h1>
 
@@ -109,7 +109,7 @@ const LpHero = () => {
                     <p
                         className={`${fadeUp} m-0 font-[Montserrat,sans-serif] text-[clamp(16px,1.8vw,24px)] font-medium text-white [animation-delay:400ms]`}
                     >
-                        Fully automated Ecom stores on top marketplaces.
+                        Hands-off, fully managed e-commerce portfolios engineered by AMZ Automation.
                     </p>
                 </div>
 
@@ -117,8 +117,8 @@ const LpHero = () => {
                     className={`${fadeUp} max-w-[640px] rounded-[20px] border border-white/12 bg-[linear-gradient(160deg,rgba(47,33,105,0.72),rgba(14,5,49,0.82))] px-5 py-7 shadow-[0_30px_70px_rgba(5,2,25,0.5)] backdrop-blur-md [animation-delay:250ms] sm:px-12 sm:pb-10 sm:pt-11 lg:max-w-none`}
                 >
                     <h2 className="mb-6 font-[Anybody,sans-serif] text-[clamp(22px,2.3vw,34px)] font-extrabold uppercase leading-[1.12] text-white">
-                        Ready to build your
-                        <span className="block text-[#8ac44b]">passive income empire?</span>
+                        Ready to Start Scaling Your
+                        <span className="block text-[#8ac44b]">Revenue Today?</span>
                     </h2>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-[22px]">
@@ -143,13 +143,13 @@ const LpHero = () => {
                         <div className="grid grid-cols-1 gap-[22px] sm:grid-cols-2 sm:gap-6">
                             <div>
                                 <label htmlFor="lp-email" className="sr-only">
-                                    Email
+                                    Email Address
                                 </label>
                                 <input
                                     id="lp-email"
                                     name="email"
                                     type="email"
-                                    placeholder="Email"
+                                    placeholder="Email Address"
                                     autoComplete="email"
                                     required
                                     value={form.email}
@@ -161,13 +161,13 @@ const LpHero = () => {
 
                             <div>
                                 <label htmlFor="lp-phone" className="sr-only">
-                                    Contact Number
+                                    Phone Number
                                 </label>
                                 <input
                                     id="lp-phone"
                                     name="phone"
                                     type="tel"
-                                    placeholder="Contact Number"
+                                    placeholder="Phone Number"
                                     autoComplete="tel"
                                     pattern="[\d\s\+\-\(\)]{7,20}"
                                     title="Please enter a valid phone number"
@@ -182,12 +182,12 @@ const LpHero = () => {
 
                         <div>
                             <label htmlFor="lp-message" className="sr-only">
-                                Tell us about your business goals
+                                Share your investment goals
                             </label>
                             <textarea
                                 id="lp-message"
                                 name="message"
-                                placeholder="Tell us about your business goals*"
+                                placeholder="Share your investment goals*"
                                 rows={4}
                                 required
                                 value={form.message}
@@ -211,7 +211,7 @@ const LpHero = () => {
                                     Sending…
                                 </>
                             ) : (
-                                'Request a Free Consultation'
+                                'Claim Your Strategy Session'
                             )}
                         </button>
 

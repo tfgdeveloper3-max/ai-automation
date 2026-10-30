@@ -20,8 +20,8 @@ const iconProps = {
 
 const STEPS: Step[] = [
     {
-        title: 'Planning',
-        desc: 'Our skilled team crafts and aligns smart strategies to build a tailored e-commerce solution for your goals.',
+        title: 'Strategy',
+        desc: 'Our seasoned experts formulate a custom blueprint tailored to align with your unique financial objectives.',
         icon: (
             <svg {...iconProps}>
                 <circle cx="12" cy="12" r="8" />
@@ -31,8 +31,8 @@ const STEPS: Step[] = [
         ),
     },
     {
-        title: 'Research',
-        desc: 'We uncover valuable insights through in-depth research of trends, target markets, products, and key platforms.',
+        title: 'Discovery',
+        desc: 'We analyze high-demand market gaps, profitable niches, and top-tier consumer trends to position your inventory for success.',
         icon: (
             <svg {...iconProps}>
                 <circle cx="10.5" cy="10.5" r="6" />
@@ -41,8 +41,8 @@ const STEPS: Step[] = [
         ),
     },
     {
-        title: 'Optimization',
-        desc: 'Your listings and products are refined to maximize visibility, improve conversions, and grow total sales.',
+        title: 'Refinement',
+        desc: 'Your storefront assets undergo continuous fine-tuning to elevate buyer engagement, rank higher, and drive steady conversions.',
         icon: (
             <svg {...iconProps}>
                 <path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0" />
@@ -53,8 +53,8 @@ const STEPS: Step[] = [
         ),
     },
     {
-        title: 'Results',
-        desc: 'We build result-driven stores that generate traffic, boost performance, and deliver consistent, measurable success.',
+        title: 'Expansion',
+        desc: 'We scale your automated operations to generate predictable revenue streams and long-term digital growth.',
         icon: (
             <svg {...iconProps}>
                 <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />
@@ -90,10 +90,11 @@ const LpProcess = () => {
                         How It Works
                     </span>
                     <h2 className="mt-4 font-['Anybody',sans-serif] text-[36px] font-bold leading-[1.1] text-[#0e0531] sm:text-[48px] lg:text-[56px]">
-                        Easy Process
+                        Streamlined Workflow
                     </h2>
-                    <p className="mt-4 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#6b6b7a] sm:text-[15px]">
-                        Four clear steps take your store from first idea to steady, measurable growth.
+                    <p className="mt-4 font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-[#6b6b7a] sm:text-[17px]">
+                        A frictionless journey designed to take your online venture from setup
+                        to automated expansion with AMZ Automation.
                     </p>
                 </header>
 
@@ -139,7 +140,7 @@ const LpProcess = () => {
                                             {step.title}
                                         </h3>
 
-                                        <p className="mt-3 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#4a4a5a] transition-colors duration-500 group-hover:text-white/75">
+                                        <p className="mt-3 font-['Montserrat',sans-serif] text-[16px] leading-relaxed text-[#4a4a5a] transition-colors duration-500 group-hover:text-white/75">
                                             {step.desc}
                                         </p>
 

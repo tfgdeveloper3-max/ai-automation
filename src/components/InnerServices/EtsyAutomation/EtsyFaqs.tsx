@@ -11,28 +11,28 @@ interface Faq {
 
 const FAQS: Faq[] = [
     {
-        q: 'How fast does the inventory pipeline sync stock changes across platforms?',
-        a: 'Stock synchronization occurs in real time. The moment an order is confirmed on Amazon, Shopify, or TikTok Shop, inventory levels are immediately adjusted across all other connected stores.',
+        q: 'How does Etsy Automation work with AMZ Automation?',
+        a: 'We manage your entire Etsy storefront, including store setup, product research, SEO-driven listing creation, inventory integration, order processing, and customer support.',
     },
     {
-        q: 'Can the pipeline integrate directly with our 3PL or warehouse system?',
-        a: 'Yes! We build custom API bridges and data feeds connecting your 3PL, ERP, or supplier database directly to your storefronts for automated stock updates and tracking pushing.',
+        q: 'What types of products are sold on an automated Etsy store?',
+        a: 'We focus on high-demand, compliant niches such as print-on-demand goods, curated trending products, and customizable gift items with strong profit margins.',
     },
     {
-        q: 'How does automated inventory prevent overselling during peak sales events?',
-        a: 'By setting safety stock thresholds and using instant webhook notifications, the pipeline automatically reserves stock and pauses listings when inventory hits pre-defined limits.',
+        q: 'How do you optimize my products for Etsy Search?',
+        a: 'We utilize data-backed keyword research to optimize product titles, attributes, and all 13 listing tags, ensuring your products rank prominently for active shopper search queries.',
     },
     {
-        q: 'Can we automate low-stock alerts and purchase orders to suppliers?',
-        a: 'Absolutely. You can configure automated triggers that notify your purchasing team or automatically send reorder requisitions to your suppliers when stock drops below safety margins.',
+        q: 'Who handles order fulfillment and customer inquiries?',
+        a: 'Our automated backend routes orders directly to fulfillment partners upon purchase, while our customer service team manages buyer communications, tracking updates, and reviews.',
     },
     {
-        q: 'Does the data pipeline consolidate multi-channel sales reports in one place?',
-        a: 'Yes. Our data pipelines aggregate revenue, unit volume, and stock movement from Amazon, Shopify, and TikTok into unified analytics reports for clear visibility into your entire operation.',
+        q: 'Do I need graphic design or crafting experience to own an Etsy store?',
+        a: 'Not at all. Our team manages all store branding, product catalog creation, and catalog design assets for you.',
     },
     {
-        q: 'What happens if a channel API experiences a temporary delay or disconnect?',
-        a: 'The system features built-in error handling and queue retries to ensure no inventory updates or order events are lost during platform maintenance or temporary API rate limits.',
+        q: 'How can I monitor my store\u2019s performance and profits?',
+        a: 'You maintain full ownership of your Etsy account and can log in anytime to review real-time dashboards detailing orders, revenue, profit margins, and traffic stats.',
     },
 ];
 
@@ -125,7 +125,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
     );
 };
 
-const SmartFaqs: React.FC = () => {
+const EtsyFaqs: React.FC = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     const { ref, inView } = useInView<HTMLDivElement>();
     const { ref: sectionRef, inView: sectionInView } = useSectionReveal<HTMLElement>({ threshold: 0.1 });
@@ -135,7 +135,7 @@ const SmartFaqs: React.FC = () => {
             ref={sectionRef}
             data-reveal="fade"
             data-inview={sectionInView}
-            className="bg-white px-5 pb-20 pt-4"
+            className="bg-white px-5 pb-20 pt-20"
         >
             <div className="mx-auto max-w-[912px]">
                 <div className="flex flex-col items-center text-center">
@@ -151,8 +151,8 @@ const SmartFaqs: React.FC = () => {
                     </h2>
 
                     <p className="mt-3 max-w-[520px] text-[15px] leading-5 text-neutral-500">
-                        Learn how our automated Inventory &amp; Data Pipelines synchronize
-                        stock levels and business data across all your e-commerce channels.
+                        Everything you need to know about setting up, managing, and scaling
+                        your automated Etsy store.
                     </p>
                 </div>
 
@@ -174,4 +174,4 @@ const SmartFaqs: React.FC = () => {
     );
 };
 
-export default SmartFaqs;
+export default EtsyFaqs;

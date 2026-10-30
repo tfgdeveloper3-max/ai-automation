@@ -12,24 +12,24 @@ interface ServiceDetailProps {
 
 const DEFAULT_HEADING = (
     <>
-        <span className="font-bold">Revenue</span> &amp; Upsell Automation
+        TikTok Shop <span className="font-bold">Automation</span>
     </>
 );
 
 const DEFAULT_INTRO =
-    'Unlock hidden revenue potential in your e-commerce channels without increasing your ad spend. AMZ Automation builds data-driven, automated upsell and cross-sell engines that trigger targeted product recommendations, bundle discounts, and post-purchase offers at the exact moment customers are most likely to buy.';
+    'Scaling a brand on TikTok requires mastering real-time trends, creator affiliate networks, and high-conversion live shopping events. At AMZ Automation, we manage the entire ecosystem for you\u2014from account verification and trending product research to affiliate coordination and order fulfillment\u2014allowing you to profit from the world\u2019s fastest-growing social commerce platform without lifting a finger.';
 
 const DEFAULT_PARAGRAPHS = [
-    'Traditional post-purchase flows often rely on static email blasts that buyers ignore. Our intelligent automated funnels personalize recommendations based on individual shopping behavior, order history, and cart contents across Shopify, Amazon, and TikTok\u2014delivering high-converting offer sequences via SMS, email, and on-page widgets.',
-    "From automated abandoned cart recovery sequences to instant one-click post-checkout upsells and subscription conversion flows, our revenue engines drive immediate bottom-line growth. Turn one-time shoppers into repeat buyers and scale your brand\u2019s profitability on complete autopilot.",
+    'Our comprehensive TikTok Shop automation framework is built around the platform\u2019s unique algorithm. We curate trending products, optimize listings with high-intent keywords, and coordinate seamlessly with our vetted network of affiliate creators to promote your items on commission. This structure drives organic visibility and viral momentum straight to your storefront without heavy dependency on paid ad spend.',
+    'Beyond content and creator outreach, our team handles the heavy lifting of daily operations, including automated inventory sync, order processing, tracking updates, and 24/7 customer service. With continuous performance tracking and strategic ad campaign management, your TikTok Shop runs efficiently on autopilot while generating steady, predictable revenue.',
 ];
 
 const MultiServiceDetail = ({
-    id = 'revenue-upsell-automation',
+    id = 'tiktok-shop-automation',
     heading = DEFAULT_HEADING,
     intro = DEFAULT_INTRO,
-    image = '/images/Multi-Channel.png',
-    imageAlt = 'Illustration of automated upsell, cross-sell, and cart recovery funnels across Amazon, Shopify, and TikTok stores',
+    image = '/images/Tiktok-Automation.png',
+    imageAlt = 'TikTok Shop automation dashboard with trending products, creator affiliate network, live shopping events, and order fulfillment workflow',
     paragraphs = DEFAULT_PARAGRAPHS,
 }: ServiceDetailProps) => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.12 });

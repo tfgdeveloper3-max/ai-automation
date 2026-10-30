@@ -12,25 +12,24 @@ interface ServiceDetailProps {
 
 const DEFAULT_HEADING = (
     <>
-        Scale Your Store Support <span className="font-bold">24/7</span>
-        <br className="hidden md:block" /> Without Increasing Headcount
+        Etsy <span className="font-bold">Automation</span>
     </>
 );
 
 const DEFAULT_INTRO =
-    'Transform how your e-commerce store handles customer inquiries with fully automated, intelligent support systems. Our AI agents integrate seamlessly with Amazon, Shopify, and TikTok Shop to provide instant, human-like responses around the clock\u2014reducing response times to seconds and dramatically improving customer satisfaction scores.';
+    'Etsy has grown into a premier destination for unique, print-on-demand, custom, and curated product markets with highly motivated buyers. However, managing search visibility, maintaining shop policies, optimizing item tags, and coordinating fulfillment across specialized suppliers requires dedicated daily attention. At AMZ Automation, we manage your entire Etsy business\u2014from niche product selection and SEO listing optimization to automated shipping\u2014allowing you to scale a profitable digital asset completely hands-free.';
 
 const DEFAULT_PARAGRAPHS = [
-    'Traditional customer support can be costly and difficult to scale during peak selling seasons. By automating repetitive requests such as order status tracking, shipping updates, return authorizations, and basic product questions, AMZ Automation frees up your internal support team to focus on high-value buyer interactions and complex issue resolution.',
-    'Equipped with natural language understanding and multi-channel synchronization, our AI agents continuously learn from your brand\u2019s data and customer history. This ensures every customer receives accurate, personalized, and branded assistance instantly, preventing abandoned carts and building long-term buyer loyalty across all your sales channels.',
+    'Our specialized Etsy automation framework is designed to capture organic search traffic and maximize shop conversions. We conduct extensive market research to identify trending, high-demand product niches with low competition. Our team crafts optimized titles, detailed descriptions, and high-converting search tags aligned with Etsy\u2019s search algorithm, positioning your listings in front of high-intent shoppers without relying solely on ad spend.',
+    'Beyond store optimization, our dedicated specialists oversee all daily operational requirements. We integrate streamlined production and logistics networks for automated order processing, handle customer inquiries, and ensure strict compliance with Etsy\u2019s seller standards. With end-to-end management, your Etsy shop operates continuously as a low-maintenance, reliable revenue stream.',
 ];
 
-const AiServiceDetail = ({
-    id = 'ai-customer-support',
+const EtsyServiceDetail = ({
+    id = 'etsy-automation',
     heading = DEFAULT_HEADING,
     intro = DEFAULT_INTRO,
-    image = '/images/Ai-Support.png',
-    imageAlt = 'Businessman touching a 24/7 service clock with support, phone, agent, email and chat icons',
+    image = '/images/Etsy-Automation.png',
+    imageAlt = 'Etsy Marketplace automation dashboard with niche product research, SEO listing optimization, search tags, and automated order fulfillment workflow',
     paragraphs = DEFAULT_PARAGRAPHS,
 }: ServiceDetailProps) => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.12 });
@@ -75,4 +74,4 @@ const AiServiceDetail = ({
     );
 };
 
-export default AiServiceDetail;
+export default EtsyServiceDetail;

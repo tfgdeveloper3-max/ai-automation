@@ -12,24 +12,24 @@ interface ServiceDetailProps {
 
 const DEFAULT_HEADING = (
     <>
-        <span className="font-bold">Inventory</span> &amp; Data Pipelines
+        Shopify <span className="font-bold">Automation</span>
     </>
 );
 
 const DEFAULT_INTRO =
-    'Prevent stockouts, eliminate double-selling, and centralize your e-commerce operations with automated real-time data pipelines. AMZ Automation synchronizes stock levels, price changes, and product updates across Amazon, Shopify, and TikTok simultaneously, ensuring your multi-channel inventory is always accurate.';
+    'Building a successful direct-to-consumer brand on Shopify requires more than just launching a website\u2014it demands strategic product selection, conversion-focused design, and seamless backend fulfillment. At AMZ Automation, we take the complexity out of running your store by managing every operational step, allowing you to own a fully functional, high-growth e-commerce asset without the daily operational stress.';
 
 const DEFAULT_PARAGRAPHS = [
-    'Managing inventory manually across multiple channels leads to costly oversight, stock mismatches, and suspended seller accounts. Our automated data pipelines connect your warehouses, 3PL providers, and supplier feeds directly into your sales channels\u2014updating stock availability in real time as orders occur.',
-    'In addition to stock management, our data pipelines compile sales velocity, reorder triggers, and channel performance into a single dashboard. By turning raw transactional data into actionable insights, your business can optimize stock allocation, automate purchase orders, and scale across platforms with total operational confidence.',
+    'Our comprehensive Shopify automation service covers everything from initial brand conceptualization to continuous optimization. We build custom-designed, mobile-responsive storefronts optimized for maximum conversion rates, integrate reliable supplier networks, and set up automated inventory control. By pairing data-driven product research with aggressive customer acquisition strategies, AMZ Automation positions your store to attract targeted traffic and convert visitors into repeat customers effortlessly.',
+    'Beyond store setup, our dedicated team continuously monitors sales performance, manages customer inquiries, and streamlines order processing from warehouse to doorstep. With continuous A/B testing, dynamic sales funnels, and automated marketing workflows in place, your Shopify business stays ahead of market trends while providing you with transparent, hands-off passive revenue growth.',
 ];
 
-const SmartServiceDetail = ({
-    id = 'inventory-data-pipelines',
+const AiServiceDetail = ({
+    id = 'shopify-automation',
     heading = DEFAULT_HEADING,
     intro = DEFAULT_INTRO,
-    image = '/images/Inventory.png',
-    imageAlt = 'Illustration of automated real-time inventory and data pipelines syncing across Amazon, Shopify, and TikTok stores',
+    image = '/images/Shopify-Automation.png',
+    imageAlt = 'Shopify automation storefront with product listings, dashboard analytics, and order fulfillment workflow',
     paragraphs = DEFAULT_PARAGRAPHS,
 }: ServiceDetailProps) => {
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.12 });
@@ -74,4 +74,4 @@ const SmartServiceDetail = ({
     );
 };
 
-export default SmartServiceDetail;
+export default AiServiceDetail;

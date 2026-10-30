@@ -23,7 +23,7 @@ const reveal =
     'opacity-0 animate-[heroFadeUp_1.1s_cubic-bezier(0.19,1,0.22,1)_forwards] motion-reduce:animate-none motion-reduce:opacity-100';
 const delay = (s: string): CSSProperties => ({ animationDelay: s });
 
-const AVATARS = ['/images/Chris-Morgan.png', '/images/Elena-Garcia.png', '/images/Elena-Rostova.png', '/images/Chloe-Bennett.png'];
+const AVATARS = ['/images/Hannah-Schmidt.png', '/images/Jason-Reynolds.png', '/images/Marcus-Lee.png', '/images/Marcus-Vance.png'];
 
 const ChevronsRight = ({ className = '' }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
@@ -31,7 +31,7 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
     </svg>
 );
 
-const MultiHero = () => {
+const EtsyHero = () => {
     const { openLeadForm } = useLeadModal();
     return (
         <section className="relative isolate overflow-hidden">
@@ -57,16 +57,14 @@ const MultiHero = () => {
                         className={`font-['Anybody',sans-serif] text-[44px] leading-[1.1] text-white sm:text-[56px] lg:text-[68px] ${reveal}`}
                         style={delay('0.1s')}
                     >
-                        <span className="font-bold">Revenue</span> <span className="font-light">&amp; Upsell Automation</span>
+                        <span className="font-bold">Etsy </span> <span className="font-light">Automation Solutions</span>
                     </h1>
 
                     <p
-                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[16px] leading-relaxed text-white/85 sm:text-[16px] ${reveal}`}
+                        className={`mt-4 max-w-[580px] font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-white/85 sm:text-[17px] ${reveal}`}
                         style={delay('0.3s')}
                     >
-                        Maximize Average Order Value (AOV) and customer lifetime value across
-                        Amazon, Shopify, and TikTok stores with automated upsell sequences, cart
-                        recovery, and personalized post-purchase offers.
+                        Capitalize on high-margin creative and specialized product niches with automated keyword tagging, storefront optimization, and complete backend fulfillment managed by AMZ Automation.
                     </p>
 
                     <div className={`mt-6 flex items-center gap-2 ${reveal}`} style={delay('0.45s')}>
@@ -111,4 +109,4 @@ const MultiHero = () => {
     );
 };
 
-export default MultiHero;
+export default EtsyHero;

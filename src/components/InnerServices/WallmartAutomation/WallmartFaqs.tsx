@@ -11,28 +11,28 @@ interface Faq {
 
 const FAQS: Faq[] = [
     {
-        q: 'How does automated order routing work across multiple sales channels?',
-        a: 'Once a customer places an order on Amazon, Shopify, or TikTok Shop, our automation engine instantly receives the order payload and routes it to your preferred warehouse, 3PL, or FBA center for immediate processing without manual intervention.',
+        q: 'How does Walmart Automation work with AMZ Automation?',
+        a: 'We oversee your entire Walmart Marketplace store. Our specialists handle application approval, catalog listing optimization, inventory management, order processing, and account compliance.',
     },
     {
-        q: 'Can customers initiate returns automatically through a self-service portal?',
-        a: 'Yes! We integrate a self-service return portal where customers can submit return requests, receive instant automated approvals based on your rules, and generate prepaid shipping labels in seconds.',
+        q: 'Is it difficult to get approved to sell on Walmart Marketplace?',
+        a: 'Walmart maintains strict seller criteria, but our experienced team prepares your business documentation and catalog details to ensure a seamless application and rapid approval process.',
     },
     {
-        q: 'How does the system handle inventory updates when an item is returned?',
-        a: 'As soon as a returned item is received and inspected at your warehouse, the system automatically adjusts inventory levels across all your connected channels (Amazon, Shopify, and TikTok) to keep stock counts 100% accurate.',
+        q: 'Who manages order fulfillment and shipping logistics?',
+        a: 'We integrate automated supply chain workflows to handle product packaging, prompt dispatch, and real-time tracking updates in compliance with Walmart\u2019s delivery standards.',
     },
     {
-        q: 'Can we set custom return policies and rules for different products?',
-        a: 'Absolutely. You can customize return windows, non-returnable categories, restocking fees, and auto-approval criteria based on item condition, price, or sales channel requirements.',
+        q: 'How do you keep my listings competitive on Walmart?',
+        a: 'We employ dynamic pricing algorithms and targeted listing optimization strategies to maintain optimal pricing margins and secure prime search position for your products.',
     },
     {
-        q: 'Does automated order processing prevent overselling during high-volume surges?',
-        a: 'Yes. Real-time inventory synchronization updates stock counts across all active store channels immediately after each purchase, preventing overselling and inventory mismatches during peak sale events.',
+        q: 'Do I need prior experience selling on Walmart?',
+        a: 'No experience is required. Our end-to-end model is built specifically to allow investors and store owners to run a fully functioning Walmart store passively.',
     },
     {
-        q: 'How does the system handle order tracking updates for buyers?',
-        a: "The moment a shipping label is generated, tracking numbers and status links are automatically pushed back to the customer's account and sent via SMS or email, reducing WISMO (\"Where Is My Order?\") inquiries.",
+        q: 'How can I review sales performance and store health?',
+        a: 'You have round-the-clock access to your store metrics dashboard and receive transparent performance reports detailing orders, revenue, profit margins, and inventory status.',
     },
 ];
 
@@ -125,7 +125,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, index, open, visible, onToggle }
     );
 };
 
-const AutomatedFaqs: React.FC = () => {
+const SmartFaqs: React.FC = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     const { ref, inView } = useInView<HTMLDivElement>();
     const { ref: sectionRef, inView: sectionInView } = useSectionReveal<HTMLElement>({ threshold: 0.1 });
@@ -135,7 +135,7 @@ const AutomatedFaqs: React.FC = () => {
             ref={sectionRef}
             data-reveal="fade"
             data-inview={sectionInView}
-            className="bg-white px-5 pb-20 pt-20"
+            className="bg-white px-5 pb-20 pt-4"
         >
             <div className="mx-auto max-w-[912px]">
                 <div className="flex flex-col items-center text-center">
@@ -151,8 +151,8 @@ const AutomatedFaqs: React.FC = () => {
                     </h2>
 
                     <p className="mt-3 max-w-[520px] text-[15px] leading-5 text-neutral-500">
-                        Find answers to common questions about how our Automated Order &amp;
-                        Returns workflow operates across Amazon, Shopify, and TikTok Shop.
+                        Everything you need to know about setting up, managing, and scaling
+                        your Walmart Marketplace store.
                     </p>
                 </div>
 
@@ -174,4 +174,4 @@ const AutomatedFaqs: React.FC = () => {
     );
 };
 
-export default AutomatedFaqs;
+export default SmartFaqs;

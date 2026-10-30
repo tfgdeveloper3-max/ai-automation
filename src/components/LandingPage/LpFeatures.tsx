@@ -1,70 +1,52 @@
-import { useState, type CSSProperties, type MouseEvent } from 'react';
+import { type CSSProperties, type MouseEvent } from 'react';
 import { useSectionReveal } from '../usesectionreveal';
 
 type Feature = {
     title: string;
     desc: string;
-    image: string;
-    wide?: boolean;
+    iconLetter: string;
 };
 
-/* Edit titles, lines and images here. `wide` cards span 2 columns on desktop. */
+/* Edit titles, lines and icon letters here. */
 const FEATURES: Feature[] = [
     {
-        title: 'Products Hunting',
-        desc: 'We research demand, competition and margins to find products that actually sell.',
-        image: '/images/features/product-hunting.png',
-        wide: true,
+        title: 'Item Research & Sourcing',
+        desc: 'Uncovering high-margin, trending commodities to position your store ahead of the market competition.',
+        iconLetter: 'P',
     },
     {
-        title: 'Inventory Management',
-        desc: 'Stock levels tracked and restocked on time, so you never miss a sale.',
-        image: '/images/features/inventory.png',
+        title: 'Stock Control & Warehousing',
+        desc: 'Maintaining optimal inventory levels to eliminate stockouts and ensure seamless supply chain flows.',
+        iconLetter: 'I',
     },
     {
-        title: 'Customer Service',
-        desc: 'Fast, friendly replies that protect your ratings and seller health.',
-        image: '/images/features/customer-service.png',
+        title: 'Buyer Support & Relations',
+        desc: 'Delivering 24/7 professional customer service to maintain high ratings and buyer satisfaction.',
+        iconLetter: 'C',
     },
     {
-        title: 'Monitoring, Tracking & Scaling',
-        desc: 'Daily performance checks and data-led decisions to grow what works.',
-        image: '/images/features/scaling.png',
+        title: 'Analytics, Tracking & Growth',
+        desc: 'Continuous performance monitoring and data-driven adjustments to scale your revenue streams safely.',
+        iconLetter: 'M',
     },
     {
-        title: 'Order Management',
-        desc: 'Every order processed, shipped and tracked from checkout to doorstep.',
-        image: '/images/features/orders.png',
+        title: 'Fulfillment & Logistics',
+        desc: 'End-to-end management of customer purchases from initial checkout to safe delivery.',
+        iconLetter: 'O',
     },
     {
-        title: 'Products Listing',
-        desc: 'Keyword-rich titles, clean images and copy written to convert browsers into buyers.',
-        image: '/images/features/listing.png',
-        wide: true,
+        title: 'Catalog Optimization',
+        desc: 'Crafting keyword-rich, high-converting product listings designed to maximize visibility and clicks.',
+        iconLetter: 'P',
     },
 ];
 
-/* Shows the first letter if the image is missing */
-const FeatureImage = ({ src, title, wide }: { src: string; title: string; wide?: boolean }) => {
-    const [failed, setFailed] = useState(false);
-    const size = wide ? 'h-28 w-28 sm:h-36 sm:w-36' : 'h-24 w-24 sm:h-28 sm:w-28';
-
-    if (failed) {
-        return (
-            <span className={`${size} flex items-center justify-center rounded-3xl bg-white/10 font-['Anybody',sans-serif] text-4xl font-bold text-[#8ac44b]`}>
-                {title[0]}
-            </span>
-        );
-    }
+/* Shows the letter icon for each feature */
+const FeatureIcon = ({ letter }: { letter: string }) => {
     return (
-        <img
-            src={src}
-            alt=""
-            loading="lazy"
-            draggable={false}
-            onError={() => setFailed(true)}
-            className={`${size} object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.45)] transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:rotate-6 group-hover:scale-110`}
-        />
+        <span className="flex h-24 w-24 items-center justify-center rounded-3xl bg-white/10 font-['Anybody',sans-serif] text-4xl font-bold text-[#8ac44b] transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:rotate-6 group-hover:scale-110 sm:h-28 sm:w-28 sm:text-5xl">
+            {letter}
+        </span>
     );
 };
 
@@ -104,24 +86,25 @@ const LpFeatures = () => {
                         Everything Included
                     </span>
                     <h2 className="mt-4 font-['Anybody',sans-serif] text-[32px] font-bold leading-[1.1] text-white sm:text-[44px] lg:text-[52px]">
-                        Extract the Best of E-Commerce
+                        Unlock the Full Potential of Digital Retail
                     </h2>
                     <p className="mt-4 font-['Montserrat',sans-serif] text-base font-semibold text-[#8ac44b] sm:text-lg">
-                        Ready to start your path toward e-commerce success?
+                        Ready to begin your journey toward e-commerce excellence?
                     </p>
-                    <p className="mt-2 font-['Montserrat',sans-serif] text-sm leading-relaxed text-white/65 sm:text-[15px]">
-                        You&rsquo;re in the right spot. We handle everything you need to enjoy the very best of e-commerce.
+                    <p className="mt-2 font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-white/65 sm:text-[17px]">
+                        You have arrived at the right destination. AMZ Automation manages every
+                        detail so you can experience the absolute pinnacle of online selling.
                     </p>
                 </header>
 
                 {/* ---------- Bento grid ---------- */}
-                <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+                <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
                     {FEATURES.map((f, i) => {
                         const r = reveal(i + 1);
                         return (
                             <li
                                 key={f.title}
-                                className={`${f.wide ? 'lg:col-span-2' : ''} ${r.className}`}
+                                className={r.className}
                                 style={r.style}
                             >
                                 <article
@@ -139,15 +122,12 @@ const LpFeatures = () => {
                                         className="absolute inset-x-8 top-0 h-px scale-x-0 bg-gradient-to-r from-transparent via-[#8ac44b] to-transparent transition-transform duration-700 group-hover:scale-x-100"
                                     />
 
-                                    <div
-                                        className={`relative flex flex-1 flex-col ${f.wide ? 'lg:flex-row lg:items-end lg:justify-between lg:gap-8' : ''
-                                            }`}
-                                    >
-                                        <div className={`mb-6 flex justify-end ${f.wide ? 'lg:order-last lg:mb-0 lg:self-center' : ''}`}>
-                                            <FeatureImage src={f.image} title={f.title} wide={f.wide} />
+                                    <div className="relative flex flex-1 flex-col">
+                                        <div className="mb-6 flex justify-end">
+                                            <FeatureIcon letter={f.iconLetter} />
                                         </div>
 
-                                        <div className={`mt-auto ${f.wide ? 'lg:max-w-[55%]' : ''}`}>
+                                        <div className="mt-auto">
                                             <span
                                                 aria-hidden="true"
                                                 className="mb-4 block h-1 w-8 rounded-full bg-[#8ac44b] transition-all duration-500 group-hover:w-16"
@@ -156,9 +136,8 @@ const LpFeatures = () => {
                                                 {f.title}
                                             </h3>
 
-                                            {/* Description: always shown on touch/tablet, expands on hover on desktop */}
                                             <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out lg:grid-rows-[0fr] lg:group-hover:grid-rows-[1fr]">
-                                                <p className="overflow-hidden font-['Montserrat',sans-serif] text-sm leading-relaxed text-white/70">
+                                                <p className="overflow-hidden font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-white/70">
                                                     <span className="block pt-3">{f.desc}</span>
                                                 </p>
                                             </div>
