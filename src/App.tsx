@@ -66,6 +66,7 @@ function HomePage() {
 function App() {
   return (
     <BrowserRouter>
+      <LiveChat />
       <LeadModalProvider>
         <ScrollToTop />
         <RouteMeta />
