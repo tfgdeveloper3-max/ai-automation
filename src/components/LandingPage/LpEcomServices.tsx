@@ -1,42 +1,47 @@
-import { type CSSProperties } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { useSectionReveal } from '../usesectionreveal';
 
 type Service = {
     title: string;
     desc: string;
-    iconLetter: string;
+    image: string;
+    iconLetter: string; 
     href: string;
 };
 
-/* Edit titles, lines and links here */
 const SERVICES: Service[] = [
     {
         title: 'Shopify Automation',
         desc: 'Custom-branded storefront creation and hands-free fulfillment managed entirely by AMZ Automation experts.',
+        image: '/images/Ecommerce/Shopify.png',
         iconLetter: 'S',
         href: '/service/shopify-automation',
     },
     {
         title: 'TikTok Shop Automation',
         desc: 'Capitalize on live-stream shopping and viral trends with our comprehensive social commerce management.',
+        image: '/images/Ecommerce/tiktok.png',
         iconLetter: 'T',
         href: '/service/tiktok-shop-automation',
     },
     {
         title: 'Walmart Automation',
         desc: 'Secure marketplace approval and scale your sales catalog across Walmart effortlessly.',
+        image: '/images/Ecommerce/Walmart.png',
         iconLetter: 'W',
         href: '/service/walmart-automation',
     },
     {
-        title: 'ebay Automation',
+        title: 'eBay Automation',
         desc: 'High-performing product curation and automated inventory control tailored for the eBay platform.',
+        image: '/images/Ecommerce/ebay.png',
         iconLetter: 'e',
         href: '/service/ebay-automation',
     },
     {
         title: 'Etsy Automation',
         desc: 'Optimize niche, creative, or vintage product listings with professional SEO and hands-off store upkeep.',
+        image: '/images/Ecommerce/Etsy.png',
         iconLetter: 'E',
         href: '/service/etsy-automation',
     },
@@ -54,13 +59,24 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
     </svg>
 );
 
-/* Shows the letter icon for each service */
-const ServiceIcon = ({ letter }: { letter: string }) => {
+/* Service image tile — falls back to the letter if the image is missing */
+const ServiceIcon = ({ src, letter }: { src: string; letter: string }) => {
+    const [failed, setFailed] = useState(false);
+
     return (
-        <span className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#f1eefc] ring-1 ring-[#2f2169]/10 transition-all duration-500 group-hover:-rotate-6 group-hover:scale-110 group-hover:bg-white group-hover:ring-[#8ac44b] sm:h-[72px] sm:w-[72px]">
-            <span className="font-['Anybody',sans-serif] text-2xl font-bold text-[#2f2169] sm:text-3xl">
-                {letter}
-            </span>
+        <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[#f1eefc] ring-1 ring-[#2f2169]/10 transition-all duration-500 group-hover:-rotate-6 group-hover:scale-110 group-hover:ring-2 group-hover:ring-[#8ac44b] sm:h-[72px] sm:w-[72px]">
+            {failed ? (
+                <span className="font-['Anybody',sans-serif] text-2xl font-bold text-[#2f2169] sm:text-3xl">{letter}</span>
+            ) : (
+                <img
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    draggable={false}
+                    onError={() => setFailed(true)}
+                    className="absolute inset-0 h-full w-full object-cover"
+                />
+            )}
         </span>
     );
 };
@@ -152,7 +168,7 @@ const LpEcomServices = () => {
                                     />
 
                                     <span className="relative">
-                                        <ServiceIcon letter={s.iconLetter} />
+                                        <ServiceIcon src={s.image} letter={s.iconLetter} />
                                     </span>
 
                                     <span className="relative min-w-0 flex-1">

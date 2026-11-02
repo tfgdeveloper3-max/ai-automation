@@ -13,17 +13,17 @@ const STATS = [
 type Brand = { name: string; logo: string };
 
 const SOURCES: Brand[] = [
-    { name: "Sam's Club", logo: '/images/brands/sams-club.png' },
-    { name: 'vidaXL', logo: '/images/brands/vidaxl.png' },
+    { name: "Sam's Club", logo: '/images/brands/samsclub.png' },
+    { name: 'vidaXL', logo: '/images/brands/vida.png' },
     { name: 'Alibaba', logo: '/images/brands/alibaba.png' },
-    { name: 'MiniInTheBox', logo: '/images/brands/miniinthebox.png' },
+    { name: 'MiniInTheBox', logo: '/images/brands/mini.png' },
     { name: 'Wish', logo: '/images/brands/wish.png' },
-    { name: 'LightInTheBox', logo: '/images/brands/lightinthebox.png' },
-    { name: 'Pure Formulas', logo: '/images/brands/pure-formulas.png' },
-    { name: 'Kmart', logo: '/images/brands/kmart.png' },
-    { name: 'Redbubble', logo: '/images/brands/redbubble.png' },
-    { name: "Macy's", logo: '/images/brands/macys.png' },
-    { name: 'DHgate', logo: '/images/brands/dhgate.png' },
+    { name: 'LightInTheBox', logo: '/images/brands/light.png' },
+    { name: 'Pure Formulas', logo: '/images/brands/pure.png' },
+    { name: 'Kmart', logo: '/images/brands/Kmart.png' },
+    { name: 'Redbubble', logo: '/images/brands/red.png' },
+    { name: "Macy's", logo: '/images/brands/macy.png' },
+    { name: 'DHgate', logo: '/images/brands/Dh.png' },
     { name: 'SHEIN', logo: '/images/brands/shein.png' },
     { name: "Kohl's", logo: '/images/brands/kohls.png' },
     { name: 'Catch', logo: '/images/brands/catch.png' },
@@ -38,7 +38,6 @@ const MARKETPLACES: Brand[] = [
     { name: 'Walmart', logo: '/images/brands/walmart.png' },
     { name: 'Amazon', logo: '/images/brands/amazon.png' },
     { name: 'Wix', logo: '/images/brands/wix.png' },
-    { name: 'TikTok Shop', logo: '/images/brands/tiktok-shop.png' },
 ];
 
 const T = {

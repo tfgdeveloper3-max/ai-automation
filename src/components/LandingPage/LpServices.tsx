@@ -19,7 +19,7 @@ const SERVICES: Service[] = [
         title: 'Shopify Automation',
         desc: 'Unlock the power of your own branded storefront with custom design, high-converting funnels, and fully managed logistics.',
         points: ['Custom store build & design', 'High-converting sales funnels', 'Automated fulfillment & tracking'],
-        image: '/images/services/shopify.png',
+        image: '/images/services/shopify.jpg',
         href: '/service/shopify-automation',
     },
     {
@@ -28,7 +28,7 @@ const SERVICES: Service[] = [
         title: 'TikTok Shop Automation',
         desc: 'Tap into viral video commerce and live-selling ecosystems to capture massive audience engagement and instant sales.',
         points: ['TikTok Shop launch & setup', 'Trending product research', 'Creator & content support'],
-        image: '/images/services/tiktok.png',
+        image: '/images/services/tiktok.webp',
         href: '/service/tiktok-shop-automation',
     },
     {
@@ -37,7 +37,7 @@ const SERVICES: Service[] = [
         title: 'Walmart Automation',
         desc: 'From expert strategy to product selection, we deliver the team and tools for a powerful Walmart automation setup.',
         points: ['Store setup & approval', 'Product sourcing', 'Daily order handling'],
-        image: '/images/services/walmart.png',
+        image: '/images/services/walmart.jpg',
         href: '/service/walmart-automation',
     },
     {
@@ -46,7 +46,7 @@ const SERVICES: Service[] = [
         title: 'eBay Automation',
         desc: 'Leverage decades of buyer trust on eBay through optimized listings, repricing strategies, and seamless customer service.',
         points: ['Seller account optimization', 'Algorithmic repricing tools', 'Automated inventory sync'],
-        image: '/images/services/ebay.png',
+        image: '/images/services/ebay.webp',
         href: '/service/ebay-automation',
     },
     {
@@ -55,13 +55,11 @@ const SERVICES: Service[] = [
         title: 'Etsy Automation',
         desc: 'Scale your unique creative or vintage inventory with specialized SEO, niche tagging, and hands-off store management.',
         points: ['Shop branding & setup', 'High-ranking SEO tagging', 'Customer query management'],
-        image: '/images/services/etsy.png',
+        image: '/images/services/etsy.webp',
         href: '/service/etsy-automation',
     },
 ];
 
-/* Layout: desktop = 3 upar, 2 neeche center me (6-column grid, har card 2 columns).
-   Tablet = 2-2, aakhri card akela center me. Mobile = ek ke neeche ek. */
 const PLACEMENT = [
     'lg:col-span-2',
     'lg:col-span-2',
@@ -99,7 +97,7 @@ const ServiceImage = ({ src, platform, letter }: { src: string; platform: string
             loading="lazy"
             draggable={false}
             onError={() => setFailed(true)}
-            className="h-40 w-auto object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] transition-transform duration-500 ease-out group-hover:-translate-y-3 group-hover:-rotate-3 group-hover:scale-105 sm:h-44"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
     );
 };
@@ -127,7 +125,7 @@ const LpServices = () => {
                     <p className="mt-4 font-['Montserrat',sans-serif] text-base font-semibold text-[#2f2169] sm:text-lg">
                         Chasing e-commerce success across top-tier digital marketplaces?
                     </p>
-                    <p className="mt-2 font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-[#6b6b7a] sm:text-[17px]">
+                    <p className="mt-2 font-['Montserrat',sans-serif] text-sm leading-relaxed text-[#6b6b7a] sm:text-[15px]">
                         Tell us what you need, and our automation team is ready to build your brand via AMZ Automation.
                     </p>
                 </header>
@@ -139,29 +137,20 @@ const LpServices = () => {
                         return (
                             <li key={s.platform} className={`h-full ${PLACEMENT[i]} ${r.className}`} style={r.style}>
                                 <article className="group relative flex h-full flex-col overflow-hidden rounded-[26px] bg-[#0e0531] p-2 shadow-[0_18px_45px_rgba(14,5,49,0.18)] ring-1 ring-[#2f2169] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(14,5,49,0.35)] hover:ring-2 hover:ring-[#8ac44b]">
-                                    {/* Media stage */}
+                                    {/* Media: image fills the whole box */}
                                     <div className="relative flex h-60 items-center justify-center overflow-hidden rounded-[20px] bg-[linear-gradient(160deg,#2f2169_0%,#1a1150_100%)]">
+                                        <ServiceImage src={s.image} platform={s.platform} letter={s.letter} />
+                                        {/* soft fade into the card at the bottom */}
                                         <span
                                             aria-hidden="true"
-                                            className="absolute inset-0 opacity-40 [background-image:radial-gradient(rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:18px_18px]"
+                                            className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0e0531]/50 to-transparent"
                                         />
-                                        <span
-                                            aria-hidden="true"
-                                            className="absolute left-1/2 top-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(138,196,75,0.45)_0%,transparent_70%)] transition-all duration-500 group-hover:h-60 group-hover:w-60"
-                                        />
-                                        <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-white/10 px-3 py-1 font-['Montserrat',sans-serif] text-[11px] font-semibold text-white backdrop-blur-sm">
-                                            {s.platform}
-                                        </span>
-
-                                        <div className="relative">
-                                            <ServiceImage src={s.image} platform={s.platform} letter={s.letter} />
-                                        </div>
                                     </div>
 
                                     {/* Content */}
                                     <div className="flex flex-1 flex-col px-5 pb-5 pt-6 sm:px-6">
                                         <h3 className="font-['Anybody',sans-serif] text-2xl font-bold text-white">{s.title}</h3>
-                                        <p className="mt-3 font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-white/70">{s.desc}</p>
+                                        <p className="mt-3 font-['Montserrat',sans-serif] text-sm leading-relaxed text-white/70">{s.desc}</p>
 
                                         <ul className="mt-5 space-y-2.5">
                                             {s.points.map((p) => (

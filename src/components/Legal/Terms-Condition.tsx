@@ -1,75 +1,407 @@
-import LegalPage, { type LegalSection } from './LegalPage';
+import LegalPage, { type LegalSection, p, h3, ul, ol, details } from './LegalPage';
 
 const SECTIONS: LegalSection[] = [
     {
-        id: 'acceptance',
-        heading: 'Acceptance of terms',
-        paragraphs: [
-            'By accessing or using the AMZ Automation Solutions website and services, you agree to be bound by these Terms and Conditions. If you do not agree, please do not use our services.',
+        id: "introduction-and-acceptance-of-terms",
+        heading: "Introduction and acceptance of terms",
+        blocks: [
+            p("Welcome to AMZ Automation Solutions."),
+            p("These Terms and Conditions (\"Terms\") govern your access to and use of our website, services, solutions, and related business offerings."),
+            p("By accessing our website, submitting an inquiry, requesting a consultation, purchasing a service, or engaging with us for an automation project, you agree to be bound by these Terms."),
+            p("If you do not agree with any part of these Terms, you should discontinue using our website and services."),
+            p("These Terms apply to all website visitors, prospective clients, existing clients, and other individuals or businesses interacting with our services."),
         ],
     },
     {
-        id: 'services',
-        heading: 'Our services',
-        paragraphs: [
-            'We provide AI-powered automation for e-commerce businesses, including workflows for Amazon, Shopify and TikTok Shop.',
-        ],
-        list: [
-            'Order tracking and customer support automation',
-            'Refund, return and exchange workflows',
-            'Upsell and product recommendation flows',
-            'Custom integrations agreed in writing',
-        ],
-    },
-    {
-        id: 'accounts',
-        heading: 'Accounts and access',
-        paragraphs: [
-            'You are responsible for keeping your login details and any store or marketplace credentials you share with us secure. Let us know immediately if you suspect unauthorized access.',
-        ],
-    },
-    {
-        id: 'payments',
-        heading: 'Fees and payments',
-        paragraphs: [
-            'Fees are listed in your proposal or invoice. Payments are due on the dates shown, and late payments may pause active automations until the balance is cleared.',
+        id: "description-of-services",
+        heading: "Description of services",
+        blocks: [
+            p("AMZ Automation Solutions provides technology-driven solutions designed to help businesses improve efficiency, reduce repetitive work, streamline operations, and optimize business processes."),
+            p("Depending on the selected service and project requirements, our offerings may include:"),
+            ul([
+                "AI-powered business automation.",
+                "Workflow design and development.",
+                "Business process automation.",
+                "AI chatbot development and implementation.",
+                "Customer communication automation.",
+                "CRM automation and integration.",
+                "Lead generation and lead management workflows.",
+                "Email and messaging automation.",
+                "Data synchronization and information processing.",
+                "Third-party application and software integrations.",
+                "Custom automation solutions.",
+                "Automation consulting, configuration, and technical support.",
+            ]),
+            p("The exact scope, functionality, deliverables, and technical requirements of each project will be determined through the relevant proposal, quotation, service agreement, or written project confirmation."),
+            p("We reserve the right to modify, improve, expand, or discontinue any service or feature, subject to existing contractual commitments."),
         ],
     },
     {
-        id: 'client-responsibilities',
-        heading: 'Your responsibilities',
-        list: [
-            'Comply with the policies of Amazon, Shopify, TikTok and any other platform you sell on',
-            'Provide accurate business and product information',
-            'Review automated customer messages before they go live',
+        id: "eligibility-and-user-responsibilities",
+        heading: "Eligibility and user responsibilities",
+        blocks: [
+            p("By using our website or engaging our services, you confirm that:"),
+            ol([
+                "You are at least 18 years old or otherwise legally authorized to enter into a binding agreement.",
+                "You have the legal authority to act on behalf of yourself or the business you represent.",
+                "Any information you provide is accurate, complete, and not misleading.",
+                "You will use our website and services only for lawful purposes.",
+                "You will not attempt to interfere with, compromise, or gain unauthorized access to our website, systems, or services.",
+            ]),
+            p("You are responsible for ensuring that your use of our services complies with all applicable laws, regulations, and third-party platform requirements."),
         ],
     },
     {
-        id: 'intellectual-property',
-        heading: 'Intellectual property',
-        paragraphs: [
-            'All software, workflows and materials we create remain our property unless a written agreement says otherwise. You keep full ownership of your store data and brand assets.',
+        id: "project-scope-and-service-agreements",
+        heading: "Project scope and service agreements",
+        blocks: [
+            p("Each automation project may involve different requirements, technical specifications, deliverables, timelines, and levels of complexity."),
+            p("Before beginning a project, we may provide a proposal, quotation, project description, or service agreement outlining:"),
+            ul([
+                "The services to be provided.",
+                "Project objectives and expected deliverables.",
+                "Technical requirements and integrations.",
+                "Estimated completion timelines.",
+                "Applicable fees and payment arrangements.",
+                "Client responsibilities and required resources.",
+                "Revision, testing, and support arrangements.",
+            ]),
+            p("Work will be performed according to the agreed project scope."),
+            p("Any additional features, modifications, integrations, or services requested outside the original scope may require additional fees, revised timelines, and written approval."),
+            p("We are not obligated to provide services or deliverables that have not been included in the agreed scope."),
         ],
     },
     {
-        id: 'liability',
-        heading: 'Limitation of liability',
-        paragraphs: [
-            'We are not liable for losses caused by third-party platform changes, account suspensions, or outages outside our control. Our total liability is limited to the fees you paid in the three months before the claim.',
+        id: "pricing-and-payment-terms",
+        heading: "Pricing and payment terms",
+        blocks: [
+            p("All service fees, pricing arrangements, and payment schedules will be communicated through the applicable quotation, proposal, invoice, or service agreement."),
+            p("Depending on the project, payment arrangements may include:"),
+            ul([
+                "Full payment before work begins.",
+                "An initial deposit followed by milestone payments.",
+                "Scheduled installments.",
+                "Recurring subscription or maintenance fees.",
+                "Additional charges for services outside the original project scope.",
+            ]),
+            p("Unless otherwise agreed in writing, payments must be made according to the deadlines stated in the relevant invoice or agreement."),
+            p("We reserve the right to:"),
+            ol([
+                "Suspend or delay work if required payments are not received.",
+                "Withhold final deliverables until outstanding balances have been settled.",
+                "Charge additional fees for approved changes or additional work.",
+                "Suspend ongoing services in cases of prolonged nonpayment.",
+            ]),
+            p("Any applicable taxes, transaction charges, currency conversion fees, or third-party subscription costs will be communicated where relevant."),
         ],
     },
     {
-        id: 'termination',
-        heading: 'Termination',
-        paragraphs: [
-            'Either party may end the service with written notice as set out in your agreement. We may suspend service immediately if these terms are breached.',
+        id: "project-timelines-and-delivery",
+        heading: "Project timelines and delivery",
+        blocks: [
+            p("We make reasonable efforts to complete projects within the estimated timelines communicated to clients."),
+            p("However, delivery schedules may depend on several factors, including:"),
+            ul([
+                "Timely submission of required information and materials.",
+                "Client approvals and feedback.",
+                "Availability of third-party platforms and integrations.",
+                "Access to required accounts, APIs, and software.",
+                "Technical complexity and unforeseen development issues.",
+                "Changes to the agreed project scope.",
+            ]),
+            p("Delays caused by missing information, delayed approvals, third-party outages, or circumstances beyond our reasonable control may affect the original delivery schedule."),
+            p("We will make reasonable efforts to communicate significant delays and coordinate revised timelines where necessary."),
         ],
     },
     {
-        id: 'changes',
-        heading: 'Changes to these terms',
-        paragraphs: [
-            'We may update these terms from time to time. The date at the top of this page shows when they last changed.',
+        id: "client-responsibilities",
+        heading: "Client responsibilities",
+        blocks: [
+            p("Successful automation implementation requires cooperation between the service provider and the client."),
+            p("Clients agree to:"),
+            ul([
+                "Provide accurate project information and business requirements.",
+                "Supply necessary content, documents, and technical resources.",
+                "Provide authorized access to relevant software platforms and applications.",
+                "Maintain valid subscriptions and licenses for third-party tools where required.",
+                "Ensure that all supplied data has been lawfully obtained.",
+                "Obtain necessary permissions and consents for processing customer or employee information.",
+                "Review and approve deliverables within reasonable timeframes.",
+                "Test and validate automation workflows before relying on them for critical business operations.",
+                "Notify us promptly of technical issues or unexpected system behavior.",
+            ]),
+            p("Clients remain responsible for the accuracy, legality, and appropriateness of the information and instructions supplied for their projects."),
+            p("We are not responsible for delays or failures resulting from inaccurate information, unauthorized account access, missing resources, or failure to fulfill agreed client responsibilities."),
+        ],
+    },
+    {
+        id: "artificial-intelligence-and-automation-limitations",
+        heading: "Artificial intelligence and automation limitations",
+        blocks: [
+            p("Our services may use artificial intelligence models, automated decision-making technologies, machine learning systems, and third-party automation platforms."),
+            p("While these technologies can improve operational efficiency, they are not infallible."),
+            p("AI-generated outputs and automated processes may occasionally produce:"),
+            ul([
+                "Inaccurate or incomplete information.",
+                "Unexpected responses or results.",
+                "Misinterpretations of instructions.",
+                "Incorrect data classifications.",
+                "Unintended workflow actions.",
+                "Technical errors or integration failures.",
+            ]),
+            p("We do not guarantee that AI-generated information will always be accurate, complete, reliable, or suitable for every intended purpose."),
+            p("Clients are responsible for reviewing and validating important AI-generated outputs and automated actions, particularly where they may affect customers, financial transactions, legal matters, employment decisions, or other consequential business activities."),
+            p("Automation solutions should not be treated as a substitute for appropriate human supervision, professional judgment, or legally required review."),
+        ],
+    },
+    {
+        id: "third-party-platforms-and-integrations",
+        heading: "Third-party platforms and integrations",
+        blocks: [
+            p("Our services may depend on external applications, software providers, APIs, cloud services, AI platforms, and automation tools."),
+            p("These may include CRM systems, communication platforms, data storage services, payment providers, AI models, and workflow automation applications."),
+            p("Third-party services are governed by their own terms, policies, technical requirements, and licensing arrangements."),
+            p("We do not own or independently control these external platforms."),
+            p("Accordingly, we are not responsible for:"),
+            ol([
+                "Third-party service interruptions or outages.",
+                "Changes to external APIs or software functionality.",
+                "Third-party pricing or subscription changes.",
+                "Account suspensions or restrictions imposed by external providers.",
+                "Changes to third-party privacy policies or data processing practices.",
+                "Service discontinuation or compatibility issues caused by external providers.",
+            ]),
+            p("Where an integration stops functioning because of a third-party change, additional work may be necessary to restore or modify the automation. Such work may be subject to additional charges unless otherwise agreed."),
+            p("Clients are responsible for maintaining any required third-party accounts, licenses, subscriptions, and permissions."),
+        ],
+    },
+    {
+        id: "intellectual-property-rights",
+        heading: "Intellectual property rights",
+        blocks: [
+            p("All intellectual property rights relating to our website, branding, original content, service descriptions, designs, methodologies, internal systems, and proprietary materials remain with their respective owners."),
+            p("Nothing in these Terms grants you ownership of our existing intellectual property unless expressly agreed in writing."),
+            h3("A. Client Materials"),
+            p("Clients retain ownership of the documents, business information, content, data, trademarks, and other materials they provide to us."),
+            p("By supplying such materials, clients grant us permission to use them only as reasonably necessary to perform the agreed services."),
+            h3("B. Project Deliverables"),
+            p("Ownership and usage rights relating to custom-developed automation workflows, scripts, configurations, documentation, designs, and other project deliverables will be determined by the applicable proposal or service agreement."),
+            p("Unless otherwise agreed in writing, ownership or transfer of rights in custom deliverables may be subject to full payment of all outstanding project fees."),
+            h3("C. Third-Party Software"),
+            p("Third-party software, libraries, APIs, AI models, plugins, and integrations remain subject to their respective owners' licenses and terms."),
+            p("We do not transfer ownership of third-party intellectual property to clients."),
+        ],
+    },
+    {
+        id: "confidentiality",
+        heading: "Confidentiality",
+        blocks: [
+            p("We recognize that automation projects may involve confidential business information, internal processes, customer records, technical configurations, and proprietary materials."),
+            p("Both parties agree to take reasonable steps to protect confidential information received during the course of a business relationship."),
+            p("We will use client-provided confidential information only as necessary to provide the agreed services, subject to applicable contractual and legal obligations."),
+            p("Confidential information may be disclosed where required by law or where disclosure is reasonably necessary to authorized service providers involved in delivering the services."),
+            p("Confidentiality obligations do not generally apply to information that:"),
+            ul([
+                "Is publicly available without a breach of confidentiality.",
+                "Was lawfully known before disclosure.",
+                "Is independently developed without using confidential information.",
+                "Is lawfully obtained from another source without confidentiality restrictions.",
+                "Must be disclosed under applicable legal requirements.",
+            ]),
+            p("Where appropriate, additional confidentiality or non-disclosure agreements may be executed between the parties."),
+        ],
+    },
+    {
+        id: "data-protection-and-privacy",
+        heading: "Data protection and privacy",
+        blocks: [
+            p("Your use of our website and services is also subject to our Privacy Policy."),
+            p("We may collect and process personal and business information to respond to inquiries, deliver services, manage projects, and maintain business operations."),
+            p("Where our services involve processing personal information on behalf of a client, the client remains responsible for ensuring that such processing is authorized and lawful."),
+            p("Clients must obtain all necessary permissions, notices, and consents before providing personal information belonging to their customers, employees, or other individuals."),
+            p("Our Privacy Policy explains our general information-handling practices and should be read together with these Terms."),
+        ],
+    },
+    {
+        id: "revisions-modifications-and-additional-work",
+        heading: "Revisions, modifications, and additional work",
+        blocks: [
+            p("We understand that project requirements may evolve during development."),
+            p("Requests for changes, revisions, additional functionality, or modifications will be evaluated according to the original project scope."),
+            p("If a request involves work beyond the agreed scope, we may provide an additional quotation or revised project estimate."),
+            p("Additional work will proceed only after the applicable terms, pricing, and timeline have been agreed upon."),
+            p("We are not responsible for delays resulting from repeated changes, additional requirements, or delayed client approvals."),
+        ],
+    },
+    {
+        id: "maintenance-and-technical-support",
+        heading: "Maintenance and technical support",
+        blocks: [
+            p("Unless specifically included in a service agreement, ongoing maintenance, monitoring, troubleshooting, software updates, and technical support are not automatically included in the initial project fee."),
+            p("Maintenance or support services may be offered separately through agreed arrangements."),
+            p("Clients are responsible for notifying us of issues affecting their automation systems and providing reasonable information to assist with troubleshooting."),
+            p("We do not guarantee uninterrupted operation of automation systems that depend on third-party infrastructure, external applications, internet connectivity, or services outside our control."),
+        ],
+    },
+    {
+        id: "acceptable-use-and-prohibited-activities",
+        heading: "Acceptable use and prohibited activities",
+        blocks: [
+            p("You agree not to use our website, services, or automation solutions for unlawful, harmful, fraudulent, or unauthorized purposes."),
+            p("Prohibited activities include:"),
+            ul([
+                "Sending unsolicited or unlawful bulk communications.",
+                "Conducting phishing, scams, or fraudulent activities.",
+                "Distributing malware or malicious software.",
+                "Accessing systems, accounts, or information without authorization.",
+                "Violating privacy, intellectual property, or data protection rights.",
+                "Creating automation designed to harass, deceive, or harm individuals.",
+                "Circumventing security measures or platform restrictions.",
+                "Using automation in violation of applicable laws or third-party service policies.",
+                "Engaging in activities that compromise the security or integrity of our systems.",
+            ]),
+            p("We reserve the right to suspend or refuse services where we reasonably believe that a client or user is engaging in prohibited activities."),
+        ],
+    },
+    {
+        id: "disclaimer-of-warranties",
+        heading: "Disclaimer of warranties",
+        blocks: [
+            p("Our website and services are provided on an \"as available\" basis, subject to the terms of any applicable service agreement."),
+            p("To the fullest extent permitted by applicable law, we do not make unconditional guarantees regarding:"),
+            ul([
+                "Continuous or uninterrupted website availability.",
+                "Error-free operation of all automation systems.",
+                "Compatibility with every third-party application.",
+                "Uninterrupted availability of external APIs or AI platforms.",
+                "Guaranteed business revenue, cost savings, or productivity improvements.",
+                "Specific commercial outcomes resulting from automation implementation.",
+                "The accuracy of every AI-generated output.",
+            ]),
+            p("We make reasonable efforts to provide functional, reliable, and professionally developed solutions, but technical systems may require ongoing adjustments, maintenance, and human oversight."),
+            p("Any express warranties or service guarantees agreed upon in a separate written contract will remain subject to that agreement."),
+        ],
+    },
+    {
+        id: "limitation-of-liability",
+        heading: "Limitation of liability",
+        blocks: [
+            p("To the fullest extent permitted by applicable law, we will not be liable for indirect, incidental, special, consequential, or punitive damages arising from the use of our website or services."),
+            p("This includes, where legally permissible:"),
+            ul([
+                "Loss of profits or revenue.",
+                "Loss of business opportunities.",
+                "Loss of anticipated savings.",
+                "Loss or corruption of data.",
+                "Business interruption.",
+                "Third-party service failures.",
+                "Errors or omissions in AI-generated outputs.",
+                "Unauthorized activities resulting from compromised client accounts or credentials.",
+            ]),
+            p("Our liability for any direct loss arising from a particular project will be governed by the applicable service agreement and relevant law."),
+            p("Where no separate limitation is agreed, our aggregate liability shall not exceed the total amount paid by the client to us for the specific service giving rise to the claim during the three months immediately preceding the event giving rise to the claim."),
+            p("Nothing in these Terms excludes or limits liability where such exclusion or limitation is prohibited by applicable law, including liability that cannot legally be waived."),
+        ],
+    },
+    {
+        id: "indemnification",
+        heading: "Indemnification",
+        blocks: [
+            p("You agree to indemnify and hold us, our representatives, and authorized service providers harmless from third-party claims, losses, liabilities, damages, and reasonable expenses arising from:"),
+            ul([
+                "Your unlawful use of our website or services.",
+                "Your violation of these Terms.",
+                "Your infringement of third-party intellectual property or privacy rights.",
+                "Your failure to obtain necessary permissions or consents for data supplied to us.",
+                "Your misuse of automation systems or third-party integrations.",
+                "Your breach of applicable laws or regulations.",
+            ]),
+            p("This obligation applies to the extent that the relevant claim results from your actions, omissions, or breach of these Terms."),
+        ],
+    },
+    {
+        id: "suspension-and-termination",
+        heading: "Suspension and termination",
+        blocks: [
+            p("We reserve the right to suspend or terminate access to our website or services where:"),
+            ul([
+                "You materially violate these Terms.",
+                "You engage in fraudulent, unlawful, or harmful activities.",
+                "You fail to meet agreed payment obligations.",
+                "Your conduct creates a security risk.",
+                "Continued service would violate applicable laws or third-party platform requirements.",
+            ]),
+            p("Clients may terminate a service engagement in accordance with the cancellation and termination provisions of their applicable service agreement."),
+            p("Upon termination, outstanding payments for services already performed or costs properly incurred may remain payable."),
+            p("Any provisions that by their nature should survive termination, including intellectual property, confidentiality, liability, and payment obligations, will continue to apply."),
+        ],
+    },
+    {
+        id: "force-majeure",
+        heading: "Force majeure",
+        blocks: [
+            p("We will not be held responsible for delays or failures to perform obligations caused by circumstances beyond our reasonable control."),
+            p("Such circumstances may include:"),
+            ul([
+                "Natural disasters.",
+                "Power or internet outages.",
+                "Cyberattacks and security incidents.",
+                "Government restrictions or regulatory actions.",
+                "War, civil unrest, or emergencies.",
+                "Third-party hosting or platform outages.",
+                "Major software or infrastructure failures.",
+                "Other unforeseen events beyond our reasonable control.",
+            ]),
+            p("We will make reasonable efforts to minimize disruption and resume affected services when circumstances permit."),
+        ],
+    },
+    {
+        id: "governing-law-and-dispute-resolution",
+        heading: "Governing law and dispute resolution",
+        blocks: [
+            p("These Terms shall be governed by the laws of the jurisdiction in which our business is legally registered, unless otherwise required by applicable law."),
+            p("In the event of a disagreement, both parties agree to make reasonable efforts to resolve the matter through good-faith communication and negotiation."),
+            p("If the matter cannot be resolved informally, it may be referred to the competent courts or dispute resolution mechanisms available under applicable law."),
+            p("Nothing in this section limits any mandatory consumer protection or statutory rights that may apply to a user."),
+        ],
+    },
+    {
+        id: "changes-to-these-terms",
+        heading: "Changes to these terms",
+        blocks: [
+            p("We reserve the right to revise, update, or modify these Terms from time to time to reflect changes in our services, business operations, technology, or applicable legal requirements."),
+            p("Updated versions will be published on our website with a revised effective date."),
+            p("We encourage visitors and clients to review this page periodically."),
+            p("Any material changes affecting existing clients or ongoing projects will be handled in accordance with applicable contractual obligations and legal requirements."),
+        ],
+    },
+    {
+        id: "severability",
+        heading: "Severability",
+        blocks: [
+            p("If any provision of these Terms is determined to be invalid, unlawful, or unenforceable, the remaining provisions will continue in full force and effect to the extent permitted by law."),
+            p("The invalid or unenforceable provision will be interpreted or modified to the minimum extent necessary to make it enforceable, where legally permissible."),
+        ],
+    },
+    {
+        id: "entire-agreement",
+        heading: "Entire agreement",
+        blocks: [
+            p("These Terms, together with our Privacy Policy and any applicable written proposal, quotation, or service agreement, constitute the relevant understanding governing your use of our website and services."),
+            p("Where a separately signed service agreement contains provisions that conflict with these general website Terms, the specific service agreement will prevail with respect to the relevant project, unless otherwise expressly stated."),
+        ],
+    },
+    {
+        id: "contact-information",
+        heading: "Contact information",
+        blocks: [
+            p("For questions, concerns, or clarification regarding these Terms and Conditions, please contact us through our official website."),
+            details([
+                "Website: https://amzautomationsolutions.com",
+                "Email: support@amzautomationsolutions.com",
+                "Business Name: AMZ Automation Solutions",
+            ]),
+            p("We will make reasonable efforts to respond to inquiries within a reasonable timeframe."),
         ],
     },
 ];
@@ -77,8 +409,8 @@ const SECTIONS: LegalSection[] = [
 const TermsAndConditions = () => (
     <LegalPage
         title="Terms & Conditions"
-        updated="October 30, 2026"
-        intro="These terms explain how you can use our website and automation services, and what we each agree to when we work together."
+        updated="October 31, 2026"
+        intro="The terms that apply when you use our website and automation services, and what we each agree to when we work together."
         sections={SECTIONS}
     />
 );

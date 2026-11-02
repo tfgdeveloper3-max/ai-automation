@@ -36,21 +36,12 @@ const POLICY_LINKS = [
     { label: 'Refund Policy', href: '/refund-policy' },
 ];
 
-const SOCIALS = [
-    { name: 'Facebook', href: '#', icon: '/images/social/facebook.svg' },
-    { name: 'Instagram', href: '#', icon: '/images/social/instagram.svg' },
-    { name: 'X', href: '#', icon: '/images/social/twitter.svg' },
-    { name: 'Discord', href: '#', icon: '/images/social/discord.svg' },
-];
-
-const BADGES = [
-    { name: 'Clutch', image: '/images/badges/clutch.png', href: '#' },
-    { name: 'Trustpilot', image: '/images/badges/trustpilot.png', href: '#' },
-    { name: 'Google Reviews', image: '/images/badges/google-reviews.png', href: '#' },
-    { name: 'BBB', image: '/images/badges/bbb.png', href: '#' },
-    { name: 'UpCity', image: '/images/badges/upcity.png', href: '#' },
-    { name: 'G2', image: '/images/badges/g2.png', href: '#' },
-];
+// const SOCIALS = [
+//     { name: 'Facebook', href: '#', icon: '/images/social/facebook.svg' },
+//     { name: 'Instagram', href: '#', icon: '/images/social/instagram.svg' },
+//     { name: 'X', href: '#', icon: '/images/social/twitter.svg' },
+//     { name: 'Discord', href: '#', icon: '/images/social/discord.svg' },
+// ];
 
 const PAYMENTS = [
     { name: 'PayPal', image: '/images/payments/paypal.png' },
@@ -142,36 +133,19 @@ const LpFooter = () => {
                     className="absolute bottom-[-0.18em] left-1/2 -translate-x-1/2 whitespace-nowrap font-['Anybody',sans-serif] text-[22vw] font-black leading-none text-transparent opacity-[0.06] lg:text-[16vw]"
                     style={{ WebkitTextStroke: '2px #ffffff' }}
                 >
-                    AUTOMATE
+                    AMZ AUTOMATION
                 </span>
             </div>
 
             <div className="relative mx-auto w-full max-w-[1200px]">
                 <div className={`grid grid-cols-1 gap-8 border-b border-white/10 pb-10 lg:grid-cols-[1.2fr_1fr] lg:items-center ${reveal(0).className}`} style={reveal(0).style}>
                     <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
-                        <img src={BRAND.logo} alt={BRAND.name} draggable={false} className="h-16 w-auto shrink-0 self-start sm:h-20" />
-                        <p className="max-w-[460px] font-['Montserrat',sans-serif] text-sm leading-relaxed text-white/65">{BRAND.about}</p>
+                        <img src={BRAND.logo} alt={BRAND.name} draggable={false} className="h-16 w-auto shrink-0 self-start sm:h-30" />
+                        <p className="max-w-[460px] font-['Montserrat',sans-serif] text-[17px] leading-relaxed text-white/65">{BRAND.about}</p>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-3 lg:justify-end">
-                        {BADGES.map((b) => (
-                            <a
-                                key={b.name}
-                                href={b.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={b.name}
-                                className="flex h-11 items-center rounded-lg border border-white/10 bg-white/[0.04] px-3 transition hover:-translate-y-0.5 hover:border-[#8ac44b]/60"
-                            >
-                                <ImageOr
-                                    src={b.image}
-                                    alt={b.name}
-                                    className="max-h-6 w-auto"
-                                    fallbackClass="font-['Montserrat',sans-serif] text-[11px] font-bold text-white"
-                                />
-                            </a>
-                        ))}
-                        <ul className="flex gap-2">
+                        {/* <ul className="flex gap-2">
                             {SOCIALS.map((s) => (
                                 <li key={s.name}>
                                     <a
@@ -190,7 +164,7 @@ const LpFooter = () => {
                                     </a>
                                 </li>
                             ))}
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
 

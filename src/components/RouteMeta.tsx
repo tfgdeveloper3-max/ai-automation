@@ -74,6 +74,21 @@ const META: Record<string, PageMeta> = {
         description:
             'Get in touch with AMZ Automation Solutions. Call, email or send us a message and our team will help you start automating your store.',
     },
+    '/terms-and-conditions': {
+        title: `Terms & Conditions | ${SITE_NAME}`,
+        description:
+            'Read the terms that apply when you use the AMZ Automation Solutions website and e-commerce automation services, including payments and responsibilities.',
+    },
+    '/privacy-policy': {
+        title: `Privacy Policy | ${SITE_NAME}`,
+        description:
+            'Learn how AMZ Automation Solutions collects, uses, shares and protects your personal information, and the choices you have about your data.',
+    },
+    '/refund-policy': {
+        title: `Refund & Cancellation Policy | ${SITE_NAME}`,
+        description:
+            'Find out when cancellations and refunds apply for AMZ Automation Solutions services, what is non-refundable, and how to submit a request.',
+    },
 };
 
 const NOT_FOUND: PageMeta = {

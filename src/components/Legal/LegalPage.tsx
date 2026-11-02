@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from 'react';
+import { Fragment, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react';
 import Navbar from '../Navbar';
 
 /* ------------------------------------------------------------------
@@ -6,11 +6,17 @@ import Navbar from '../Navbar';
    Each page only passes data, so content is easy to replace.
 ------------------------------------------------------------------- */
 
+export type LegalBlock =
+    | { type: 'p'; text: string }
+    | { type: 'h3'; text: string }
+    | { type: 'ul'; items: string[] }
+    | { type: 'ol'; items: string[] }
+    | { type: 'details'; items: string[] }; // "Label: value" rows, e.g. contact info
+
 export interface LegalSection {
     id: string; // used for the #anchor link, keep it unique per page
     heading: string;
-    paragraphs?: string[];
-    list?: string[];
+    blocks: LegalBlock[];
 }
 
 export interface LegalPageProps {
@@ -19,6 +25,13 @@ export interface LegalPageProps {
     intro: string;
     sections: LegalSection[];
 }
+
+/* Small helpers so the page files stay readable */
+export const p = (text: string): LegalBlock => ({ type: 'p', text });
+export const h3 = (text: string): LegalBlock => ({ type: 'h3', text });
+export const ul = (items: string[]): LegalBlock => ({ type: 'ul', items });
+export const ol = (items: string[]): LegalBlock => ({ type: 'ol', items });
+export const details = (items: string[]): LegalBlock => ({ type: 'details', items });
 
 const CONTACT = {
     phoneLabel: '(213) 863-9445',
@@ -40,14 +53,138 @@ const HEADER_BG: CSSProperties = {
     ].join(', '),
 };
 
-const LegalPage = ({ title, intro, sections }: LegalPageProps) => {
+const pad = (n: number) => String(n).padStart(2, '0');
+
+/* Turns emails and https links inside text into real links */
+const linkify = (text: string): ReactNode[] =>
+    text.split(/(https?:\/\/[^\s,)]+|[\w.+-]+@[\w-]+\.[\w.]+)/g).map((part, i) => {
+        if (/^https?:\/\//.test(part)) {
+            return (
+                <a key={i} href={part} className="font-medium text-[#5f9a24] underline-offset-2 hover:underline">
+                    {part.replace(/^https?:\/\//, '')}
+                </a>
+            );
+        }
+        if (/^[\w.+-]+@[\w-]+\.[\w.]+$/.test(part)) {
+            return (
+                <a key={i} href={`mailto:${part}`} className="break-all font-medium text-[#5f9a24] underline-offset-2 hover:underline">
+                    {part}
+                </a>
+            );
+        }
+        return <Fragment key={i}>{part}</Fragment>;
+    });
+
+const Block = ({ block }: { block: LegalBlock }) => {
+    switch (block.type) {
+        case 'p':
+            return <p className="mt-4 text-[15px] leading-[1.85] text-[#55556a]">{linkify(block.text)}</p>;
+        case 'h3':
+            return <h3 className="mt-8 font-['Anybody',sans-serif] text-[17px] font-bold text-[#1f1650]">{block.text}</h3>;
+        case 'ul':
+            return (
+                <ul className="mt-4 space-y-2.5">
+                    {block.items.map((item, i) => (
+                        <li key={i} className="flex gap-3 text-[15px] leading-[1.7] text-[#55556a]">
+                            <span aria-hidden="true" className="mt-[0.65em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#8ac44b]" />
+                            <span>{linkify(item)}</span>
+                        </li>
+                    ))}
+                </ul>
+            );
+        case 'ol':
+            return (
+                <ol className="mt-4 space-y-3">
+                    {block.items.map((item, i) => (
+                        <li key={i} className="flex gap-3 text-[15px] leading-[1.7] text-[#55556a]">
+                            <span className="mt-[0.15em] flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1f1650]/[0.07] text-[11px] font-bold text-[#1f1650]">
+                                {i + 1}
+                            </span>
+                            <span>{linkify(item)}</span>
+                        </li>
+                    ))}
+                </ol>
+            );
+        case 'details':
+            return (
+                <dl className="mt-5 divide-y divide-[#ececf2] overflow-hidden rounded-xl border border-[#ececf2]">
+                    {block.items.map((item, i) => {
+                        const idx = item.indexOf(':');
+                        const label = idx > -1 ? item.slice(0, idx) : '';
+                        const value = idx > -1 ? item.slice(idx + 1).trim() : item;
+                        return (
+                            <div key={i} className="flex flex-col gap-1 bg-[#fafafd] px-4 py-3 text-[14px] sm:flex-row sm:gap-4">
+                                <dt className="w-32 shrink-0 font-semibold text-[#1f1650]">{label}</dt>
+                                <dd className="min-w-0 text-[#55556a]">{linkify(value)}</dd>
+                            </div>
+                        );
+                    })}
+                </dl>
+            );
+    }
+};
+
+const TocList = ({ sections, active, onPick }: { sections: LegalSection[]; active: string; onPick?: () => void }) => (
+    <ol className="mt-3 space-y-0.5">
+        {sections.map((s, i) => (
+            <li key={s.id}>
+                <a
+                    href={`#${s.id}`}
+                    onClick={onPick}
+                    className={`flex gap-2.5 rounded-lg px-2.5 py-1.5 text-[13px] leading-snug transition-colors ${active === s.id
+                            ? 'bg-white font-semibold text-[#1f1650] shadow-[0_2px_8px_rgba(31,22,80,0.08)]'
+                            : 'text-[#6b6b7a] hover:bg-white/70 hover:text-[#1f1650]'
+                        }`}
+                >
+                    <span className={`shrink-0 tabular-nums ${active === s.id ? 'text-[#5f9a24]' : 'text-[#a3a3b2]'}`}>{pad(i + 1)}</span>
+                    <span>{s.heading}</span>
+                </a>
+            </li>
+        ))}
+    </ol>
+);
+
+const LegalPage = ({ title, updated, intro, sections }: LegalPageProps) => {
     const [active, setActive] = useState(sections[0]?.id ?? '');
+    const [progress, setProgress] = useState(0);
+    const [showTop, setShowTop] = useState(false);
+    const [tocOpen, setTocOpen] = useState(false);
     const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+
+    /* Rough reading time */
+    const minutes = useMemo(() => {
+        const words = sections
+            .flatMap((s) => s.blocks)
+            .map((b) => ('text' in b ? b.text : b.items.join(' ')))
+            .join(' ')
+            .split(/\s+/).length;
+        return Math.max(1, Math.round(words / 220));
+    }, [sections]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
+    /* Reading progress + back-to-top button */
+    useEffect(() => {
+        let raf = 0;
+        const onScroll = () => {
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(() => {
+                const max = document.documentElement.scrollHeight - window.innerHeight;
+                setProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0);
+                setShowTop(window.scrollY > 700);
+            });
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => {
+            cancelAnimationFrame(raf);
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, []);
+
+    /* Highlight the section currently on screen */
     useEffect(() => {
         const els = sections
             .map((s) => document.getElementById(s.id))
@@ -58,7 +195,7 @@ const LegalPage = ({ title, intro, sections }: LegalPageProps) => {
                 const visible = entries.filter((e) => e.isIntersecting);
                 if (visible.length) setActive(visible[0].target.id);
             },
-            { rootMargin: '-20% 0px -70% 0px' },
+            { rootMargin: '-25% 0px -65% 0px' },
         );
 
         els.forEach((el) => observer.observe(el));
@@ -67,47 +204,80 @@ const LegalPage = ({ title, intro, sections }: LegalPageProps) => {
 
     return (
         <main className="bg-white font-['Montserrat',sans-serif]">
+            {/* Reading progress bar */}
+            <div aria-hidden="true" className="fixed inset-x-0 top-0 z-[60] h-[3px] bg-transparent">
+                <div className="h-full origin-left bg-[#8ac44b]" style={{ transform: `scaleX(${progress})` }} />
+            </div>
+
             {/* ---------- Header ---------- */}
             <header className="relative isolate overflow-hidden" style={HEADER_BG}>
                 <span aria-hidden="true" className="absolute -right-16 bottom-[-80px] -z-10 h-64 w-64 rounded-full bg-white/[0.06]" />
                 <span aria-hidden="true" className="absolute right-40 bottom-[-60px] -z-10 h-40 w-40 rounded-full bg-[#8ac44b]/15 blur-2xl" />
+                <span
+                    aria-hidden="true"
+                    className="absolute inset-0 -z-10 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,0.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:linear-gradient(180deg,#000,transparent)]"
+                />
 
                 <Navbar />
 
                 <div className="mx-auto w-full max-w-[1200px] px-5 pb-14 pt-10 sm:px-8 sm:pb-16 lg:px-10 lg:pb-20 lg:pt-14">
-                    <span className="inline-flex rounded-full bg-[#8ac44b] px-6 py-1 text-[11px] font-medium text-white sm:text-xs">
-                        Legal
-                    </span>
+                    <span className="inline-flex rounded-full bg-[#8ac44b] px-6 py-1 text-[11px] font-medium text-white sm:text-xs">Legal</span>
                     <h1 className="mt-3 font-['Anybody',sans-serif] text-[34px] font-bold leading-[1.1] text-white sm:text-[44px] lg:text-[54px]">
                         {title}
                     </h1>
                     <p className="mt-6 max-w-[640px] border-l-[3px] border-[#8ac44b] pl-4 text-sm leading-relaxed text-white/80 sm:text-[15px]">
                         {intro}
                     </p>
+
+                    <ul className="mt-8 flex flex-wrap gap-2.5 text-xs text-white/85">
+                        <li className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5 text-[#8ac44b]" aria-hidden="true">
+                                <rect x="3" y="5" width="18" height="16" rx="2" />
+                                <path d="M3 10h18M8 3v4M16 3v4" strokeLinecap="round" />
+                            </svg>
+                            Last updated {updated}
+                        </li>
+                        <li className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5">
+                            {sections.length} sections
+                        </li>
+                        <li className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5">
+                            {minutes} min read
+                        </li>
+                    </ul>
                 </div>
             </header>
 
             {/* ---------- Body ---------- */}
-            <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-10 px-5 py-14 sm:px-8 sm:py-16 lg:grid-cols-[250px_1fr] lg:gap-16 lg:px-10 lg:py-20">
+            <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-10 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[270px_1fr] lg:gap-16 lg:px-10 lg:py-20">
                 {/* Sidebar */}
-                <aside className="lg:sticky lg:top-8 lg:self-start">
-                    <nav aria-label="On this page" className="rounded-2xl bg-[#f6f6fa] p-5">
-                        <p className="text-sm font-semibold text-[#111111]">On this page</p>
-                        <ol className="mt-3 space-y-1">
-                            {sections.map((s) => (
-                                <li key={s.id}>
-                                    <a
-                                        href={`#${s.id}`}
-                                        className={`block border-l-2 py-1.5 pl-3 text-[13px] leading-snug transition-colors ${active === s.id
-                                                ? 'border-[#8ac44b] font-medium text-[#1f1650]'
-                                                : 'border-transparent text-[#6b6b7a] hover:text-[#1f1650]'
-                                            }`}
-                                    >
-                                        {s.heading}
-                                    </a>
-                                </li>
-                            ))}
-                        </ol>
+                <aside className="lg:sticky lg:top-28 lg:self-start">
+                    {/* Mobile / tablet: collapsible */}
+                    <div className="rounded-2xl bg-[#f6f6fa] p-4 lg:hidden">
+                        <button
+                            type="button"
+                            onClick={() => setTocOpen((v) => !v)}
+                            aria-expanded={tocOpen}
+                            aria-controls="legal-toc-mobile"
+                            className="flex w-full items-center justify-between text-sm font-semibold text-[#111111]"
+                        >
+                            On this page ({sections.length})
+                            <svg viewBox="0 0 24 24" fill="none" className={`h-4 w-4 transition-transform ${tocOpen ? 'rotate-180' : ''}`} aria-hidden="true">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </button>
+                        {tocOpen && (
+                            <nav id="legal-toc-mobile" aria-label="On this page">
+                                <TocList sections={sections} active={active} onPick={() => setTocOpen(false)} />
+                            </nav>
+                        )}
+                    </div>
+
+                    {/* Desktop */}
+                    <nav aria-label="On this page" className="hidden rounded-2xl bg-[#f6f6fa] p-4 lg:block">
+                        <p className="px-2.5 text-sm font-semibold text-[#111111]">On this page</p>
+                        <div className="mt-1 max-h-[calc(100vh-340px)] overflow-y-auto pr-1">
+                            <TocList sections={sections} active={active} />
+                        </div>
                     </nav>
 
                     <nav aria-label="Other policies" className="mt-4 hidden rounded-2xl border border-[#ececf2] p-5 lg:block">
@@ -129,31 +299,32 @@ const LegalPage = ({ title, intro, sections }: LegalPageProps) => {
                 </aside>
 
                 {/* Content */}
-                <article className="max-w-[760px]">
+                <article className="min-w-0 max-w-[780px]">
                     {sections.map((s, i) => (
-                        <section key={s.id} id={s.id} className={`scroll-mt-8 ${i > 0 ? 'mt-12' : ''}`}>
-                            <h2 className="font-['Anybody',sans-serif] text-xl font-bold text-[#111111] sm:text-2xl">
-                                {s.heading}
-                            </h2>
-                            {s.paragraphs?.map((p, j) => (
-                                <p key={j} className="mt-4 text-[15px] leading-[1.8] text-[#55556a]">
-                                    {p}
-                                </p>
-                            ))}
-                            {s.list && (
-                                <ul className="mt-4 space-y-2.5">
-                                    {s.list.map((item, j) => (
-                                        <li key={j} className="flex gap-3 text-[15px] leading-[1.7] text-[#55556a]">
-                                            <span aria-hidden="true" className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#8ac44b]" />
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                        <section
+                            key={s.id}
+                            id={s.id}
+                            className={`scroll-mt-28 ${i > 0 ? 'mt-12 border-t border-[#ececf2] pt-12' : ''}`}
+                        >
+                            <div className="flex items-start gap-4">
+                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1f1650] font-['Anybody',sans-serif] text-sm font-bold text-[#8ac44b]">
+                                    {pad(i + 1)}
+                                </span>
+                                <h2 className="pt-1 font-['Anybody',sans-serif] text-xl font-bold leading-snug text-[#111111] sm:text-2xl">
+                                    {s.heading}
+                                </h2>
+                            </div>
+                            <div className="sm:pl-14">
+                                {s.blocks.map((b, j) => (
+                                    <Block key={j} block={b} />
+                                ))}
+                            </div>
                         </section>
                     ))}
+
                     <div className="relative isolate mt-16 overflow-hidden rounded-2xl bg-[#1f1650] px-6 py-8 text-white sm:px-9">
                         <span aria-hidden="true" className="absolute -bottom-10 -right-6 -z-10 h-32 w-32 rounded-full bg-white/10" />
+                        <span aria-hidden="true" className="absolute -top-12 right-24 -z-10 h-28 w-28 rounded-full bg-[#8ac44b]/20 blur-2xl" />
                         <h2 className="font-['Anybody',sans-serif] text-xl font-bold sm:text-2xl">Questions about this policy?</h2>
                         <p className="mt-2 text-sm text-white/75">Our team will get back to you within one business day.</p>
                         <div className="mt-6 flex flex-col gap-3 text-sm sm:flex-row sm:gap-8">
@@ -167,6 +338,19 @@ const LegalPage = ({ title, intro, sections }: LegalPageProps) => {
                     </div>
                 </article>
             </div>
+
+            {/* Back to top */}
+            <button
+                type="button"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                aria-label="Back to top"
+                className={`fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#1f1650] text-[#8ac44b] shadow-[0_12px_30px_rgba(31,22,80,0.35)] transition-[opacity,transform] duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ac44b] ${showTop ? 'opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+                    }`}
+            >
+                <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+                    <path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+            </button>
         </main>
     );
 };

@@ -7,7 +7,7 @@ import LpHero from "@/components/LandingPage/LpHero";
 import LpInvest from "@/components/LandingPage/LpInvest";
 import LpNavbar from "@/components/LandingPage/LpNav";
 import LpProcess from "@/components/LandingPage/LpProcess";
-import LpResults from "@/components/LandingPage/LpResults";
+// import LpResults from "@/components/LandingPage/LpResults";
 import LpReviews from "@/components/LandingPage/LpReviews";
 import LpServices from "@/components/LandingPage/LpServices";
 
@@ -20,7 +20,7 @@ const LandingPage = () => {
             <LpProcess />
             <LpEcosystem />
             <LpServices />
-            <LpResults />
+            {/* <LpResults /> */}
             <LpEcomServices />
             <LpFeatures />
             <LpInvest />
