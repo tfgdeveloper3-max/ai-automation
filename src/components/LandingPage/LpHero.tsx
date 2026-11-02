@@ -62,7 +62,7 @@ const LpHero = () => {
     return (
         <section
             id="home"
-            className="relative flex min-h-screen items-center overflow-hidden bg-[linear-gradient(135deg,#0e0531_0%,#2f2169_100%)] px-5 pb-[110px] pt-[120px] sm:px-8 sm:pb-[130px] sm:pt-[150px]"
+            className="relative flex min-h-screen items-center overflow-hidden bg-[linear-gradient(135deg,#0e0531_0%,#2f2169_100%)] px-5 pb-[110px] pt-[120px] sm:px-8 sm:pb-[130px] sm:pt-[130px]"
         >
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_85%_10%,rgba(75,58,160,0.55)_0%,transparent_60%)]" />
@@ -84,8 +84,8 @@ const LpHero = () => {
                 />
             </div>
 
-            <div className="relative z-[1] mx-auto grid w-full max-w-[1280px] grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
-                <div>
+            <div className="relative z-[1] mx-auto grid w-full max-w-[1280px] grid-cols-1 items-start gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+                <div className="lg:pt-11">
                     <p
                         className={`${fadeUp} mb-3.5 font-[Montserrat,sans-serif] text-[clamp(14px,1.8vw,22px)] font-medium text-white/90 [animation-delay:50ms]`}
                     >
