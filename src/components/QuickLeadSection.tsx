@@ -89,7 +89,7 @@ const QuickLeadSection = () => {
     };
 
     return (
-        <section ref={ref} id="quick-audit" className="bg-white px-5 pt-12 sm:px-8 sm:pt-14 lg:px-10 lg:pt-16">
+        <section ref={ref} id="quick-audit" className="bg-white px-5 pt-0 sm:px-8 sm:pt-0 lg:px-10 lg:pt-0">
             <div
                 style={CARD_BG}
                 className={`relative isolate mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-8 overflow-hidden rounded-3xl px-6 py-8 shadow-[0_20px_60px_rgba(20,12,60,0.22)] ring-1 ring-white/10 transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none sm:px-9 lg:px-10 lg:py-10 xl:grid-cols-[240px_1fr] xl:gap-10 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
