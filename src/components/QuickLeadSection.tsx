@@ -1,7 +1,7 @@
-import { useCallback, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
+import { useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSectionReveal } from './usesectionreveal';
 import { submitLead } from './SubmitLead';
-import ThankYouPopup from './ThankYou';
 
 const SERVICES = [
     'Amazon Automation',
@@ -58,11 +58,10 @@ const ChevronsRight = ({ className = '' }: { className?: string }) => (
 );
 
 const QuickLeadSection = () => {
+    const navigate = useNavigate();
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.2 });
-    const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-    const [thanksName, setThanksName] = useState('');
+    const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
     const sending = status === 'sending';
-    const closeThanks = useCallback(() => setStatus('idle'), []);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -79,9 +78,8 @@ const QuickLeadSection = () => {
                 phone_number: get('phone'),
                 message: `Service: ${get('service')}\nSource: Quick audit form (homepage)`,
             });
-            setThanksName(name.split(' ')[0] ?? '');
             form.reset();
-            setStatus('sent');
+            navigate('/thank-you', { state: { name } });
         } catch (err) {
             console.error('Quick lead form failed:', err);
             setStatus('error');
@@ -175,8 +173,6 @@ const QuickLeadSection = () => {
                     </p>
                 </form>
             </div>
-
-            <ThankYouPopup open={status === 'sent'} name={thanksName} onClose={closeThanks} />
         </section>
     );
 };

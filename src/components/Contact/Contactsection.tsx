@@ -1,7 +1,7 @@
-import { useCallback, useState, type CSSProperties, type FormEvent } from 'react';
+import { useState, type CSSProperties, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSectionReveal } from '../usesectionreveal';
 import { submitLead } from '../SubmitLead';
-import ThankYouPopup from '../ThankYou';
 
 const CONTACT = {
     phoneLabel: '(213) 863-9445',
@@ -82,12 +82,11 @@ const Field = ({
 );
 
 const ContactSection = () => {
+    const navigate = useNavigate();
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.12 });
     const [subject, setSubject] = useState(SUBJECTS[0].id);
-    const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+    const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
     const sending = status === 'sending';
-    const [thanksName, setThanksName] = useState('');
-    const closeThanks = useCallback(() => setStatus('idle'), []);
 
     const reveal = (i: number) => ({
         className: `transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`,
@@ -100,19 +99,19 @@ const ContactSection = () => {
         const fd = new FormData(form);
         const get = (k: string) => String(fd.get(k) ?? '').trim();
         const subjectLabel = SUBJECTS.find((x) => x.id === subject)?.label ?? '';
+        const name = `${get('firstName')} ${get('lastName')}`.trim();
 
         setStatus('sending');
         try {
             await submitLead({
-                name: `${get('firstName')} ${get('lastName')}`.trim(),
+                name,
                 email: get('email'),
                 phone_number: get('phone'),
                 message: `Subject: ${subjectLabel}\n\n${get('message')}`,
             });
-            setThanksName(get('firstName'));
             form.reset();
             setSubject(SUBJECTS[0].id);
-            setStatus('sent'); 
+            navigate('/thank-you', { state: { name } });
         } catch (err) {
             console.error('Contact form failed:', err);
             setStatus('error');
@@ -169,7 +168,6 @@ const ContactSection = () => {
                                     <span className="min-w-0 break-all">{CONTACT.email}</span>
                                 </a>
                             </li>
-
                         </ul>
 
                         <ul className="relative z-10 mt-12 flex gap-3 lg:mt-auto lg:pt-12">
@@ -235,7 +233,6 @@ const ContactSection = () => {
                                     className="mt-1.5 block w-full resize-none border-0 border-b border-[#8d8d99] bg-transparent px-0 pb-2 pt-1 font-['Montserrat',sans-serif] text-sm text-[#111111] outline-none transition-colors placeholder:text-[#8d8d99] focus:border-[#111111] focus:ring-0"
                                 />
                             </label>
-
                         </fieldset>
 
                         <div className="mt-8 flex flex-col items-end gap-3">
@@ -256,10 +253,7 @@ const ContactSection = () => {
                                     <ChevronsRight className="h-5 w-5" />
                                 </button>
                             </div>
-                            <p
-                                aria-live="polite"
-                                className={`text-right font-['Montserrat',sans-serif] text-sm ${status === 'error' ? 'text-[#b42318]' : 'text-[#5f9a24]'}`}
-                            >
+                            <p aria-live="polite" className="text-right font-['Montserrat',sans-serif] text-sm text-[#b42318]">
                                 {status === 'error' &&
                                     'Sorry, your message could not be sent. Please try again or email support@amzautomationsolutions.com.'}
                             </p>
@@ -267,8 +261,6 @@ const ContactSection = () => {
                     </form>
                 </div>
             </div>
-
-            <ThankYouPopup open={status === 'sent'} name={thanksName} onClose={closeThanks} />
         </section>
     );
 };

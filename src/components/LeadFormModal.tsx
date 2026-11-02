@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { createPortal } from 'react-dom';
-import ThankYouPopup from './ThankYou';
+import { useNavigate } from 'react-router-dom';
 import { submitLead } from './SubmitLead';
-
 
 interface LeadFormModalProps {
     open: boolean;
     onClose: () => void;
 }
 
-type Status = 'idle' | 'sending' | 'sent' | 'error';
+type Status = 'idle' | 'sending' | 'error';
 
 const font = "font-['Montserrat',sans-serif]";
 const labelCls = `block ${font} text-[13px] font-semibold text-[#1d1650]`;
@@ -23,16 +22,16 @@ const Spinner = () => (
 );
 
 const LeadFormModal = ({ open, onClose }: LeadFormModalProps) => {
+    const navigate = useNavigate();
     const [status, setStatus] = useState<Status>('idle');
     const [error, setError] = useState('');
-    const [sentName, setSentName] = useState('');
     const firstFieldRef = useRef<HTMLInputElement | null>(null);
     const openerRef = useRef<HTMLElement | null>(null);
+    const redirectingRef = useRef(false);
     const sending = status === 'sending';
     const sendingRef = useRef(false);
     sendingRef.current = sending;
 
-    /* Lock scroll, Escape to close, focus first field, return focus to the button that opened it */
     useEffect(() => {
         if (!open) return;
         openerRef.current = document.activeElement as HTMLElement | null;
@@ -47,7 +46,9 @@ const LeadFormModal = ({ open, onClose }: LeadFormModalProps) => {
             document.body.style.overflow = prevOverflow;
             window.removeEventListener('keydown', onKey);
             window.clearTimeout(t);
-            openerRef.current?.focus?.();
+            // Redirect ke baad purane button par focus wapas na bhejein
+            if (!redirectingRef.current) openerRef.current?.focus?.();
+            redirectingRef.current = false;
         };
     }, [open, onClose]);
 
@@ -57,33 +58,30 @@ const LeadFormModal = ({ open, onClose }: LeadFormModalProps) => {
         const t = window.setTimeout(() => {
             setStatus('idle');
             setError('');
-            setSentName('');
         }, 200);
         return () => window.clearTimeout(t);
     }, [open]);
 
     if (!open) return null;
 
-    if (status === 'sent') {
-        return <ThankYouPopup open name={sentName} onClose={onClose} lockScroll={false} />;
-    }
-
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget;
         const fd = new FormData(form);
+        const name = String(fd.get('name') ?? '');
         setStatus('sending');
         setError('');
         try {
             await submitLead({
-                name: String(fd.get('name') ?? ''),
+                name,
                 email: String(fd.get('email') ?? ''),
                 phone_number: String(fd.get('phone_number') ?? ''),
                 message: String(fd.get('message') ?? ''),
             });
-            setSentName(String(fd.get('name') ?? ''));
             form.reset();
-            setStatus('sent');
+            redirectingRef.current = true;
+            onClose();
+            navigate('/thank-you', { state: { name } });
         } catch (err) {
             console.error('Lead submit failed:', err);
             setError(
@@ -110,15 +108,7 @@ const LeadFormModal = ({ open, onClose }: LeadFormModalProps) => {
                     aria-label="Close"
                     className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-[#6b6b7a] transition hover:bg-[#f2f2f6] hover:text-[#111111] disabled:opacity-40"
                 >
-                    <svg
-                        viewBox="0 0 24 24"
-                        className="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        aria-hidden="true"
-                    >
+                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                         <path d="M6 6l12 12M18 6L6 18" />
                     </svg>
                 </button>
@@ -140,27 +130,13 @@ const LeadFormModal = ({ open, onClose }: LeadFormModalProps) => {
                     <fieldset disabled={sending} className="mt-6 space-y-5">
                         <label className="block">
                             <span className={labelCls}>Full Name</span>
-                            <input
-                                ref={firstFieldRef}
-                                name="name"
-                                required
-                                autoComplete="name"
-                                placeholder="John Doe"
-                                className={inputCls}
-                            />
+                            <input ref={firstFieldRef} name="name" required autoComplete="name" placeholder="John Doe" className={inputCls} />
                         </label>
 
                         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                             <label className="block">
                                 <span className={labelCls}>Email</span>
-                                <input
-                                    name="email"
-                                    type="email"
-                                    required
-                                    autoComplete="email"
-                                    placeholder="you@example.com"
-                                    className={inputCls}
-                                />
+                                <input name="email" type="email" required autoComplete="email" placeholder="you@example.com" className={inputCls} />
                             </label>
                             <label className="block">
                                 <span className={labelCls}>Phone Number</span>

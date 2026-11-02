@@ -29,6 +29,8 @@ const routes: SitemapRoute[] = [
 
     { url: "/automation-services", changefreq: EnumChangefreq.MONTHLY, priority: 0.7 },
 
+    { url: "/thank-you", changefreq: EnumChangefreq.YEARLY, priority: 0.1 },
+
     { url: "/terms-and-conditions", changefreq: EnumChangefreq.YEARLY, priority: 0.3 },
     { url: "/privacy-policy", changefreq: EnumChangefreq.YEARLY, priority: 0.3 },
     { url: "/refund-policy", changefreq: EnumChangefreq.YEARLY, priority: 0.3 },

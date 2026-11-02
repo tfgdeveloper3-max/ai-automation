@@ -33,6 +33,7 @@ import PrivacyPolicy from './components/Legal/PrivacyPolicy';
 import RefundPolicy from './components/Legal/RefundPolicy';
 import LandingPage from './components/pages/LP/page';
 import Etsy from './components/pages/InnerServices/EtsyAutomation/page';
+import ThankYouPage from './components/ThankYou';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -84,6 +85,7 @@ function App() {
           <Route path="/affiliate" element={<AfiliatePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/reviews" element={<ReviewsPage />} />
+          <Route path="/thank-you" element={<ThankYouPage />} />
 
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

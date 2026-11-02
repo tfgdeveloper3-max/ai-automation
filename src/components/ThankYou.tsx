@@ -1,14 +1,6 @@
-import { useEffect, useRef, type CSSProperties } from 'react';
-import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { useEffect, type CSSProperties } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import "./ThankYou.css";
-
-interface ThankYouPopupProps {
-    open: boolean;
-    onClose: () => void;
-    name?: string;
-    lockScroll?: boolean;
-}
 
 const SUPPORT_EMAIL = 'support@amzautomationsolutions.com';
 const font = "font-['Montserrat',sans-serif]";
@@ -28,7 +20,6 @@ const DOTS: CSSProperties = {
     maskImage: 'radial-gradient(ellipse at 100% 0%, #000 0%, transparent 65%)',
 };
 
-/* Confetti: fixed "random" values so every piece is different but stable */
 const COLORS = ['#8ac44b', '#4f8cff', '#ffce00', '#ff6b8b', '#ffffff', '#b9a8ff'];
 const CONFETTI = Array.from({ length: 34 }, (_, i) => {
     const r = (n: number) => ((i * 9301 + n * 49297) % 233280) / 233280;
@@ -58,9 +49,7 @@ const STEPS = [
     {
         title: 'Request received',
         text: 'Your details are safely with our team.',
-        icon: (
-            <path d="M5 12.5l4.5 4.5L19 7.5" />
-        ),
+        icon: <path d="M5 12.5l4.5 4.5L19 7.5" />,
     },
     {
         title: 'We review your store',
@@ -84,39 +73,26 @@ const STEPS = [
     },
 ];
 
-const ThankYouPopup = ({ open, onClose, name, lockScroll = true }: ThankYouPopupProps) => {
-    const doneRef = useRef<HTMLButtonElement | null>(null);
+const ThankYouPage = () => {
+    const location = useLocation();
+    const [params] = useSearchParams();
+
+    const name = (location.state as { name?: string } | null)?.name ?? params.get('name') ?? '';
+    const firstName = name.trim().split(/\s+/)[0];
 
     useEffect(() => {
-        if (!open) return;
-        const prevOverflow = document.body.style.overflow;
-        if (lockScroll) document.body.style.overflow = 'hidden';
-        const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
-        window.addEventListener('keydown', onKey);
-        const t = window.setTimeout(() => doneRef.current?.focus(), 50);
-        return () => {
-            if (lockScroll) document.body.style.overflow = prevOverflow;
-            window.removeEventListener('keydown', onKey);
-            window.clearTimeout(t);
-        };
-    }, [open, onClose, lockScroll]);
+        window.scrollTo(0, 0);
+        document.title = 'Thank You | AMZ Automation Solutions';
+    }, []);
 
-    if (!open) return null;
-
-    const firstName = name?.trim().split(/\s+/)[0];
-
-    return createPortal(
-        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 sm:p-6">
-            <div aria-hidden="true" className="ty-backdrop absolute inset-0 bg-[#0e0531]/75 backdrop-blur-sm" onClick={onClose} />
-
-            <div
-                role="dialog"
-                aria-modal="true"
+    return (
+        <main className="relative flex min-h-screen items-center justify-center bg-[#f4f3fb] px-4 py-12 sm:px-6 sm:py-16">
+            <section
                 aria-labelledby="thank-you-title"
                 aria-describedby="thank-you-text"
-                className="ty-card relative max-h-[92vh] w-full max-w-[480px] overflow-y-auto overflow-x-hidden rounded-[28px] bg-white shadow-[0_30px_80px_rgba(14,5,49,0.45)]"
+                className="ty-card relative w-full max-w-[560px] overflow-hidden rounded-[28px] bg-white shadow-[0_30px_80px_rgba(14,5,49,0.18)]"
             >
-                {/* Confetti (falls once over the whole card) */}
+                {/* Confetti */}
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
                     {CONFETTI.map((c, i) => (
                         <span
@@ -127,20 +103,8 @@ const ThankYouPopup = ({ open, onClose, name, lockScroll = true }: ThankYouPopup
                     ))}
                 </div>
 
-                {/* Close */}
-                <button
-                    type="button"
-                    onClick={onClose}
-                    aria-label="Close"
-                    className="absolute right-4 top-4 z-30 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-                >
-                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                        <path d="M6 6l12 12M18 6L6 18" />
-                    </svg>
-                </button>
-
-                {/* ---------- Header with animated badge ---------- */}
-                <div className="relative overflow-hidden px-6 pb-16 pt-10 text-center" style={HEADER_BG}>
+                {/* Header */}
+                <div className="relative overflow-hidden px-6 pb-16 pt-12 text-center" style={HEADER_BG}>
                     <div aria-hidden="true" className="absolute inset-0" style={DOTS} />
                     {SPARKLES.map((s, i) => (
                         <svg
@@ -165,41 +129,36 @@ const ThankYouPopup = ({ open, onClose, name, lockScroll = true }: ThankYouPopup
                         </span>
                     </div>
 
-                    {/* Wave into the white body (sits inside the header — no negative margin) */}
                     <svg aria-hidden="true" viewBox="0 0 480 40" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 block h-8 w-full">
                         <path d="M0 40V18C80 0 160 0 240 16S400 34 480 14V40Z" fill="#ffffff" />
                     </svg>
                 </div>
 
-                {/* ---------- Body ---------- */}
-                <div className="relative z-10 px-6 pb-8 text-center sm:px-9">
-                    <h2
+                {/* Body */}
+                <div className="relative z-10 px-6 pb-10 text-center sm:px-10">
+                    <h1
                         id="thank-you-title"
-                        className="ty-fade font-['Anybody',sans-serif] text-[28px] font-light leading-tight text-[#111111] sm:text-[32px]"
+                        className="ty-fade font-['Anybody',sans-serif] text-[30px] font-bold leading-tight text-[#111111] sm:text-[36px]"
                         style={{ '--ty-delay': '0.45s' } as CSSProperties}
                     >
-                        <span className="font-bold">Thank You{firstName ? `, ${firstName}` : ''}!</span>
-                    </h2>
+                        Thank You{firstName ? `, ${firstName}` : ''}!
+                    </h1>
                     <p
                         id="thank-you-text"
-                        className={`ty-fade mx-auto mt-2 max-w-[340px] text-sm leading-relaxed text-[#6b6b7a] ${font}`}
+                        className={`ty-fade mx-auto mt-2 max-w-[380px] text-sm leading-relaxed text-[#6b6b7a] sm:text-base ${font}`}
                         style={{ '--ty-delay': '0.55s' } as CSSProperties}
                     >
                         Your request has been sent successfully. Our automation specialists will get back to you shortly.
                     </p>
 
-                    {/* What happens next */}
-                    <ol className="mt-6 space-y-3 text-left">
+                    <ol className="mt-7 space-y-3 text-left">
                         {STEPS.map((step, i) => (
                             <li
                                 key={step.title}
                                 className="ty-fade flex items-start gap-3 rounded-2xl border border-[#ececf2] bg-[#fafaff] p-3.5"
                                 style={{ '--ty-delay': `${0.7 + i * 0.12}s` } as CSSProperties}
                             >
-                                <span
-                                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${i === 0 ? 'bg-[#8ac44b] text-white' : 'bg-[#1d1650] text-white'
-                                        }`}
-                                >
+                                <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white ${i === 0 ? 'bg-[#8ac44b]' : 'bg-[#1d1650]'}`}>
                                     <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                         {step.icon}
                                     </svg>
@@ -212,39 +171,34 @@ const ThankYouPopup = ({ open, onClose, name, lockScroll = true }: ThankYouPopup
                         ))}
                     </ol>
 
-                    {/* Actions */}
                     <div
-                        className="ty-fade mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center"
+                        className="ty-fade mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center"
                         style={{ '--ty-delay': '1.1s' } as CSSProperties}
                     >
-                        <button
-                            ref={doneRef}
-                            type="button"
-                            onClick={onClose}
+                        <Link
+                            to="/"
                             className={`inline-flex h-11 items-center justify-center rounded-full bg-[#8ac44b] px-9 text-sm font-semibold text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d1650] ${font}`}
                         >
-                            Awesome, thanks!
-                        </button>
+                            Back to Home
+                        </Link>
                         <Link
                             to="/service"
-                            onClick={onClose}
                             className={`inline-flex h-11 items-center justify-center rounded-full border border-[#1d1650]/15 px-7 text-sm font-semibold text-[#1d1650] transition hover:border-[#1d1650] ${font}`}
                         >
                             Explore Services
                         </Link>
                     </div>
 
-                    <p className={`ty-fade mt-5 text-xs text-[#8d8d99] ${font}`} style={{ '--ty-delay': '1.2s' } as CSSProperties}>
+                    <p className={`ty-fade mt-6 text-xs text-[#8d8d99] ${font}`} style={{ '--ty-delay': '1.2s' } as CSSProperties}>
                         Questions in the meantime?{' '}
                         <a href={`mailto:${SUPPORT_EMAIL}`} className="break-all font-semibold text-[#1d1650] hover:underline">
                             {SUPPORT_EMAIL}
                         </a>
                     </p>
                 </div>
-            </div>
-        </div>,
-        document.body
+            </section>
+        </main>
     );
 };
 
-export default ThankYouPopup;
+export default ThankYouPage;

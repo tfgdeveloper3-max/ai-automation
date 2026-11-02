@@ -1,7 +1,7 @@
-import { useCallback, useState, type ChangeEvent, type CSSProperties, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type CSSProperties, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSectionReveal } from '../usesectionreveal';
 import { submitLead } from '../SubmitLead';
-import ThankYouPopup from '../ThankYou';
 
 const CONTACT = {
     phoneLabel: '(213) 883-9445',
@@ -16,7 +16,7 @@ const NEXT_STEPS = [
 ];
 
 type LeadForm = { name: string; email: string; phone: string; message: string };
-type Status = 'idle' | 'loading' | 'sent' | 'error';
+type Status = 'idle' | 'loading' | 'error';
 const EMPTY_FORM: LeadForm = { name: '', email: '', phone: '', message: '' };
 
 /* ---------- Floating-label field ---------- */
@@ -65,11 +65,10 @@ const ArrowRight = ({ className = '' }: { className?: string }) => (
 );
 
 const LpCta = () => {
+    const navigate = useNavigate();
     const { ref, inView } = useSectionReveal<HTMLElement>({ threshold: 0.15 });
     const [form, setForm] = useState<LeadForm>(EMPTY_FORM);
     const [status, setStatus] = useState<Status>('idle');
-    const [thanksName, setThanksName] = useState('');
-    const closeThanks = useCallback(() => setStatus('idle'), []);
     const isLoading = status === 'loading';
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -90,9 +89,8 @@ const LpCta = () => {
                 phone_number: form.phone.trim(),
                 message: form.message.trim(),
             });
-            setThanksName(name.split(/\s+/)[0] ?? '');
             setForm(EMPTY_FORM);
-            setStatus('sent');
+            navigate('/thank-you', { state: { name } });
         } catch (err) {
             console.error('CTA form failed:', err);
             setStatus('error');
@@ -270,8 +268,6 @@ const LpCta = () => {
                     </div>
                 </div>
             </div>
-
-            <ThankYouPopup open={status === 'sent'} name={thanksName} onClose={closeThanks} />
         </section>
     );
 };

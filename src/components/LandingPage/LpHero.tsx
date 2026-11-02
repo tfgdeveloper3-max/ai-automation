@@ -1,6 +1,6 @@
-import { useCallback, useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { submitLead } from '../SubmitLead';
-import ThankYouPopup from '../ThankYou';
 
 type LeadForm = {
     name: string;
@@ -9,7 +9,7 @@ type LeadForm = {
     message: string;
 };
 
-type Status = 'idle' | 'loading' | 'sent' | 'error';
+type Status = 'idle' | 'loading' | 'error';
 
 const EMPTY_FORM: LeadForm = { name: '', email: '', phone: '', message: '' };
 
@@ -23,10 +23,9 @@ const blobBase =
     'absolute -top-[15%] h-[130%] w-[55%] rounded-full blur-[70px] will-change-transform motion-reduce:animate-none';
 
 const LpHero = () => {
+    const navigate = useNavigate();
     const [form, setForm] = useState<LeadForm>(EMPTY_FORM);
     const [status, setStatus] = useState<Status>('idle');
-    const [thanksName, setThanksName] = useState('');
-    const closeThanks = useCallback(() => setStatus('idle'), []);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -48,9 +47,8 @@ const LpHero = () => {
                 phone_number: form.phone.trim(),
                 message: form.message.trim(),
             });
-            setThanksName(name.split(/\s+/)[0] ?? '');
             setForm(EMPTY_FORM);
-            setStatus('sent');
+            navigate('/thank-you', { state: { name } });
         } catch (err) {
             console.error('Hero form failed:', err);
             setStatus('error');
@@ -226,8 +224,6 @@ const LpHero = () => {
                     </form>
                 </div>
             </div>
-
-            <ThankYouPopup open={status === 'sent'} name={thanksName} onClose={closeThanks} />
         </section>
     );
 };
