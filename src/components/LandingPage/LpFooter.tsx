@@ -31,7 +31,7 @@ const SERVICE_LINKS = [
 ];
 
 const POLICY_LINKS = [
-    { label: 'Terms & Conditions', href: '/terms' },
+    { label: 'Terms & Conditions', href: '/terms-and-conditions' },
     { label: 'Privacy Policy', href: '/privacy-policy' },
     { label: 'Refund Policy', href: '/refund-policy' },
 ];
