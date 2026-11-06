@@ -200,6 +200,18 @@ const SECTIONS: LegalSection[] = [
         ],
     },
     {
+        id: "pseudonym-policy",
+        heading: "Pseudonym Policy",
+        blocks: [
+            p("We follow a pseudonym policy to ensure consistency, convenience, and a seamless communication experience for our customers."),
+            p("To avoid confusion or inconvenience when a customer is assigned a new account manager, we use pseudonyms to maintain a consistent point of contact. This allows our customers to build familiarity, maintain continuity in communication, and easily remember the names of their representatives."),
+            p("Additionally, as our team consists of professionals from diverse geographical regions and cultural backgrounds, using pseudonyms helps us maintain a consistent and unified organizational identity while ensuring a professional and standardized customer experience."),
+            h3("Opt-Out"),
+            p('You can opt out of SMS communications at any time by replying "STOP" to any text message you receive from us.'),
+            p('To unsubscribe from our email communications, click the "Unsubscribe" link included in any of our emails or contact us directly at support@amzautomationsolutions.com.'),
+        ],
+    },
+    {
         id: "third-party-websites-and-services",
         heading: "Third-party websites and services",
         blocks: [
